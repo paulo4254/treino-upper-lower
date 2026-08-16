@@ -1,7 +1,7 @@
 {
-  "name": "Treino Upper / Lower",
+  "name": "UL Treino 2.0",
   "short_name": "UL Treino",
-  "description": "Treino Upper/Lower 4x por semana com carga, reps e RIR por série.",
+  "description": "Treino, progressão explicável, evolução corporal e histórico.",
   "lang": "pt-BR",
   "start_url": "./index.html",
   "scope": "./",

@@ -4,17 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#14161A">
-<title>Treino Upper / Lower</title>
-<!-- Versão final auditada. Hospede esta pasta em HTTPS para instalação como PWA. -->
+<title>UL Treino 2.0</title>
+<!-- Arquivo único, autossuficiente. Basta hospedar este .html. -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="UL Treino">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" sizes="192x192" href="./icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
 <!-- Manifest e ícones embutidos: este arquivo é autossuficiente. -->
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" sizes="192x192" href="data:image/png;base64,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">
 <link rel="icon" type="image/png" sizes="512x512" href="data:image/png;base64,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AKcIAAA4RQAAwCkCAABOEQAAcIoAAIBTBAAAnCIAAOAUAQAApwgAADhFAADAKQIAAE4RAABwigAAgFMEAACcIgAA4BQBAACnCAAAOEUAAMApAgAAThEAAHCKAACAUwQAAJwiAADgFAEAAKcIAAA4RQAAwCkCAABOEQAAcIoAAIBTBAAAnCIAAOAUAQAApwgAADhFAADAKQIAAE4RAABwigAAgFMEAACcIgAA4BQBAACnCAAAOEUAAMApAgAAThEAAHCKAACAUwQAAJwiAADgFAEAAKcIAAA4RQAAwCkCAABOEQAAcIoAAIBTBAAAnCIAAOAUAQAApwgAADhFAADAKQIAAE4RAABwigAAgFMEAACcIgAA4BQBAACnCAAAOEUAAMApAgAAThEAAHCKAACAUwQAAJwiAADgFAEAAKcIAAA4RQAAwCkCAABOEQAAcIoAAIBTBAAAnCIAAOAUAQAApwgAADhFAADAKQIAAE4RAABwigAAgFMEAACcIgAA4BQBAACnCAAAOEUAAMApAgAAThEAAHCKAACAUwQAAJwiAADgFAEAAKcIAAA4RQAAwCkCAABOEQAAcIoAAIBTBAAAnCIAAOAUAQAApwgAADhFAADAKQIAAE4RAABwigAAgFMEAACcIgAA4BQBAACn/g+4FJtNH4CzvQAAAABJRU5ErkJggg==">
 <meta name="description" content="Registro de treino Upper/Lower 4x por semana com carga, reps e RIR por série.">
 <style>
@@ -91,6 +90,113 @@ button{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .vidconfirm{width:100%;margin-top:8px;border:1px solid #D4A72C55;background:transparent;color:#D4A72C;border-radius:9px;padding:9px;font-size:11.5px;font-weight:700}
 .vidconfirm.done{border-color:#5FBF7A55;color:#5FBF7A}
 .vidempty{margin:20px;padding:22px;text-align:center;border:1px dashed #2A2D33;border-radius:14px;color:#82868D;font-size:13px;line-height:1.5}
+
+/* ===== UL TREINO 2.0 ===== */
+body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+.v2page{padding:18px 20px 110px}
+.v2hero{
+  padding:22px 20px 14px;
+  display:flex;justify-content:space-between;gap:14px;align-items:flex-start
+}
+.v2eyebrow{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;color:#D4A72C;font-weight:800}
+.v2hero h1{font-size:28px;line-height:1.05;margin:5px 0 5px;letter-spacing:-.6px}
+.v2muted{color:#8C9097;font-size:12px;line-height:1.45}
+.v2badge{font-size:10px;color:#D4A72C;border:1px solid #D4A72C55;background:#D4A72C10;border-radius:999px;padding:5px 9px;font-weight:800;white-space:nowrap}
+.v2grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.v2stat{background:#1D2025;border:1px solid #2A2D33;border-radius:14px;padding:14px;min-height:92px}
+.v2stat b{display:block;font-size:23px;letter-spacing:-.5px}
+.v2stat span{display:block;color:#858990;font-size:10.5px;margin-top:3px;line-height:1.35}
+.v2section{margin-top:16px}
+.v2section-title{font-size:12px;font-weight:850;letter-spacing:.2px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.v2section-title small{font-size:10px;color:#777B82;font-weight:600}
+.v2card{background:#1D2025;border:1px solid #2A2D33;border-radius:16px;padding:15px}
+.v2primary{
+  width:100%;border:0;border-radius:12px;padding:12px 14px;background:#D4A72C;color:#14161A;
+  font-size:13px;font-weight:850;cursor:pointer
+}
+.v2secondary{
+  width:100%;border:1px solid #34383F;border-radius:11px;padding:10px 12px;background:#16191D;color:#F2F0EA;
+  font-size:12px;font-weight:750;cursor:pointer
+}
+.v2row{display:flex;gap:8px;align-items:center}
+.v2row>*{min-width:0}
+.v2next{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.v2next .name{font-size:18px;font-weight:850}
+.v2next .meta{color:#888C93;font-size:11px;margin-top:3px}
+.v2pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:800;background:#14161A;border:1px solid #30343A;color:#AEB1B7}
+.readiness{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:11px}
+.readybtn{border:1px solid #31353B;background:#15181C;color:#A0A4AB;border-radius:10px;padding:10px 5px;font-size:11px;font-weight:750}
+.readybtn.on{border-color:#D4A72C;background:#D4A72C16;color:#D4A72C}
+.mini-note{margin-top:8px;font-size:10px;color:#73777E;line-height:1.45}
+.v2form{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.v2field{display:flex;flex-direction:column;gap:5px}
+.v2field.full{grid-column:1/-1}
+.v2field label{font-size:10px;color:#80848B}
+.v2input,.v2select{
+  width:100%;background:#14161A;border:1px solid #2D3036;border-radius:10px;padding:10px;color:#F2F0EA;outline:none;font-size:13px
+}
+.v2input:focus,.v2select:focus{border-color:#D4A72C66}
+.v2tabs{display:flex;gap:6px;overflow:auto;padding-bottom:4px}
+.v2tab{border:1px solid #2D3036;background:#171A1E;color:#8D9198;border-radius:999px;padding:7px 10px;font-size:10.5px;font-weight:750;white-space:nowrap}
+.v2tab.on{color:#D4A72C;border-color:#D4A72C55;background:#D4A72C10}
+.v2chart{margin-top:10px;background:#15181C;border:1px solid #292D32;border-radius:12px;padding:10px}
+.v2chart svg{width:100%;height:130px;display:block}
+.v2chart-foot{display:flex;justify-content:space-between;color:#696E75;font-size:9.5px;margin-top:4px}
+.v2empty{padding:20px 10px;text-align:center;color:#777B82;font-size:12px;line-height:1.5}
+.prlist{display:flex;flex-direction:column;gap:7px}
+.pritem{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #292D32}
+.pritem:last-child{border-bottom:0}
+.pritem b{font-size:12px}.pritem span{font-size:11px;color:#D4A72C;font-weight:800;white-space:nowrap}
+.calhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.calnav{border:1px solid #2E3238;background:#15181C;color:#A3A6AC;width:34px;height:34px;border-radius:9px;font-weight:900}
+.caltitle{font-size:15px;font-weight:850;text-transform:capitalize}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.calwd{text-align:center;color:#6F747B;font-size:9px;padding:4px 0}
+.calday{aspect-ratio:1;border:1px solid #292D32;background:#171A1E;border-radius:9px;color:#B6B9BE;font-size:11px;position:relative}
+.calday.blank{visibility:hidden}
+.calday.today{border-color:#D4A72C;color:#D4A72C;font-weight:900}
+.calday.done:after{content:"";position:absolute;width:5px;height:5px;background:#5FBF7A;border-radius:50%;bottom:5px;left:50%;transform:translateX(-50%)}
+.calday.partial:after{content:"";position:absolute;width:5px;height:5px;background:#D4A72C;border-radius:50%;bottom:5px;left:50%;transform:translateX(-50%)}
+.bodysave{margin-top:10px}
+.bodylist{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.bodyentry{padding:10px;border:1px solid #292D32;border-radius:10px;background:#15181C;display:flex;justify-content:space-between;gap:8px}
+.bodyentry .date{font-size:10px;color:#777B82}.bodyentry .vals{font-size:10.5px;color:#B8BBC0;text-align:right}
+.v2bottom{
+ position:fixed;left:0;right:0;bottom:0;z-index:60;
+ display:grid;grid-template-columns:repeat(5,1fr);
+ padding:7px 8px calc(7px + env(safe-area-inset-bottom));
+ background:#16191DEE;border-top:1px solid #2A2D33;backdrop-filter:blur(14px)
+}
+.navbtn{border:0;background:none;color:#70757C;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 2px;font-size:9px;font-weight:700}
+.navbtn .ico{font-size:18px;line-height:1}
+.navbtn.on{color:#D4A72C}
+.workout-home-wrap{padding-bottom:95px}
+@media(max-width:380px){.v2grid{grid-template-columns:1fr 1fr}.v2form{grid-template-columns:1fr}.v2field.full{grid-column:auto}}
+
+
+/* ===== Product Beta refinements ===== */
+.prbadges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.prbadge{font-size:9.5px;font-weight:800;border-radius:999px;padding:4px 7px;border:1px solid #D4A72C55;color:#D4A72C;background:#D4A72C10}
+.warmbox{margin-top:9px;padding:10px;border-radius:10px;background:#14161A;border:1px solid #2B2F35;font-size:11px;line-height:1.55}
+.warmrow{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px solid #24282D}
+.warmrow:last-child{border-bottom:0}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}
+.photo-tile{position:relative;aspect-ratio:3/4;border-radius:11px;overflow:hidden;border:1px solid #2C3036;background:#15181C}
+.photo-tile img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-del{position:absolute;right:5px;top:5px;border:0;border-radius:999px;width:26px;height:26px;background:#111C;color:#fff;font-size:13px}
+.reportgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.reportmetric{padding:12px;border:1px solid #2B2F35;border-radius:12px;background:#15181C}
+.reportmetric b{display:block;font-size:19px}.reportmetric span{font-size:10px;color:#7F848B}
+
+/* ===== FASE 2 — dashboard ===== */
+.volbars{display:flex;align-items:flex-end;gap:6px;height:132px;margin-top:4px}
+.volcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;height:100%}
+.voltrack{flex:1;width:100%;display:flex;align-items:flex-end;background:#1B1E23;border-radius:6px;overflow:hidden}
+.volfill{width:100%;background:linear-gradient(180deg,#D4A72C,#A87E17);border-radius:6px 6px 0 0;transition:height .45s cubic-bezier(.4,0,.2,1)}
+.volfill.full{background:linear-gradient(180deg,#5FBF7A,#3E8C55)}
+.vollabel{font-size:9px;color:#6E727A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.v2note{margin-top:8px;font-size:10.5px;line-height:1.45;color:#82868D;border-left:2px solid #2A2D33;padding-left:8px}
+
 </style>
 </head>
 <body>
@@ -99,41 +205,41 @@ button{cursor:pointer;-webkit-tap-highlight-color:transparent}
 <script>
 const DIAS=[
 {id:"segunda",label:"Segunda",foco:"Upper A · Peito",cor:"#E8542A",exercicios:[
-{nome:"Supino reto na máquina",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Peito",video:"https://youtu.be/0bFkkO9AanU",fonte:"Vídeo indicado por você · supino reto na máquina",videoStatus:"reference",ancora:true,dicas:["Ajuste o banco para a pegada ficar aproximadamente na linha média do peitoral.","Mantenha escápulas apoiadas e tronco estável.","Controle a volta e use uma amplitude confortável para o ombro."],erros:["Banco alto/baixo demais.","Perder estabilidade para mover mais carga.","Encerrar a descida só porque a carga está pesada."]},
-{nome:"Supino inclinado com halteres",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Peito",video:"https://www.youtube.com/watch?v=1mXT4WEiBdc&t=168s",fonte:"Laércio Refundini · a partir de 2:48",videoStatus:"reference",dicas:["Banco com inclinação moderada.","Desça com controle e mantenha punhos estáveis.","Procure movimento do braço sem elevar os ombros."],erros:["Inclinação excessiva transformando em desenvolvimento.","Bater halteres no topo.","Perder controle na descida."]},
-{nome:"Remada com apoio no peito",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Costas",video:"https://youtu.be/0UBRfiO4zDs",fonte:"Chest Supported Row",videoStatus:"reference",dicas:["Mantenha o peito no apoio durante toda a série.","Puxe com cotovelos numa trajetória repetível.","Controle a fase de retorno."],erros:["Tirar o peito do apoio para roubar.","Transformar o movimento em encolhimento.","Soltar a carga na volta."]},
-{nome:"Puxada neutra",series:3,reps:"8-12",rir:"1-2",rest:120,grupo:"Costas",video:"https://youtu.be/ej9Z_jMQpLY",fonte:"Vídeo de referência atual",videoStatus:"reference",dicas:["Tronco estável com leve inclinação confortável.","Puxe até a amplitude que mantém o ombro bem posicionado.","Controle o alongamento na volta."],erros:["Balançar o tronco.","Puxar só com bíceps.","Encurtar a amplitude para usar mais carga."]},
-{nome:"Elevação lateral",series:3,reps:"12-15",rir:"1",rest:90,grupo:"Ombro",video:"https://youtu.be/c7zMmbWkUPw",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Use carga que permita trajetória limpa.","Eleve o braço sem dar impulso com o tronco.","Mantenha tensão e controle na descida."],erros:["Encolher o trapézio para mover a carga.","Balançar o corpo.","Acelerar demais a fase excêntrica."]},
-{nome:"Tríceps acima da cabeça na polia",series:2,reps:"10-12",rir:"1",rest:90,grupo:"Tríceps",video:"https://www.youtube.com/watch?v=NvCgPutyMrc",fonte:"Execução correta · Overhead Rope Triceps Extension",videoStatus:"reference",dicas:["Mantenha os cotovelos estáveis.","Busque boa amplitude sem dor no ombro/cotovelo.","Controle o retorno."],erros:["Abrir e fechar demais os cotovelos.","Usar o tronco para empurrar.","Cortar a amplitude."]},
-{nome:"Rosca Scott",series:2,reps:"8-10",rir:"1",rest:90,grupo:"Bíceps",video:"https://youtu.be/zpTK6eihdSA",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Mantenha o braço apoiado.","Controle especialmente a descida.","Use amplitude que não cause desconforto no cotovelo."],erros:["Levantar o braço do banco.","Soltar a barra na descida.","Exagerar na carga e perder amplitude."]}
+{nome:"Supino reto na máquina",exerciseId:"chest_press_machine",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Peito",video:"https://youtu.be/0bFkkO9AanU",fonte:"Vídeo indicado por você · supino reto na máquina",videoStatus:"reference",ancora:true,dicas:["Ajuste o banco para a pegada ficar aproximadamente na linha média do peitoral.","Mantenha escápulas apoiadas e tronco estável.","Controle a volta e use uma amplitude confortável para o ombro."],erros:["Banco alto/baixo demais.","Perder estabilidade para mover mais carga.","Encerrar a descida só porque a carga está pesada."]},
+{nome:"Supino inclinado com halteres",exerciseId:"incline_dumbbell_press",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Peito",video:"https://www.youtube.com/watch?v=1mXT4WEiBdc&t=168s",fonte:"Laércio Refundini · a partir de 2:48",videoStatus:"reference",dicas:["Banco com inclinação moderada.","Desça com controle e mantenha punhos estáveis.","Procure movimento do braço sem elevar os ombros."],erros:["Inclinação excessiva transformando em desenvolvimento.","Bater halteres no topo.","Perder controle na descida."]},
+{nome:"Remada com apoio no peito",exerciseId:"chest_supported_row",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Costas",video:"https://youtu.be/0UBRfiO4zDs",fonte:"Chest Supported Row",videoStatus:"reference",dicas:["Mantenha o peito no apoio durante toda a série.","Puxe com cotovelos numa trajetória repetível.","Controle a fase de retorno."],erros:["Tirar o peito do apoio para roubar.","Transformar o movimento em encolhimento.","Soltar a carga na volta."]},
+{nome:"Puxada neutra",exerciseId:"neutral_grip_pulldown",series:3,reps:"8-12",rir:"1-2",rest:120,grupo:"Costas",video:"https://youtu.be/ej9Z_jMQpLY",fonte:"Vídeo de referência atual",videoStatus:"reference",dicas:["Tronco estável com leve inclinação confortável.","Puxe até a amplitude que mantém o ombro bem posicionado.","Controle o alongamento na volta."],erros:["Balançar o tronco.","Puxar só com bíceps.","Encurtar a amplitude para usar mais carga."]},
+{nome:"Elevação lateral",exerciseId:"dumbbell_lateral_raise",series:3,reps:"12-15",rir:"1",rest:90,grupo:"Ombro",video:"https://youtu.be/c7zMmbWkUPw",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Use carga que permita trajetória limpa.","Eleve o braço sem dar impulso com o tronco.","Mantenha tensão e controle na descida."],erros:["Encolher o trapézio para mover a carga.","Balançar o corpo.","Acelerar demais a fase excêntrica."]},
+{nome:"Tríceps acima da cabeça na polia",exerciseId:"overhead_cable_triceps_extension",series:2,reps:"10-12",rir:"1",rest:90,grupo:"Tríceps",video:"https://www.youtube.com/watch?v=NvCgPutyMrc",fonte:"Execução correta · Overhead Rope Triceps Extension",videoStatus:"reference",dicas:["Mantenha os cotovelos estáveis.","Busque boa amplitude sem dor no ombro/cotovelo.","Controle o retorno."],erros:["Abrir e fechar demais os cotovelos.","Usar o tronco para empurrar.","Cortar a amplitude."]},
+{nome:"Rosca Scott",exerciseId:"preacher_curl",series:2,reps:"8-10",rir:"1",rest:90,grupo:"Bíceps",video:"https://youtu.be/zpTK6eihdSA",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Mantenha o braço apoiado.","Controle especialmente a descida.","Use amplitude que não cause desconforto no cotovelo."],erros:["Levantar o braço do banco.","Soltar a barra na descida.","Exagerar na carga e perder amplitude."]}
 ]},
 {id:"terca",label:"Terça",foco:"Lower A · Quadríceps",cor:"#5B5FE9",exercicios:[
-{nome:"Hack squat",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Quadríceps",video:"https://youtu.be/hzvwXKUDWIc",fonte:"Laércio Refundini",videoStatus:"reference",ancora:true,dicas:["Posicione os pés para conseguir profundidade confortável.","Mantenha costas e pelve apoiadas.","Desça com controle e suba sem perder alinhamento."],erros:["Reduzir muito a amplitude para usar mais carga.","Joelhos colapsando para dentro.","Descer sem controle."]},
-{nome:"Leg press",series:3,reps:"10-12",rir:"1-2",rest:150,grupo:"Quadríceps",video:"https://youtu.be/nY8UsiAqwds",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Mantenha a pelve apoiada no fundo.","Use amplitude máxima que você controla.","Empurre mantendo alinhamento dos joelhos."],erros:["Arredondar a lombar no fundo.","Travar os joelhos agressivamente.","Encurtar amplitude para aumentar carga."]},
-{nome:"Cadeira extensora",series:2,reps:"12-15",rir:"1",rest:90,grupo:"Quadríceps",video:"https://youtu.be/el3oHblB5DM",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Alinhe o eixo da máquina com o joelho.","Mantenha quadril encostado.","Suba firme e desça controlando."],erros:["Banco mal ajustado.","Jogar o tronco para gerar impulso.","Deixar o peso despencar."]},
-{nome:"Cadeira/mesa flexora",series:3,reps:"8-10",rir:"1-2",rest:120,grupo:"Posterior",video:"https://youtu.be/2-ULaRrQa7c",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Ajuste a máquina para o eixo do joelho.","Mantenha quadril estável.","Controle a volta até alongar sem perder posição."],erros:["Levantar o quadril.","Usar impulso.","Cortar a fase alongada."]},
-{nome:"Elevação pélvica na máquina",series:2,reps:"8-10",rir:"1-2",rest:120,grupo:"Glúteo",video:"https://www.youtube.com/watch?v=9UPvhCLa1IQ",fonte:"Elevação pélvica na máquina · execução",videoStatus:"reference",dicas:["Nas primeiras sessões use carga conservadora.","Ajuste o apoio para ficar confortável sobre a pelve.","Suba até extensão de quadril sem hiperestender a lombar."],erros:["Aprender o exercício já com carga alta.","Hiperestender a lombar no topo.","Pés muito longe/perto sem testar a posição."]},
-{nome:"Panturrilha em pé",series:3,reps:"8-12",rir:"1",rest:90,grupo:"Panturrilha",video:"https://youtu.be/824pMjvGXgc",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Desça até alongar com controle.","Faça breve pausa na posição alongada.","Suba sem quicar."],erros:["Repetições curtas.","Usar impulso.","Acelerar a descida."]},
-{nome:"Abdômen na polia",series:3,reps:"10-15",rir:"1-2",rest:75,grupo:"Core",video:"https://www.youtube.com/watch?v=Ea2igVmZdks",fonte:"Abdominal na polia ajoelhada · execução",videoStatus:"reference",dicas:["Pense em aproximar costelas e pelve.","Mantenha quadril relativamente estável.","Controle a volta sem deixar o peso puxar você."],erros:["Transformar em flexão de quadril.","Puxar só com os braços.","Amplitude muito curta."]}
+{nome:"Hack squat",exerciseId:"hack_squat",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Quadríceps",video:"https://youtu.be/hzvwXKUDWIc",fonte:"Laércio Refundini",videoStatus:"reference",ancora:true,dicas:["Posicione os pés para conseguir profundidade confortável.","Mantenha costas e pelve apoiadas.","Desça com controle e suba sem perder alinhamento."],erros:["Reduzir muito a amplitude para usar mais carga.","Joelhos colapsando para dentro.","Descer sem controle."]},
+{nome:"Leg press",exerciseId:"leg_press",series:3,reps:"10-12",rir:"1-2",rest:150,grupo:"Quadríceps",video:"https://youtu.be/nY8UsiAqwds",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Mantenha a pelve apoiada no fundo.","Use amplitude máxima que você controla.","Empurre mantendo alinhamento dos joelhos."],erros:["Arredondar a lombar no fundo.","Travar os joelhos agressivamente.","Encurtar amplitude para aumentar carga."]},
+{nome:"Cadeira extensora",exerciseId:"leg_extension",series:2,reps:"12-15",rir:"1",rest:90,grupo:"Quadríceps",video:"https://youtu.be/el3oHblB5DM",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Alinhe o eixo da máquina com o joelho.","Mantenha quadril encostado.","Suba firme e desça controlando."],erros:["Banco mal ajustado.","Jogar o tronco para gerar impulso.","Deixar o peso despencar."]},
+{nome:"Cadeira/mesa flexora",exerciseId:"lying_or_seated_leg_curl",series:3,reps:"8-10",rir:"1-2",rest:120,grupo:"Posterior",video:"https://youtu.be/2-ULaRrQa7c",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Ajuste a máquina para o eixo do joelho.","Mantenha quadril estável.","Controle a volta até alongar sem perder posição."],erros:["Levantar o quadril.","Usar impulso.","Cortar a fase alongada."]},
+{nome:"Elevação pélvica na máquina",exerciseId:"machine_hip_thrust",series:2,reps:"8-10",rir:"1-2",rest:120,grupo:"Glúteo",video:"https://www.youtube.com/watch?v=9UPvhCLa1IQ",fonte:"Elevação pélvica na máquina · execução",videoStatus:"reference",dicas:["Nas primeiras sessões use carga conservadora.","Ajuste o apoio para ficar confortável sobre a pelve.","Suba até extensão de quadril sem hiperestender a lombar."],erros:["Aprender o exercício já com carga alta.","Hiperestender a lombar no topo.","Pés muito longe/perto sem testar a posição."]},
+{nome:"Panturrilha em pé",exerciseId:"standing_calf_raise",series:3,reps:"8-12",rir:"1",rest:90,grupo:"Panturrilha",video:"https://youtu.be/824pMjvGXgc",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Desça até alongar com controle.","Faça breve pausa na posição alongada.","Suba sem quicar."],erros:["Repetições curtas.","Usar impulso.","Acelerar a descida."]},
+{nome:"Abdômen na polia",exerciseId:"cable_crunch",series:3,reps:"10-15",rir:"1-2",rest:75,grupo:"Core",video:"https://www.youtube.com/watch?v=Ea2igVmZdks",fonte:"Abdominal na polia ajoelhada · execução",videoStatus:"reference",dicas:["Pense em aproximar costelas e pelve.","Mantenha quadril relativamente estável.","Controle a volta sem deixar o peso puxar você."],erros:["Transformar em flexão de quadril.","Puxar só com os braços.","Amplitude muito curta."]}
 ]},
 {id:"quinta",label:"Quinta",foco:"Upper B · Costas",cor:"#2A9D8F",exercicios:[
-{nome:"Remada com apoio no peito",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Costas",video:"https://youtu.be/0UBRfiO4zDs",fonte:"Chest Supported Row",videoStatus:"reference",ancora:true,dicas:["Mantenha o peito no apoio.","Use trajetória reproduzível.","Controle a fase excêntrica."],erros:["Roubar tirando o tronco do apoio.","Encolher os ombros.","Perder amplitude com aumento de carga."]},
-{nome:"Puxada unilateral",series:3,reps:"8-10",rir:"1-2",rest:120,grupo:"Costas",video:"https://www.youtube.com/watch?v=NlkOPj8y65k",fonte:"Puxada unilateral na polia alta · execução",videoStatus:"reference",dicas:["Estabilize o tronco antes de puxar.","Mantenha o ombro em posição confortável.","Controle o alongamento no retorno."],erros:["Rodar demais o tronco.","Puxar com impulso.","Perder controle da escápula."]},
-{nome:"Supino inclinado na máquina",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Peito",video:"https://www.youtube.com/watch?v=Ao2lm6GBUro",fonte:"Supino inclinado na máquina · execução",videoStatus:"reference",dicas:["Ajuste o banco para a pegada chegar ao peitoral superior sem desconforto.","Mantenha escápulas apoiadas.","Controle a descida."],erros:["Banco alto demais, levando esforço ao ombro.","Perder contato com o encosto.","Amplitude curta por excesso de carga."]},
-{nome:"Crucifixo na polia",series:2,reps:"10-12",rir:"1",rest:90,grupo:"Peito",video:"https://youtu.be/pdMWt71MPlw",fonte:"Crossover na polia",videoStatus:"reference",dicas:["Mantenha leve flexão do cotovelo.","Pense em aproximar os braços pelo peitoral.","Controle a fase alongada."],erros:["Transformar em press.","Abrir demais até perder posição do ombro.","Usar balanço do corpo."]},
-{nome:"Elevação lateral na polia",series:3,reps:"12-15",rir:"1",rest:90,grupo:"Ombro",video:"https://www.youtube.com/watch?v=79kNM5LbFXE",fonte:"Elevação lateral na polia · execução",videoStatus:"reference",dicas:["Ajuste a polia para tensão confortável desde o início.","Use trajetória sem impulso.","Controle a descida."],erros:["Compensar com tronco.","Encolher trapézio.","Carga excessiva."]},
-{nome:"Reverse pec deck",series:2,reps:"12-15",rir:"1-2",rest:90,grupo:"Ombro",video:"https://youtu.be/wjlX-5DTjBQ",fonte:"Voador invertido",videoStatus:"reference",dicas:["Apoie o peito e mantenha tronco estável.","Abra os braços sem encolher os ombros.","Controle o retorno."],erros:["Usar lombar para roubar.","Transformar em remada.","Perder controle no retorno."]},
-{nome:"Rosca inclinada",series:2,reps:"8-10",rir:"1",rest:90,grupo:"Bíceps",video:"https://youtu.be/aTYlqC_JacQ",fonte:"Incline Dumbbell Curl",videoStatus:"reference",dicas:["Mantenha o braço estável atrás do tronco.","Não avance o cotovelo durante a subida.","Desça com controle."],erros:["Balançar o tronco.","Avançar o ombro.","Cortar a descida."]},
-{nome:"Tríceps corda",series:2,reps:"10-12",rir:"1",rest:90,grupo:"Tríceps",video:"https://youtu.be/btj6dDfAQ2w",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Mantenha cotovelos próximos ao corpo.","Estenda sem balançar o tronco.","Controle a volta."],erros:["Mover ombro e cotovelo juntos.","Inclinar demais o corpo.","Usar impulso."]}
+{nome:"Remada com apoio no peito",exerciseId:"chest_supported_row",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Costas",video:"https://youtu.be/0UBRfiO4zDs",fonte:"Chest Supported Row",videoStatus:"reference",ancora:true,dicas:["Mantenha o peito no apoio.","Use trajetória reproduzível.","Controle a fase excêntrica."],erros:["Roubar tirando o tronco do apoio.","Encolher os ombros.","Perder amplitude com aumento de carga."]},
+{nome:"Puxada unilateral",exerciseId:"single_arm_lat_pulldown",series:3,reps:"8-10",rir:"1-2",rest:120,grupo:"Costas",video:"https://www.youtube.com/watch?v=NlkOPj8y65k",fonte:"Puxada unilateral na polia alta · execução",videoStatus:"reference",dicas:["Estabilize o tronco antes de puxar.","Mantenha o ombro em posição confortável.","Controle o alongamento no retorno."],erros:["Rodar demais o tronco.","Puxar com impulso.","Perder controle da escápula."]},
+{nome:"Supino inclinado na máquina",exerciseId:"incline_machine_press",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Peito",video:"https://www.youtube.com/watch?v=Ao2lm6GBUro",fonte:"Supino inclinado na máquina · execução",videoStatus:"reference",dicas:["Ajuste o banco para a pegada chegar ao peitoral superior sem desconforto.","Mantenha escápulas apoiadas.","Controle a descida."],erros:["Banco alto demais, levando esforço ao ombro.","Perder contato com o encosto.","Amplitude curta por excesso de carga."]},
+{nome:"Crucifixo na polia",exerciseId:"cable_fly",series:2,reps:"10-12",rir:"1",rest:90,grupo:"Peito",video:"https://youtu.be/pdMWt71MPlw",fonte:"Crossover na polia",videoStatus:"reference",dicas:["Mantenha leve flexão do cotovelo.","Pense em aproximar os braços pelo peitoral.","Controle a fase alongada."],erros:["Transformar em press.","Abrir demais até perder posição do ombro.","Usar balanço do corpo."]},
+{nome:"Elevação lateral na polia",exerciseId:"cable_lateral_raise",series:3,reps:"12-15",rir:"1",rest:90,grupo:"Ombro",video:"https://www.youtube.com/watch?v=79kNM5LbFXE",fonte:"Elevação lateral na polia · execução",videoStatus:"reference",dicas:["Ajuste a polia para tensão confortável desde o início.","Use trajetória sem impulso.","Controle a descida."],erros:["Compensar com tronco.","Encolher trapézio.","Carga excessiva."]},
+{nome:"Reverse pec deck",exerciseId:"reverse_pec_deck",series:2,reps:"12-15",rir:"1-2",rest:90,grupo:"Ombro",video:"https://youtu.be/wjlX-5DTjBQ",fonte:"Voador invertido",videoStatus:"reference",dicas:["Apoie o peito e mantenha tronco estável.","Abra os braços sem encolher os ombros.","Controle o retorno."],erros:["Usar lombar para roubar.","Transformar em remada.","Perder controle no retorno."]},
+{nome:"Rosca inclinada",exerciseId:"incline_dumbbell_curl",series:2,reps:"8-10",rir:"1",rest:90,grupo:"Bíceps",video:"https://youtu.be/aTYlqC_JacQ",fonte:"Incline Dumbbell Curl",videoStatus:"reference",dicas:["Mantenha o braço estável atrás do tronco.","Não avance o cotovelo durante a subida.","Desça com controle."],erros:["Balançar o tronco.","Avançar o ombro.","Cortar a descida."]},
+{nome:"Tríceps corda",exerciseId:"rope_triceps_pushdown",series:2,reps:"10-12",rir:"1",rest:90,grupo:"Tríceps",video:"https://youtu.be/btj6dDfAQ2w",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Mantenha cotovelos próximos ao corpo.","Estenda sem balançar o tronco.","Controle a volta."],erros:["Mover ombro e cotovelo juntos.","Inclinar demais o corpo.","Usar impulso."]}
 ]},
 {id:"sexta",label:"Sexta",foco:"Lower B · Posterior",cor:"#D4A72C",exercicios:[
-{nome:"Stiff / Romanian deadlift",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Posterior",video:"https://youtu.be/_oyxCn2iSjU",fonte:"Jeff Nippard",videoStatus:"reference",ancora:true,dicas:["Pense em levar o quadril para trás.","Mantenha coluna e tronco rígidos.","Desça só até onde consegue manter tensão e posição."],erros:["Transformar em agachamento.","Arredondar a lombar.","Forçar amplitude além da mobilidade."]},
-{nome:"Cadeira flexora",series:3,reps:"10-12",rir:"1-2",rest:120,grupo:"Posterior",video:"https://youtu.be/2-ULaRrQa7c",fonte:"Leandro Twin · referência de flexora",videoStatus:"reference",dicas:["Ajuste eixo do joelho.","Mantenha quadril estável.","Controle a volta."],erros:["Levantar o quadril.","Soltar a carga.","Usar impulso."]},
-{nome:"Hack squat ou Smith",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Quadríceps",video:"https://youtu.be/hzvwXKUDWIc",fonte:"Laércio Refundini · Hack squat",videoStatus:"reference",dicas:["Escolha uma variação e mantenha por várias semanas.","Use amplitude confortável e padronizada.","Controle a descida."],erros:["Alternar Hack/Smith toda sessão.","Mudar posição dos pés constantemente.","Perder amplitude por excesso de carga."]},
-{nome:"Afundo búlgaro",series:2,reps:"8-10 por perna",rir:"1-2",rest:120,grupo:"Quadríceps",video:"https://www.youtube.com/watch?v=XZpWTmbcMWY",fonte:"Fabrício Pacholok · execução do agachamento búlgaro",videoStatus:"reference",dicas:["Aprenda equilíbrio antes de aumentar carga.","Mantenha o pé da frente estável.","Use amplitude que não cause dor."],erros:["Carga alta antes de dominar estabilidade.","Passo curto/longuíssimo sem objetivo.","Empurrar demais com a perna de trás."]},
-{nome:"Cadeira extensora",series:2,reps:"12-15",rir:"1",rest:90,grupo:"Quadríceps",video:"https://youtu.be/el3oHblB5DM",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Alinhe eixo do joelho.","Mantenha quadril apoiado.","Desça controlando."],erros:["Roubar com o tronco.","Descer rápido.","Usar amplitude inconsistente."]},
-{nome:"Panturrilha sentada",series:3,reps:"10-12",rir:"1",rest:90,grupo:"Panturrilha",video:"https://youtu.be/jMWs_p-W9gY",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Amplitude completa confortável.","Pausa curta no alongamento.","Evite quicar."],erros:["Repetições parciais involuntárias.","Descer sem controle.","Usar impulso."]},
-{nome:"Elevação de pernas",series:3,reps:"10-15",rir:"1-2",rest:75,grupo:"Core",video:"https://www.youtube.com/watch?v=A63IRokDdy8",fonte:"Abdominal com elevação de pernas · execução",videoStatus:"reference",dicas:["Controle a pelve, não apenas as pernas.","Pare antes da lombar perder posição.","Evite balanço."],erros:["Usar impulso.","Fazer só flexão de quadril sem controle pélvico.","Aumentar amplitude às custas da lombar."]}
+{nome:"Stiff / Romanian deadlift",exerciseId:"romanian_deadlift",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Posterior",video:"https://youtu.be/_oyxCn2iSjU",fonte:"Jeff Nippard",videoStatus:"reference",ancora:true,dicas:["Pense em levar o quadril para trás.","Mantenha coluna e tronco rígidos.","Desça só até onde consegue manter tensão e posição."],erros:["Transformar em agachamento.","Arredondar a lombar.","Forçar amplitude além da mobilidade."]},
+{nome:"Cadeira flexora",exerciseId:"seated_leg_curl",series:3,reps:"10-12",rir:"1-2",rest:120,grupo:"Posterior",video:"https://youtu.be/2-ULaRrQa7c",fonte:"Leandro Twin · referência de flexora",videoStatus:"reference",dicas:["Ajuste eixo do joelho.","Mantenha quadril estável.","Controle a volta."],erros:["Levantar o quadril.","Soltar a carga.","Usar impulso."]},
+{nome:"Hack squat ou Smith",exerciseId:"hack_or_smith_squat",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Quadríceps",video:"https://youtu.be/hzvwXKUDWIc",fonte:"Laércio Refundini · Hack squat",videoStatus:"reference",dicas:["Escolha uma variação e mantenha por várias semanas.","Use amplitude confortável e padronizada.","Controle a descida."],erros:["Alternar Hack/Smith toda sessão.","Mudar posição dos pés constantemente.","Perder amplitude por excesso de carga."]},
+{nome:"Afundo búlgaro",exerciseId:"bulgarian_split_squat",series:2,reps:"8-10 por perna",rir:"1-2",rest:120,grupo:"Quadríceps",video:"https://www.youtube.com/watch?v=XZpWTmbcMWY",fonte:"Fabrício Pacholok · execução do agachamento búlgaro",videoStatus:"reference",dicas:["Aprenda equilíbrio antes de aumentar carga.","Mantenha o pé da frente estável.","Use amplitude que não cause dor."],erros:["Carga alta antes de dominar estabilidade.","Passo curto/longuíssimo sem objetivo.","Empurrar demais com a perna de trás."]},
+{nome:"Cadeira extensora",exerciseId:"leg_extension",series:2,reps:"12-15",rir:"1",rest:90,grupo:"Quadríceps",video:"https://youtu.be/el3oHblB5DM",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Alinhe eixo do joelho.","Mantenha quadril apoiado.","Desça controlando."],erros:["Roubar com o tronco.","Descer rápido.","Usar amplitude inconsistente."]},
+{nome:"Panturrilha sentada",exerciseId:"seated_calf_raise",series:3,reps:"10-12",rir:"1",rest:90,grupo:"Panturrilha",video:"https://youtu.be/jMWs_p-W9gY",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Amplitude completa confortável.","Pausa curta no alongamento.","Evite quicar."],erros:["Repetições parciais involuntárias.","Descer sem controle.","Usar impulso."]},
+{nome:"Elevação de pernas",exerciseId:"leg_raise",series:3,reps:"10-15",rir:"1-2",rest:75,grupo:"Core",video:"https://www.youtube.com/watch?v=A63IRokDdy8",fonte:"Abdominal com elevação de pernas · execução",videoStatus:"reference",dicas:["Controle a pelve, não apenas as pernas.","Pare antes da lombar perder posição.","Evite balanço."],erros:["Usar impulso.","Fazer só flexão de quadril sem controle pélvico.","Aumentar amplitude às custas da lombar."]}
 ]}
 ];
 
@@ -146,7 +252,8 @@ function parseRange(s){const a=(String(s).match(/\d+/g)||[]).map(Number);return{
 function rirMin(s){const a=(String(s).match(/\d+/g)||[]).map(Number);return a.length?Math.min(...a):0}
 function esc(s){return String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
 
-let sessions=safeGet("treino-sessoes-ul-v2",{});
+const LEGACY_SESSION_SNAPSHOT=safeGet("treino-sessoes-ul-v2",{});
+let sessions={};
 let exOrder=safeGet("treino-ordem-ul-v2",{});
 let videoOk=safeGet("treino-videos-ok-ul",{});
 let viewDate=null;
@@ -156,12 +263,125 @@ let legacyDone=safeGet("treino-feitos-ul-v1",{});
 let dayNotes=safeGet("treino-notas-dia-ul-v2",{});
 const WK=weekKey(new Date());
 let active=null;
+let mainView=localStorage.getItem("ul-v2-main-view")||"dashboard";
+let profile={name:"",goal:"Hipertrofia",weeklyTarget:4,height:""};
+let bodyLog=[];
+let checkins={};
+let calCursor=new Date();
+let progressMetric="weight";
+let foundationReady=false;
+let storageHealth={ok:true,lastError:"",lastWriteAt:null};
+let productPrefs=JSON.parse(localStorage.getItem("ul-product-prefs-v1")||"null")||{
+  progressionMode:"balanced",
+  anchorExercises:["chest_press_machine","row_machine","hack_squat_or_smith","rdl"],
+  showWhy:true,
+  programType:"upper_lower"
+};
+function saveProductPrefs(){localStorage.setItem("ul-product-prefs-v1",JSON.stringify(productPrefs))}
 
-// ---------- tela acesa durante o treino ----------
-let wakeLock=null;
-async function requestWakeLock(){
-  if(!("wakeLock" in navigator)||wakeLock)return;
-  try{wakeLock=await navigator.wakeLock.request("screen");wakeLock.addEventListener("release",()=>{wakeLock=null});}catch(e){wakeLock=null}
+let bodyPhotos=[];
+let selectedBodyEntryForPhoto=null;
+
+async function loadBodyPhotos(){
+  if(!ULDB.db){bodyPhotos=[];return}
+  bodyPhotos=(await ULDB.all("media")).filter(x=>x.kind==="body-photo"&&!x.deletedAt).sort((a,b)=>a.createdAt<b.createdAt?1:-1);
+}
+function photoUrl(rec){return rec?.blob?URL.createObjectURL(rec.blob):""}
+async function addBodyPhoto(file,ownerId){
+  if(!file)return;
+  if(!ownerId){alert("Salve uma medição corporal antes de adicionar uma foto.");return}
+  try{
+    const rec=await storeBodyPhoto(file,ownerId);
+    bodyPhotos.unshift(rec);
+    renderProfile();
+  }catch(err){console.error(err);alert("Não foi possível salvar a foto.")}
+}
+async function deleteBodyPhoto(id){
+  const rec=bodyPhotos.find(x=>x.id===id);if(!rec||!confirm("Remover esta foto de evolução?"))return;
+  rec.deletedAt=nowISO();rec.updatedAt=rec.deletedAt;
+  if(ULDB.db)await ULDB.put("media",rec);
+  bodyPhotos=bodyPhotos.filter(x=>x.id!==id);
+  renderProfile();
+}
+
+function isAnchorExercise(e){return productPrefs.anchorExercises.includes(e.exerciseId)}
+function progressionModeLabel(){return productPrefs.progressionMode==="conservative"?"Conservador":productPrefs.progressionMode==="push"?"Agressivo":"Equilibrado"}
+
+const dirtySessions=new Map();
+let dirtyTimer=null;
+
+function queueSessionWrite(s){
+  if(!s?.id)return;
+  dirtySessions.set(s.id,s);
+  if(dirtyTimer)clearTimeout(dirtyTimer);
+  dirtyTimer=setTimeout(()=>flushSessionWrites(),180);
+}
+async function flushSessionWrites(){
+  if(dirtyTimer){clearTimeout(dirtyTimer);dirtyTimer=null}
+  if(!ULDB.db||!dirtySessions.size)return;
+  const batch=[...dirtySessions.values()];
+  dirtySessions.clear();
+  try{
+    for(const s of batch)await ULDB.put("sessions",s);
+    storageHealth={ok:true,lastError:"",lastWriteAt:nowISO()};
+  }catch(err){
+    batch.forEach(s=>dirtySessions.set(s.id,s));
+    storageHealth={ok:false,lastError:String(err?.message||err),lastWriteAt:storageHealth.lastWriteAt};
+    console.error("Falha ao salvar no IndexedDB",err);
+  }
+}
+
+
+function uid(prefix="id"){return prefix+"_"+(globalThis.crypto?.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2))}
+function nowISO(){return new Date().toISOString()}
+function exerciseById(id){for(const d of DIAS){const e=d.exercicios.find(x=>x.exerciseId===id);if(e)return e}return null}
+function exerciseIdFromName(name){for(const d of DIAS){const e=d.exercicios.find(x=>x.nome===name);if(e)return e.exerciseId}return null}
+function stableKey(dayId,exerciseId){return dayId+"|"+exerciseId}
+function sessionId(date,dayId,exerciseId){return "session:"+date+":"+dayId+":"+exerciseId}
+
+const ULDB={name:"ul-treino-db",version:1,db:null,open(){if(this.db)return Promise.resolve(this.db);return new Promise((res,rej)=>{const r=indexedDB.open(this.name,this.version);r.onupgradeneeded=()=>{const db=r.result;if(!db.objectStoreNames.contains("sessions")){const s=db.createObjectStore("sessions",{keyPath:"id"});s.createIndex("date","date");s.createIndex("exerciseId","exerciseId");s.createIndex("updatedAt","updatedAt")}if(!db.objectStoreNames.contains("bodyEntries")){const s=db.createObjectStore("bodyEntries",{keyPath:"id"});s.createIndex("date","date")}if(!db.objectStoreNames.contains("checkins")){const s=db.createObjectStore("checkins",{keyPath:"id"});s.createIndex("date","date",{unique:true})}if(!db.objectStoreNames.contains("media")){const s=db.createObjectStore("media",{keyPath:"id"});s.createIndex("ownerId","ownerId")}if(!db.objectStoreNames.contains("meta"))db.createObjectStore("meta",{keyPath:"key"})};r.onsuccess=()=>{this.db=r.result;res(this.db)};r.onerror=()=>rej(r.error)})},store(n,m="readonly"){return this.db.transaction(n,m).objectStore(n)},all(n){return new Promise((res,rej)=>{const r=this.store(n).getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=()=>rej(r.error)})},put(n,v){return new Promise((res,rej)=>{const r=this.store(n,"readwrite").put(v);r.onsuccess=()=>res(v);r.onerror=()=>rej(r.error)})},clear(n){return new Promise((res,rej)=>{const r=this.store(n,"readwrite").clear();r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})},meta(k){return new Promise((res,rej)=>{const r=this.store("meta").get(k);r.onsuccess=()=>res(r.result?.value);r.onerror=()=>rej(r.error)})},setMeta(k,v){return this.put("meta",{key:k,value:v,updatedAt:nowISO()})}};
+
+function cloneSet(x={}){return{id:x.id||uid("set"),load:x.load??"",reps:x.reps??"",rir:x.rir??"",done:!!x.done,createdAt:x.createdAt||nowISO(),updatedAt:x.updatedAt||nowISO(),deletedAt:x.deletedAt||null}}
+function normalizeSession(raw,{date,dayId,exerciseId,series}){const stamp=raw.updatedAt||raw.createdAt||nowISO(),sets=(Array.isArray(raw.sets)?raw.sets:[]).map(cloneSet);while(sets.length<series)sets.push(cloneSet());return{id:raw.id||sessionId(date,dayId,exerciseId),schemaVersion:2,date,dayId,exerciseId,sets,note:raw.note||"",extra:Number(raw.extra||0),createdAt:raw.createdAt||stamp,updatedAt:stamp,deletedAt:raw.deletedAt||null}}
+function cacheSession(s){if(!sessions[s.date])sessions[s.date]={};if(!sessions[s.date][s.dayId])sessions[s.date][s.dayId]={};sessions[s.date][s.dayId][s.exerciseId]=s}
+function allSessionRecords(){const a=[];Object.values(sessions).forEach(d=>Object.values(d||{}).forEach(e=>Object.values(e||{}).forEach(s=>{if(s&&!s.deletedAt)a.push(s)})));return a}
+function touchSession(s){s.updatedAt=nowISO();s.schemaVersion=2;s.sets.forEach(x=>{if(!x.id)x.id=uid("set");if(!x.createdAt)x.createdAt=s.createdAt||s.updatedAt;if(!x.updatedAt)x.updatedAt=s.updatedAt;if(x.deletedAt===undefined)x.deletedAt=null});queueSessionWrite(s)}
+async function persistAllSessions(){if(ULDB.db)await Promise.all(allSessionRecords().map(s=>ULDB.put("sessions",s)))}
+function migrateKeyedObject(obj){const out={};Object.entries(obj||{}).forEach(([k,v])=>{const p=k.indexOf("|");if(p<0){out[k]=v;return}const day=k.slice(0,p),old=k.slice(p+1),eid=exerciseIdFromName(old)||old;out[stableKey(day,eid)]=v});return out}
+function migrateOrder(){const next={};Object.entries(exOrder||{}).forEach(([day,arr])=>{const d=DIAS.find(x=>x.id===day);if(!d||!Array.isArray(arr))return;next[day]=arr.map(v=>d.exercicios.find(e=>e.exerciseId===v)?.exerciseId||d.exercicios.find(e=>e.nome===v)?.exerciseId).filter(Boolean)});exOrder=next}
+async function migrateLegacySessions(){for(const [date,byDay] of Object.entries(LEGACY_SESSION_SNAPSHOT||{})){if(!/^\d{4}-\d{2}-\d{2}$/.test(date))continue;for(const [day,byName] of Object.entries(byDay||{})){for(const [name,raw] of Object.entries(byName||{})){const eid=exerciseIdFromName(name),e=exerciseById(eid);if(!eid||!e)continue;const s=normalizeSession(raw||{},{date,dayId:day,exerciseId:eid,series:e.series});cacheSession(s);await ULDB.put("sessions",s)}}}}
+async function migrateBodyCheckins(){for(const x of safeGet("ul-v2-body-log",[])){await ULDB.put("bodyEntries",{...x,id:x.id||uid("body"),schemaVersion:2,createdAt:x.createdAt||nowISO(),updatedAt:x.updatedAt||nowISO(),deletedAt:x.deletedAt||null})}for(const [date,x] of Object.entries(safeGet("ul-v2-checkins",{}))){await ULDB.put("checkins",{...x,id:x.id||"checkin:"+date,schemaVersion:2,date,createdAt:x.createdAt||nowISO(),updatedAt:x.updatedAt||nowISO(),deletedAt:x.deletedAt||null})}}
+
+async function resizePhotoFile(file,maxSide=1600,quality=.82){
+  if(!file||!file.type?.startsWith("image/"))throw new Error("Arquivo não é uma imagem.");
+  const bmp=await createImageBitmap(file);
+  const scale=Math.min(1,maxSide/Math.max(bmp.width,bmp.height));
+  const w=Math.max(1,Math.round(bmp.width*scale)),h=Math.max(1,Math.round(bmp.height*scale));
+  const canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;
+  const ctx=canvas.getContext("2d",{alpha:false});ctx.drawImage(bmp,0,0,w,h);
+  if(bmp.close)bmp.close();
+  const blob=await new Promise((res,rej)=>canvas.toBlob(b=>b?res(b):rej(new Error("Falha ao comprimir imagem.")),"image/jpeg",quality));
+  return{blob,width:w,height:h,type:"image/jpeg",bytes:blob.size};
+}
+async function storeBodyPhoto(file,bodyEntryId){
+  if(!ULDB.db)throw new Error("Banco local indisponível.");
+  const img=await resizePhotoFile(file);
+  const rec={id:uid("media"),schemaVersion:2,ownerId:bodyEntryId,kind:"body-photo",blob:img.blob,width:img.width,height:img.height,type:img.type,bytes:img.bytes,createdAt:nowISO(),updatedAt:nowISO(),deletedAt:null};
+  await ULDB.put("media",rec);
+  return rec;
+}
+
+async function initFoundation(){try{await ULDB.open();migrateOrder();customVideos=migrateKeyedObject(customVideos);videoOk=migrateKeyedObject(videoOk);const rows=await ULDB.all("sessions");if(rows.length)rows.filter(x=>!x.deletedAt).forEach(cacheSession);else await migrateLegacySessions();let body=await ULDB.all("bodyEntries"),checks=await ULDB.all("checkins");if(!(await ULDB.meta("schemaVersion"))&&!body.length&&!checks.length){await migrateBodyCheckins();body=await ULDB.all("bodyEntries");checks=await ULDB.all("checkins")}bodyLog=body.filter(x=>!x.deletedAt);checkins={};checks.filter(x=>!x.deletedAt).forEach(x=>checkins[x.date]=x);profile=(await ULDB.meta("profile"))||safeGet("ul-v2-profile",profile);await loadBodyPhotos();await ULDB.setMeta("schemaVersion",2);await ULDB.setMeta("exerciseCatalogVersion",1);await ULDB.setMeta("lastMigrationAt",nowISO());localStorage.setItem("treino-ordem-ul-v2",JSON.stringify(exOrder));localStorage.setItem("treino-videos-ok-ul",JSON.stringify(videoOk));localStorage.setItem("treino-videos-ul-v1",JSON.stringify(customVideos));foundationReady=true}catch(err){console.error(err);for(const [date,byDay] of Object.entries(LEGACY_SESSION_SNAPSHOT||{})){for(const [day,byName] of Object.entries(byDay||{})){for(const [name,raw] of Object.entries(byName||{})){const eid=exerciseIdFromName(name),e=exerciseById(eid);if(eid&&e)cacheSession(normalizeSession(raw||{},{date,dayId:day,exerciseId:eid,series:e.series}))}}}profile=safeGet("ul-v2-profile",profile);bodyLog=safeGet("ul-v2-body-log",[]);checkins=safeGet("ul-v2-checkins",{});foundationReady=true}}
+async function saveV2(){
+  localStorage.setItem("ul-v2-main-view",mainView);
+  localStorage.setItem("ul-v2-profile",JSON.stringify(profile));
+  if(!ULDB.db)return;
+  try{
+    await ULDB.setMeta("profile",profile);
+    storageHealth={ok:true,lastError:"",lastWriteAt:nowISO()};
+  }catch(err){
+    storageHealth={ok:false,lastError:String(err?.message||err),lastWriteAt:storageHealth.lastWriteAt};
+  }
 }
 function releaseWakeLock(){if(wakeLock){try{wakeLock.release()}catch(e){}wakeLock=null}}
 document.addEventListener("visibilitychange",()=>{
@@ -209,7 +429,7 @@ function orderedIdx(d){
   const saved=exOrder[d.id];
   const all=d.exercicios.map((e,i)=>i);
   if(!Array.isArray(saved))return all;
-  const byName=new Map(d.exercicios.map((e,i)=>[e.nome,i]));
+  const byName=new Map(d.exercicios.map((e,i)=>[e.exerciseId,i]));
   const out=[];
   saved.forEach(n=>{if(byName.has(n)&&!out.includes(byName.get(n)))out.push(byName.get(n))});
   all.forEach(i=>{if(!out.includes(i))out.push(i)});
@@ -222,7 +442,7 @@ function moveExercise(dayId,idx,dir){
   const target=pos+dir;
   if(pos<0||target<0||target>=ord.length)return;
   ord.splice(target,0,ord.splice(pos,1)[0]);
-  exOrder[d.id]=ord.map(i=>d.exercicios[i].nome);
+  exOrder[d.id]=ord.map(i=>d.exercicios[i].exerciseId);
   vibrate(15);
   save();
   renderDay();
@@ -239,56 +459,56 @@ function resetOrder(){
 function setCount(s,e){return Math.max(e.series,e.series+(s.extra||0))}
 function addSet(dayId,idx){
   const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx];
-  const s=sessionFor(curDate(),dayId,e.nome,e.series);
+  const s=sessionFor(curDate(),dayId,e.exerciseId,e.series);
   if((s.extra||0)>=4)return;
   s.extra=(s.extra||0)+1;
-  while(s.sets.length<setCount(s,e))s.sets.push({load:"",reps:"",rir:"",done:false});
+  while(s.sets.filter(x=>!x.deletedAt).length<setCount(s,e))s.sets.push(cloneSet());touchSession(s);
   vibrate(15);
   save();
   updateCard(dayId,idx);
 }
 function removeSet(dayId,idx){
   const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx];
-  const s=sessionFor(curDate(),dayId,e.nome,e.series);
+  const s=sessionFor(curDate(),dayId,e.exerciseId,e.series);
   if(!s.extra)return;
   s.extra-=1;
-  s.sets=s.sets.slice(0,setCount(s,e));
+  const a=s.sets.filter(x=>!x.deletedAt),last=a.at(-1);if(last){last.deletedAt=nowISO();last.updatedAt=last.deletedAt}touchSession(s);
   vibrate(15);
   save();
   updateCard(dayId,idx);
 }
 
-function save(){localStorage.setItem("treino-sessoes-ul-v2",JSON.stringify(sessions));localStorage.setItem("treino-ordem-ul-v2",JSON.stringify(exOrder));localStorage.setItem("treino-videos-ok-ul",JSON.stringify(videoOk));localStorage.setItem("treino-videos-ul-v1",JSON.stringify(customVideos));localStorage.setItem("treino-notas-dia-ul-v2",JSON.stringify(dayNotes))}
-function sessionFor(date,dayId,exName,series){if(!sessions[date])sessions[date]={};if(!sessions[date][dayId])sessions[date][dayId]={};if(!sessions[date][dayId][exName])sessions[date][dayId][exName]={sets:Array.from({length:series},()=>({load:"",reps:"",rir:"",done:false})),note:"",extra:0};const x=sessions[date][dayId][exName];if(x.extra==null)x.extra=0;const need=series+x.extra;while(x.sets.length<need)x.sets.push({load:"",reps:"",rir:"",done:false});return x}
-function getSession(date,dayId,exName){return sessions?.[date]?.[dayId]?.[exName]||null}
-function exerciseDone(date,dayId,e){const s=getSession(date,dayId,e.nome);if(!s)return false;const c=setCount(s,e);return s.sets.slice(0,c).length===c&&s.sets.slice(0,c).every(x=>x.done)}
+function save(){localStorage.setItem("treino-ordem-ul-v2",JSON.stringify(exOrder));localStorage.setItem("treino-videos-ok-ul",JSON.stringify(videoOk));localStorage.setItem("treino-videos-ul-v1",JSON.stringify(customVideos));localStorage.setItem("treino-notas-dia-ul-v2",JSON.stringify(dayNotes))}
+function sessionFor(date,dayId,exerciseId,series){if(!sessions[date])sessions[date]={};if(!sessions[date][dayId])sessions[date][dayId]={};if(!sessions[date][dayId][exerciseId])sessions[date][dayId][exerciseId]=normalizeSession({},{date,dayId,exerciseId,series});const x=sessions[date][dayId][exerciseId];if(x.extra==null)x.extra=0;while(x.sets.filter(z=>!z.deletedAt).length<series+x.extra)x.sets.push(cloneSet());return x}
+function getSession(date,dayId,exerciseId){return sessions?.[date]?.[dayId]?.[exerciseId]||null}
+function exerciseDone(date,dayId,e){const s=getSession(date,dayId,e.exerciseId);if(!s)return false;const a=s.sets.filter(x=>!x.deletedAt),c=e.series+(s.extra||0);return a.slice(0,c).length===c&&a.slice(0,c).every(x=>x.done)}
 function dayDoneCount(d,date){return d.exercicios.filter(e=>exerciseDone(date||todayISO(),d.id,e)).length}
-function completedSetsToday(){let n=0,total=0;DIAS.forEach(d=>d.exercicios.forEach(e=>{total+=e.series;const s=getSession(todayISO(),d.id,e.nome);if(s)n+=s.sets.slice(0,setCount(s,e)).filter(x=>x.done).length}));return{n,total}}
+function completedSetsToday(){let n=0,total=0;DIAS.forEach(d=>d.exercicios.forEach(e=>{total+=e.series;const s=getSession(todayISO(),d.id,e.exerciseId);if(s)n+=s.sets.filter(x=>!x.deletedAt).slice(0,e.series+(s.extra||0)).filter(x=>x.done).length}));return{n,total}}
 function videoFor(d,e){
-  const k=key(d,e.nome),c=customVideos[k];
+  const k=stableKey(d,e.exerciseId),c=customVideos[k];
   if(c?.url)return{url:c.url,fonte:c.fonte||"Vídeo cadastrado por você",custom:true,status:"custom"};
   if(!e.video)return{url:"",fonte:"",custom:false,status:"pending"};
   const st=videoOk[k]?"confirmed":(e.videoStatus||"reference");
   return{url:e.video,fonte:e.fonte||"",custom:false,status:st};
 }
 function videoLabel(st){
-  return st==="custom"?"seu vídeo":st==="confirmed"?"conferido":st==="unverified"?"conferir":st==="pending"?"sem vídeo":"vídeo";
+  return st==="custom"?"seu vídeo":st==="confirmed"?"conferido":st==="unverified"||st==="reference"?"conferir":st==="pending"?"sem vídeo":"vídeo";
 }
 function needsReview(){
   const out=[];
-  DIAS.forEach(d=>d.exercicios.forEach((e,i)=>{const v=videoFor(d.id,e);if(v.status==="unverified"||v.status==="pending")out.push({d,e,i,v})}));
+  DIAS.forEach(d=>d.exercicios.forEach((e,i)=>{const v=videoFor(d.id,e);if(v.status==="unverified"||v.status==="pending"||v.status==="reference")out.push({d,e,i,v})}));
   return out;
 }
 function confirmVideo(dayId,idx){
   const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx];
-  videoOk[key(dayId,e.nome)]=1;
+  videoOk[stableKey(dayId,e.exerciseId)]=1;
   vibrate(20);
   save();
   render();
 }
 function unconfirmVideo(dayId,idx){
   const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx];
-  delete videoOk[key(dayId,e.nome)];
+  delete videoOk[stableKey(dayId,e.exerciseId)];
   save();
   render();
 }
@@ -298,17 +518,756 @@ function ringSVG(pct,size,stroke,color,track){const r=(size-stroke)/2,c=2*Math.P
 function animateRings(){requestAnimationFrame(()=>document.querySelectorAll(".ring-fg").forEach(el=>el.style.strokeDashoffset=el.dataset.target))}
 function checkIcon(){return `<svg viewBox="0 0 16 16"><path d="M3 8.5L6.2 11.5L13 4.5"/></svg>`}
 
-function priorSessions(dayId,e){const out=[];Object.keys(sessions).sort().reverse().forEach(date=>{if(date===curDate())return;const s=getSession(date,dayId,e.nome);if(s&&s.sets.some(x=>x.done||x.load||x.reps))out.push({date,...s})});return out}
+function priorSessions(dayId,e){const out=[];Object.keys(sessions).sort().reverse().forEach(date=>{if(date===curDate())return;const ss=getSession(date,dayId,e.exerciseId);if(ss&&ss.sets.some(x=>!x.deletedAt&&(x.done||x.load||x.reps)))out.push({date,...ss})});return out}
 function legacyHistory(dayId,e){return (legacyLoads[key(dayId,e.nome)]||[]).slice().sort((a,b)=>a.d<b.d?1:-1)}
-function sessionSummary(s){const sets=s.sets.filter(x=>x.done||x.load||x.reps);if(!sets.length)return"sem dados";return sets.map(x=>`${x.load?x.load+"kg":"—"} × ${x.reps||"—"}${x.rir!==""?` · RIR ${x.rir}`:""}`).join(" | ")}
-function recommendation(e,s){const sets=s.sets.slice(0,e.series);if(!sets.every(x=>x.done))return null;const {lo,hi}=parseRange(e.reps),minR=rirMin(e.rir);const reps=sets.map(x=>Number(x.reps));const rirs=sets.map(x=>Number(x.rir));if(reps.some(Number.isNaN))return{txt:"Treino concluído — registre reps para liberar recomendação.",cls:""};const allTop=reps.every(r=>r>=hi);const allAtLeastLo=reps.every(r=>r>=lo);const rirOk=rirs.every(r=>Number.isNaN(r)||r>=minR);if(allTop&&rirOk)return{txt:"Topo da faixa atingido com RIR adequado — considere subir a carga na próxima sessão.",cls:"good"};if(!allAtLeastLo||rirs.filter(r=>!Number.isNaN(r)&&r===0).length>=2)return{txt:"Desempenho abaixo do alvo ou esforço alto — mantenha a carga e revise execução/recuperação.",cls:"warn"};return{txt:"Boa sessão — mantenha a carga e tente acumular repetições dentro da faixa.",cls:""}}
-function trendPoints(dayId,e){const pts=[];Object.keys(sessions).sort().forEach(date=>{const s=getSession(date,dayId,e.nome);if(!s)return;const vals=s.sets.filter(x=>x.done&&x.load).map(x=>Number(x.load)).filter(Number.isFinite);if(vals.length)pts.push({d:date,v:Math.max(...vals)})});legacyHistory(dayId,e).slice().reverse().forEach(h=>{const v=Number(h.v);if(Number.isFinite(v))pts.push({d:h.d,v,legacy:true})});pts.sort((a,b)=>a.d.localeCompare(b.d));return pts.slice(-12)}
+function sessionSummary(s){const a=s.sets.filter(x=>!x.deletedAt&&(x.done||x.load||x.reps));if(!a.length)return"sem dados";return a.map(x=>`${x.load?x.load+"kg":"—"} × ${x.reps||"—"}${x.rir!==""?` · RIR ${x.rir}`:""}`).join(" | ")}
+function recommendation(dayId,e,s){
+  const sets=s.sets.filter(x=>!x.deletedAt).slice(0,e.series);
+  if(sets.length<e.series||!sets.every(x=>x.done))return null;
+
+  const complete=sets.every(x=>String(x.load??"").trim()!==""&&String(x.reps??"").trim()!==""&&String(x.rir??"").trim()!=="");
+  if(!complete)return{txt:"Complete carga, reps e RIR de todas as séries para liberar a recomendação.",cls:"warn",confidence:"baixa"};
+
+  const {lo,hi}=parseRange(e.reps),targetMin=rirMin(e.rir);
+  const reps=sets.map(x=>Number(x.reps)),rirs=sets.map(x=>Number(x.rir)),loads=sets.map(x=>Number(x.load));
+  if([...reps,...rirs,...loads].some(v=>!Number.isFinite(v)))return{txt:"Há um valor inválido nesta sessão. Corrija antes da recomendação.",cls:"warn",confidence:"baixa"};
+
+  const sameLoad=loads.every(v=>Math.abs(v-loads[0])<1e-9);
+  const currentLoad=Math.max(...loads);
+  const allTop=reps.every(r=>r>=hi);
+  const allAtLeastLo=reps.every(r=>r>=lo);
+  const effortOk=rirs.every(r=>r>=targetMin);
+  const tooHard=rirs.filter(r=>r<=0).length>=2;
+  const avgRir=rirs.reduce((a,b)=>a+b,0)/rirs.length;
+
+  const recent=priorSessions(dayId,e).filter(x=>{
+    const a=x.sets.filter(z=>!z.deletedAt).slice(0,e.series);
+    return a.length===e.series&&a.every(z=>z.done&&String(z.load).trim()!==""&&String(z.reps).trim()!==""&&String(z.rir).trim()!=="");
+  }).slice(0,3);
+
+  const comparable=recent.filter(x=>{
+    const a=x.sets.filter(z=>!z.deletedAt).slice(0,e.series);
+    const max=Math.max(...a.map(z=>Number(z.load)));
+    return Number.isFinite(max)&&Math.abs(max-currentLoad)<1e-9;
+  });
+
+  const priorStrong=comparable.filter(x=>{
+    const a=x.sets.filter(z=>!z.deletedAt).slice(0,e.series);
+    return a.every(z=>Number(z.reps)>=Math.max(lo,hi-1)&&Number(z.rir)>=targetMin);
+  }).length;
+
+  if(!sameLoad)return{txt:"Você usou cargas diferentes entre as séries. O registro é válido, mas a sugestão automática fica menos confiável. Compare a próxima sessão antes de progredir.",cls:"",confidence:"média"};
+
+  if(allTop&&effortOk){
+    if(priorStrong>=1){
+      const why=`${priorStrong+1} exposições fortes na mesma carga; todas as séries chegaram ao topo da faixa com RIR ≥ ${targetMin}.`;
+      return{txt:"Desempenho forte repetido. Teste o menor aumento de carga disponível na próxima sessão.",why,cls:"good",confidence:isAnchorExercise(e)?"alta":"média"};
+    }
+    return{txt:"Topo da faixa atingido com RIR adequado. Repita esse desempenho mais uma vez antes de subir a carga.",why:`Primeira confirmação forte nesta carga; o app ainda quer mais uma exposição comparável.`,cls:"good",confidence:"média"};
+  }
+  if(!allAtLeastLo||tooHard)return{txt:"A carga está pesada para a faixa-alvo ou o esforço ficou muito alto. Mantenha ou reduza levemente e priorize técnica e recuperação.",cls:"warn",confidence:"alta"};
+  if(avgRir>targetMin+2&&reps.every(r=>r>=lo))return{txt:"Você ficou claramente acima do RIR previsto. Mantenha a técnica e tente mais repetições antes de aumentar a carga.",cls:"",confidence:"média"};
+  return{txt:"Sessão dentro do alvo. Mantenha a carga e tente acumular repetições com o RIR prescrito.",why:`Faixa ${lo}–${hi} reps; RIR-alvo mínimo ${targetMin}; ainda não há evidência suficiente para subir a carga.`,cls:"",confidence:"média"};
+}
+function trendPoints(dayId,e){const pts=[];Object.keys(sessions).sort().forEach(date=>{const ss=getSession(date,dayId,e.exerciseId);if(!ss)return;const vals=ss.sets.filter(x=>!x.deletedAt&&x.done&&x.load).map(x=>Number(x.load)).filter(Number.isFinite);if(vals.length)pts.push({d:date,v:Math.max(...vals)})});legacyHistory(dayId,e).slice().reverse().forEach(h=>{const v=Number(h.v);if(Number.isFinite(v))pts.push({d:h.d,v,legacy:true})});pts.sort((a,b)=>a.d.localeCompare(b.d));return pts.slice(-12)}
 function sparkSVG(points,color){const W=100,H=30,pad=3,vals=points.map(p=>p.v),min=Math.min(...vals),max=Math.max(...vals),range=(max-min)||1;const c=points.map((p,i)=>({x:(i/(points.length-1||1))*(W-pad*2)+pad,y:H-pad-((p.v-min)/range)*(H-pad*2)}));const line=c.map((p,i)=>(i?"L":"M")+p.x.toFixed(2)+" "+p.y.toFixed(2)).join(" ");return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><path d="${line}" fill="none" stroke="${color}" stroke-width="1.6" vector-effect="non-scaling-stroke"/>${c.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="1.8" fill="${color}"/>`).join("")}</svg>`}
 
 function backupInfo(){let iso=null;try{iso=localStorage.getItem("treino-ul-ultimo-backup")}catch{}const tem=Object.keys(sessions).length||Object.keys(legacyLoads).length;if(!iso)return{atrasado:!!tem,nunca:true,dias:null};const d=new Date(iso),dias=Math.floor((Date.now()-d)/86400000);return{atrasado:!!tem&&dias>=14,nunca:false,dias,data:d}}
 function backupAlertHtml(){const i=backupInfo();if(!i.atrasado)return"";return `<div class="bkalert"><div>⚠</div><div><b>Backup pendente</b><br>${i.nunca?"Você já tem dados e ainda não exportou backup.":`Último backup há ${i.dias} dias.`}</div></div>`}
 
-function renderHome(){const app=document.getElementById("app"),totalEx=DIAS.reduce((s,d)=>s+d.exercicios.length,0),done=DIAS.reduce((s,d)=>s+dayDoneCount(d),0),setp=completedSetsToday();app.innerHTML=`<div class="wrap"><div class="header"><div><div class="brand"><b>◉</b> Semana de treino</div><div class="title">Upper / Lower</div><div class="sub">4 dias · registro série por série · RIR real · descanso automático</div></div><div class="weekring"><div class="ringwrap">${ringSVG(done/totalEx,58,5,"#D4A72C","#2A2D33")}<div class="ringnum">${Math.round(done/totalEx*100)}%</div></div><div class="wlabel">${done}/${totalEx} exercícios</div></div></div><div class="days">${DIAS.map(d=>{const n=dayDoneCount(d);return `<button class="day" data-action="open-day" data-day="${d.id}"><span class="bar" style="background:${d.cor}"></span><div class="daytop"><div><div class="dayname">${d.label}</div><div class="focus">${d.foco}</div></div><div class="dayright">${ringSVG(n/d.exercicios.length,34,4,d.cor,"#2A2D33")}<span class="count" style="color:${d.cor};border:1px solid ${d.cor}55">${n}/${d.exercicios.length}</span></div></div></button>`}).join("")}<div class="rest">Quarta, sábado e domingo — recuperação</div></div><div class="summarybox"><div class="tooltitle">Resumo de hoje</div><div class="summarygrid"><div class="metric"><b>${setp.n}</b><span>séries concluídas</span></div><div class="metric"><b>${done}</b><span>exercícios concluídos</span></div><div class="metric"><b>4x</b><span>estrutura semanal</span></div></div></div>${backupAlertHtml()}<div class="tools"><div class="tooltitle">Ferramentas</div><div class="toolsub">${needsReview().length?needsReview().length+" vídeo(s) sugeridos automaticamente ainda não foram conferidos.":"Todos os vídeos foram conferidos."}</div><div class="toolrow"><button class="toolbtn" data-action="open-calc">🧮 Anilhas</button><button class="toolbtn" data-action="open-pending">🎬 Revisar vídeos${needsReview().length?" ("+needsReview().length+")":""}</button></div></div><div class="tools"><div class="tooltitle">Dados do treino</div><div class="toolsub">O backup agora inclui registros série por série, notas, vídeos personalizados e também o histórico antigo.</div><div class="toolrow"><button class="toolbtn" data-action="export-backup">Exportar backup</button><button class="toolbtn" data-action="import-backup">Importar backup</button><input id="import-file" type="file" accept="application/json,.json"></div></div></div>`;animateRings()}
+
+function isoDateObj(iso){const [y,m,d]=iso.split("-").map(Number);return new Date(y,m-1,d)}
+function isoFromDate(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function mondayOf(date){const d=new Date(date);const n=(d.getDay()+6)%7;d.setDate(d.getDate()-n);d.setHours(0,0,0,0);return d}
+function fmtLong(iso){return isoDateObj(iso).toLocaleDateString("pt-BR",{day:"2-digit",month:"short"})}
+function workoutDayForDate(date){
+  const n=date.getDay();
+  return n===1?DIAS[0]:n===2?DIAS[1]:n===4?DIAS[2]:n===5?DIAS[3]:null
+}
+function nextWorkout(){
+  const now=new Date();
+  for(let i=0;i<8;i++){const d=new Date(now);d.setDate(now.getDate()+i);const w=workoutDayForDate(d);if(w)return{day:w,date:d}}
+  return null
+}
+function sessionDates(){
+  return Object.keys(sessions||{}).filter(k=>/^\d{4}-\d{2}-\d{2}$/.test(k)).sort();
+}
+function workoutProgressOn(date,day){
+  if(!day)return{done:0,total:0,sets:0};
+  let done=0,total=day.exercicios.length,sets=0;
+  day.exercicios.forEach(e=>{
+    const s=getSession(date,day.id,e.exerciseId);
+    if(s){
+      // descarta séries apagadas antes de recortar, igual a exerciseDone/completedSetsToday
+      const ativas=s.sets.filter(x=>!x.deletedAt);
+      const c=ativas.slice(0,setCount(s,e)).filter(x=>x.done).length;
+      sets+=c;
+      if(c>=e.series)done++;
+    }
+  });
+  return{done,total,sets}
+}
+function weeklyStats(){
+  const mon=mondayOf(new Date()), vals=[];
+  let completed=0,planned=0,sets=0;
+  for(let i=0;i<7;i++){
+    const d=new Date(mon);d.setDate(mon.getDate()+i);
+    const w=workoutDayForDate(d); if(!w)continue;
+    planned++;
+    const p=workoutProgressOn(isoFromDate(d),w);sets+=p.sets;
+    if(p.done===p.total)completed++;
+    vals.push({date:d,day:w,p});
+  }
+  return{completed,planned,sets,vals}
+}
+function totalCompletedSets(){
+  let n=0;
+  Object.values(sessions||{}).forEach(byDay=>{
+    if(!byDay||typeof byDay!=="object")return;
+    Object.values(byDay).forEach(byEx=>{
+      if(!byEx||typeof byEx!=="object")return;
+      Object.values(byEx).forEach(ex=>{if(ex&&Array.isArray(ex.sets))n+=ex.sets.filter(x=>x.done&&!x.deletedAt).length});
+    });
+  });
+  return n;
+}
+function getReadiness(){return checkins[todayISO()]||{energy:0,sleep:0,motivation:0}}
+function checkinScore(c){const a=[c.energy,c.sleep,c.motivation].filter(Boolean);return a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length*20):0}
+function mostRecentWorkout(){
+  const dates=sessionDates().reverse();
+  for(const date of dates){
+    for(const d of DIAS){const p=workoutProgressOn(date,d);if(p.sets>0)return{date,day:d,p}}
+  }
+  return null
+}
+function lastBody(){return bodyLog.length?bodyLog.slice().sort((a,b)=>a.date<b.date?1:-1)[0]:null}
+function bodyDelta(field){
+  const arr=bodyLog.filter(x=>x[field]!==""&&x[field]!=null).slice().sort((a,b)=>a.date>b.date?1:-1);
+  if(arr.length<2)return null; return +(parseFloat(arr[arr.length-1][field])-parseFloat(arr[arr.length-2][field])).toFixed(2)
+}
+
+/* ---------- séries temporais para o dashboard ---------- */
+
+/** Volume de uma data: soma de carga × reps das séries concluídas e não apagadas. */
+function volumeOnDate(date){
+  let v=0;
+  DIAS.forEach(d=>d.exercicios.forEach(e=>{
+    const s=getSession(date,d.id,e.exerciseId);
+    if(!s)return;
+    s.sets.forEach(x=>{
+      if(!x.done||x.deletedAt)return;
+      const l=Number(x.load),r=Number(x.reps);
+      if(Number.isFinite(l)&&Number.isFinite(r))v+=l*r;
+    });
+  }));
+  return v;
+}
+
+/**
+ * Últimas `n` semanas (segunda a domingo), da mais antiga para a mais recente.
+ * Cada item: volume total, treinos completos, treinos planejados e séries.
+ * A semana corrente entra parcial — é o esperado num painel.
+ */
+function weekSeries(n=8,ref=new Date()){
+  const out=[],base=mondayOf(ref);
+  for(let w=n-1;w>=0;w--){
+    const mon=new Date(base);mon.setDate(base.getDate()-w*7);
+    let volume=0,sets=0,completed=0,planned=0;
+    for(let i=0;i<7;i++){
+      const d=new Date(mon);d.setDate(mon.getDate()+i);
+      const wd=workoutDayForDate(d);if(!wd)continue;
+      planned++;
+      const iso=isoFromDate(d),p=workoutProgressOn(iso,wd);
+      sets+=p.sets;volume+=volumeOnDate(iso);
+      if(p.total&&p.done===p.total)completed++;
+    }
+    out.push({start:isoFromDate(mon),label:fmtDate(isoFromDate(mon)),volume:Math.round(volume),sets,completed,planned});
+  }
+  return out;
+}
+
+/**
+ * Sequência atual de dias de treino planejados que foram concluídos,
+ * contando para trás. Dias sem treino previsto não quebram a sequência.
+ * O dia de hoje, se ainda estiver incompleto, também não quebra.
+ */
+function currentStreak(ref=new Date()){
+  let streak=0;
+  const hoje=isoFromDate(ref);
+  for(let i=0;i<180;i++){
+    const d=new Date(ref);d.setDate(ref.getDate()-i);
+    const wd=workoutDayForDate(d);
+    if(!wd)continue;
+    const iso=isoFromDate(d),p=workoutProgressOn(iso,wd);
+    const completo=p.total&&p.done===p.total;
+    if(completo){streak++;continue}
+    if(iso===hoje)continue; // hoje ainda dá tempo
+    break;
+  }
+  return streak;
+}
+
+/** Melhor série da semana corrente por 1RM estimado, para destaque no painel. */
+function bestSetOfWeek(ref=new Date()){
+  const mon=mondayOf(ref);let best=null;
+  for(let i=0;i<7;i++){
+    const d=new Date(mon);d.setDate(mon.getDate()+i);
+    const iso=isoFromDate(d);
+    DIAS.forEach(day=>day.exercicios.forEach(e=>{
+      const s=getSession(iso,day.id,e.exerciseId);
+      if(!s)return;
+      s.sets.forEach(x=>{
+        if(!x.done||x.deletedAt)return;
+        const est=estimated1RM(x.load,x.reps);
+        if(est==null)return;
+        if(!best||est>best.est)best={est,load:Number(x.load),reps:Number(x.reps),name:e.nome,date:iso};
+      });
+    }));
+  }
+  return best;
+}
+
+/** Variação percentual entre as duas últimas semanas com volume registrado. */
+function volumeTrend(series){
+  const comVolume=series.filter(w=>w.volume>0);
+  if(comVolume.length<2)return null;
+  const atual=comVolume.at(-1).volume,anterior=comVolume.at(-2).volume;
+  if(!anterior)return null;
+  return Math.round(((atual-anterior)/anterior)*100);
+}
+
+
+
+function migrationReport(){
+  const legacyDates=Object.keys(LEGACY_SESSION_SNAPSHOT||{}).filter(x=>/^\d{4}-\d{2}-\d{2}$/.test(x));
+  const current=allSessionRecords();
+  const legacyCount=legacyDates.reduce((n,date)=>{
+    const byDay=LEGACY_SESSION_SNAPSHOT[date]||{};
+    return n+Object.values(byDay).reduce((s,byEx)=>s+Object.keys(byEx||{}).length,0);
+  },0);
+  const unmatched=[];
+  legacyDates.forEach(date=>{
+    const byDay=LEGACY_SESSION_SNAPSHOT[date]||{};
+    Object.entries(byDay).forEach(([day,byEx])=>{
+      Object.keys(byEx||{}).forEach(name=>{if(!exerciseIdFromName(name))unmatched.push({date,day,name})});
+    });
+  });
+  return {legacyCount,migratedCount:current.length,unmatched,exact:(legacyCount===0||legacyCount===current.length)&&unmatched.length===0};
+}
+function showMigrationReport(){
+  const r=migrationReport();
+  const lines=[
+    "Relatório de migração","",
+    "Sessões antigas detectadas: "+r.legacyCount,
+    "Sessões na base nova: "+r.migratedCount,
+    "Itens antigos sem correspondência: "+r.unmatched.length,
+    "",
+    r.exact?"Migração compatível pelos critérios automáticos.":"Há diferenças que precisam ser conferidas antes de substituir o app atual."
+  ];
+  alert(lines.join("\n"));
+}
+
+
+async function storageSelfTest(){
+  if(!ULDB.db)throw new Error("IndexedDB não inicializado.");
+  const testId="selftest:"+Date.now();
+  const record={id:testId,schemaVersion:2,date:todayISO(),dayId:"__selftest",exerciseId:"__selftest",sets:[],note:"teste",extra:0,createdAt:nowISO(),updatedAt:nowISO(),deletedAt:null};
+  await ULDB.put("sessions",record);
+  const all=await ULDB.all("sessions");
+  const found=all.find(x=>x.id===testId);
+  if(!found)throw new Error("Falha ao reler dado gravado.");
+  found.deletedAt=nowISO();found.updatedAt=found.deletedAt;
+  await ULDB.put("sessions",found);
+  const all2=await ULDB.all("sessions");
+  if(!all2.find(x=>x.id===testId)?.deletedAt)throw new Error("Falha no teste de atualização/soft-delete.");
+  return true;
+}
+
+function sessionCountsByExercise(){
+  const map=new Map();
+  allSessionRecords().forEach(s=>{
+    const e=exerciseById(s.exerciseId);
+    const label=e?.nome||s.exerciseId;
+    if(!map.has(s.exerciseId))map.set(s.exerciseId,{exerciseId:s.exerciseId,label,count:0,sets:0});
+    const row=map.get(s.exerciseId);
+    row.count++;
+    row.sets+=s.sets.filter(x=>!x.deletedAt&&x.done).length;
+  });
+  return [...map.values()].sort((a,b)=>b.count-a.count||a.label.localeCompare(b.label,"pt-BR"));
+}
+
+function buildRecoverySnapshot(){
+  return {
+    id:uid("recovery"),
+    schemaVersion:2,
+    createdAt:nowISO(),
+    sessions:allSessionRecords().map(x=>structuredClone(x)),
+    dayNotes:structuredClone(dayNotes||{}),
+    customVideos:structuredClone(customVideos||{}),
+    legacyLoads:structuredClone(legacyLoads||{}),
+    legacyDone:structuredClone(legacyDone||{}),
+    exOrder:structuredClone(exOrder||{}),
+    videoOk:structuredClone(videoOk||{}),
+    profile:structuredClone(profile||{}),
+    bodyLog:structuredClone(bodyLog||[]),
+    checkins:structuredClone(checkins||{})
+  };
+}
+
+async function saveLocalRecoveryPoint(){
+  if(!ULDB.db)throw new Error("Banco local indisponível.");
+  const snap=buildRecoverySnapshot();
+  await ULDB.setMeta("recoveryPoint",snap);
+  await ULDB.setMeta("recoveryPointCreatedAt",snap.createdAt);
+  return snap;
+}
+
+async function getLocalRecoveryPoint(){
+  if(!ULDB.db)return null;
+  return await ULDB.meta("recoveryPoint");
+}
+
+async function restoreLocalRecoveryPoint(){
+  const snap=await getLocalRecoveryPoint();
+  if(!snap)throw new Error("Nenhum ponto de recuperação local foi criado.");
+  if(!confirm("Restaurar o ponto de recuperação local? Os dados atuais serão substituídos."))return false;
+
+  await ULDB.clear("sessions");
+  sessions={};
+  for(const raw of snap.sessions||[]){
+    const e=exerciseById(raw.exerciseId);
+    const s=normalizeSession(raw,{date:raw.date,dayId:raw.dayId,exerciseId:raw.exerciseId,series:e?.series||raw.sets?.length||1});
+    cacheSession(s);await ULDB.put("sessions",s);
+  }
+  dayNotes=snap.dayNotes||{};
+  customVideos=snap.customVideos||{};
+  legacyLoads=snap.legacyLoads||{};
+  legacyDone=snap.legacyDone||{};
+  exOrder=snap.exOrder||{};
+  videoOk=snap.videoOk||{};
+  profile=snap.profile||profile;
+  bodyLog=Array.isArray(snap.bodyLog)?snap.bodyLog:[];
+  checkins=snap.checkins||{};
+  migrateOrder();savingLegacy();save();await saveV2();
+
+  if(ULDB.db){
+    await ULDB.clear("bodyEntries");
+    await ULDB.clear("checkins");
+    for(const x of bodyLog)await ULDB.put("bodyEntries",x);
+    for(const x of Object.values(checkins))await ULDB.put("checkins",x);
+  }
+  return true;
+}
+
+function exportRecoveryPoint(){
+  getLocalRecoveryPoint().then(snap=>{
+    if(!snap){alert("Nenhum ponto de recuperação local criado ainda.");return}
+    const blob=new Blob([JSON.stringify(snap,null,2)],{type:"application/json"});
+    const url=URL.createObjectURL(blob),a=document.createElement("a");
+    a.href=url;a.download="ul-recovery-point-"+todayISO()+".json";document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }).catch(err=>{console.error(err);alert("Não foi possível exportar o ponto de recuperação.")});
+}
+
+function backupDiagnosticsPayload(){
+  return {
+    app:"Upper/Lower diagnostics",
+    version:1,
+    generatedAt:nowISO(),
+    integrity:runIntegrityCheck(),
+    migration:migrationReport(),
+    countsByExercise:sessionCountsByExercise(),
+    storageHealth
+  };
+}
+function exportDiagnostics(){
+  const payload=backupDiagnosticsPayload();
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="ul-diagnostico-"+todayISO()+".json";document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function runIntegrityCheck(){
+  const issues=[],ids=new Set(),catalog=new Set();
+  // O mesmo movimento pode aparecer em mais de um dia do programa e nesse caso
+  // deve manter o mesmo exerciseId — é isso que unifica histórico e recordes.
+  // Colisão real só existe se o id se repetir dentro do MESMO dia, porque a
+  // chave da sessão é date:dayId:exerciseId.
+  DIAS.forEach(d=>{
+    const noDia=new Set();
+    d.exercicios.forEach(e=>{
+      if(!e.exerciseId){issues.push("Exercício sem exerciseId: "+e.nome);return}
+      if(noDia.has(e.exerciseId))issues.push("exerciseId repetido no mesmo dia ("+d.label+"): "+e.exerciseId);
+      noDia.add(e.exerciseId);
+      catalog.add(e.exerciseId);
+    });
+  });
+  allSessionRecords().forEach(s=>{
+    if(!s.id)issues.push("Sessão sem id.");
+    else if(ids.has(s.id))issues.push("ID de sessão duplicado: "+s.id);
+    else ids.add(s.id);
+    if(!catalog.has(s.exerciseId))issues.push("Sessão órfã: "+s.exerciseId);
+    if(!s.createdAt||!s.updatedAt)issues.push("Sessão sem timestamps: "+s.id);
+    if(!Array.isArray(s.sets))issues.push("Sessão sem séries: "+s.id);
+    else s.sets.forEach((x,i)=>{
+      if(!x.id)issues.push("Série sem id em "+s.id+" #"+(i+1));
+      if(x.rir!==""&&x.rir!=null&&!Number.isFinite(Number(x.rir)))issues.push("RIR inválido em "+s.id);
+      if(x.reps!==""&&x.reps!=null&&!Number.isFinite(Number(x.reps)))issues.push("Reps inválidas em "+s.id);
+      if(x.load!==""&&x.load!=null&&!Number.isFinite(Number(x.load)))issues.push("Carga inválida em "+s.id);
+    });
+  });
+  bodyLog.forEach(x=>{if(!x.id||!x.updatedAt)issues.push("Medição corporal incompleta: "+(x.date||"sem data"))});
+  Object.values(checkins).forEach(x=>{if(!x.id||!x.updatedAt)issues.push("Check-in incompleto: "+(x.date||"sem data"))});
+  return{ok:issues.length===0,issues,sessions:allSessionRecords().length,body:bodyLog.length,checkins:Object.keys(checkins).length,exerciseIds:catalog.size,storage:storageHealth};
+}
+function showIntegrityCheck(){
+  const r=runIntegrityCheck();
+  const storage=r.storage.ok?"armazenamento OK":"erro de armazenamento";
+  if(r.ok)alert(`Integridade OK.\n\n${r.exerciseIds} exercícios com IDs estáveis\n${r.sessions} sessões\n${r.body} medições corporais\n${r.checkins} check-ins\n${storage}`);
+  else alert("Foram encontrados "+r.issues.length+" problema(s):\n\n"+r.issues.slice(0,12).join("\n")+(r.issues.length>12?"\n…":""));
+}
+
+
+async function renderDiagnostics(){
+  const app=document.getElementById("app");
+  const counts=sessionCountsByExercise();
+  const recoveryAt=ULDB.db?(await ULDB.meta("recoveryPointCreatedAt")):null;
+  const integ=runIntegrityCheck(),mig=migrationReport();
+
+  app.innerHTML=wrapV2(`
+    <div class="v2hero">
+      <div><div class="v2eyebrow">Base técnica</div><h1>Diagnóstico</h1><div class="v2muted">Ferramentas para conferir armazenamento, migração e recuperação antes de substituir o app atual.</div></div>
+      <span class="v2badge">${integ.ok?"OK":"revisar"}</span>
+    </div>
+    <main class="v2page">
+      <section class="v2section">
+        <div class="v2section-title"><span>Status</span><small>schema 2</small></div>
+        <div class="v2grid">
+          <div class="v2stat"><b>${allSessionRecords().length}</b><span>sessões na base nova</span></div>
+          <div class="v2stat"><b>${integ.issues.length}</b><span>problemas de integridade</span></div>
+          <div class="v2stat"><b>${mig.unmatched.length}</b><span>itens antigos sem correspondência</span></div>
+          <div class="v2stat"><b>${storageHealth.ok?"OK":"ERRO"}</b><span>último estado do armazenamento</span></div>
+        </div>
+      </section>
+
+      <section class="v2section">
+        <div class="v2section-title"><span>Testes</span><small>não alteram seu histórico real</small></div>
+        <div class="v2card">
+          <div class="v2row"><button class="v2secondary" data-action="diag-storage-test">Testar IndexedDB</button><button class="v2secondary" data-action="integrity-check">Integridade</button></div>
+          <div class="v2row" style="margin-top:8px"><button class="v2secondary" data-action="migration-report">Migração</button><button class="v2secondary" data-action="diag-roundtrip">Testar backup</button></div><div class="v2row" style="margin-top:8px"><button class="v2secondary" data-action="export-diagnostics">Exportar diagnóstico</button></div>
+        </div>
+      </section>
+
+      <section class="v2section">
+        <div class="v2section-title"><span>Recuperação local</span><small>${recoveryAt?new Date(recoveryAt).toLocaleString("pt-BR"):"nenhum ponto criado"}</small></div>
+        <div class="v2card">
+          <div class="v2muted">Crie um ponto de recuperação antes de testar importações ou mudanças maiores. Ele fica salvo localmente neste dispositivo.</div>
+          <div class="v2row" style="margin-top:10px"><button class="v2primary" data-action="recovery-save">Criar ponto</button><button class="v2secondary" data-action="recovery-restore">Restaurar</button></div>
+          <div class="v2row" style="margin-top:8px"><button class="v2secondary" data-action="recovery-export">Exportar ponto</button></div>
+        </div>
+      </section>
+
+      <section class="v2section">
+        <div class="v2section-title"><span>Sessões por exercício</span><small>${counts.length} exercícios com histórico</small></div>
+        <div class="v2card">
+          ${counts.length?`<div class="prlist">${counts.map(x=>`<div class="pritem"><div><b>${esc(x.label)}</b><div class="v2muted">${x.sets} séries concluídas</div></div><span>${x.count} sessão${x.count===1?"":"ões"}</span></div>`).join("")}</div>`:`<div class="v2empty">Ainda não há sessões na base nova.</div>`}
+        </div>
+      </section>
+    </main>`);
+}
+
+function bottomNav(){
+  const items=[
+    ["dashboard","⌂","Início"],["calendar","▦","Calendário"],["workouts","◉","Treino"],["progress","↗","Evolução"],["profile","◎","Perfil"]
+  ];
+  return `<nav class="v2bottom">${items.map(([id,ico,l])=>`<button class="navbtn ${mainView===id&&!active?"on":""}" data-action="v2-nav" data-view="${id}"><span class="ico">${ico}</span><span>${l}</span></button>`).join("")}</nav>`;
+}
+function wrapV2(inner){return `<div class="wrap">${inner}</div>${bottomNav()}`}
+function renderMonthStatsCard(){
+  const m=monthStats();
+  return `<div class="reportgrid"><div class="reportmetric"><b>${m.workoutDays}</b><span>dias treinados</span></div><div class="reportmetric"><b>${m.completedSets}</b><span>séries concluídas</span></div><div class="reportmetric"><b>${m.volume.toLocaleString("pt-BR")}</b><span>kg·reps registrados</span></div><div class="reportmetric"><b>${m.weightDelta==null?"—":(m.weightDelta>0?"+":"")+m.weightDelta.toFixed(1)+" kg"}</b><span>variação de peso no mês</span></div></div>`;
+}
+/** Barras de volume semanal em HTML puro — escala melhor no celular que SVG. */
+function renderVolumeChart(series){
+  const max=Math.max(...series.map(w=>w.volume),0);
+  if(!max)return `<div class="v2empty">O gráfico aparece depois que você registrar carga e reps em algumas séries.</div>`;
+  return `<div class="volbars">${series.map(w=>{
+    const pct=Math.round((w.volume/max)*100);
+    const cheia=w.planned&&w.completed===w.planned;
+    return `<div class="volcol" title="${esc(w.label)} · ${w.volume.toLocaleString("pt-BR")} kg·reps">
+      <div class="voltrack"><div class="volfill ${cheia?"full":""}" style="height:${Math.max(pct,2)}%"></div></div>
+      <span class="vollabel">${esc(w.label)}</span>
+    </div>`;
+  }).join("")}</div>`;
+}
+
+/**
+ * Treino a exibir hoje: o programado para o dia da semana ou, se hoje não for
+ * dia de treino mas já houver séries registradas, o treino efetivamente feito.
+ * Sem isso, treinar fora da escala deixava o painel dizendo "recuperação".
+ */
+function todayWorkout(){
+  const programado=workoutDayForDate(new Date());
+  if(programado)return{day:programado,foraDeEscala:false};
+  const hoje=todayISO();
+  for(const d of DIAS){
+    if(workoutProgressOn(hoje,d).sets>0)return{day:d,foraDeEscala:true};
+  }
+  return null;
+}
+
+function renderDashboard(){
+  const w=weeklyStats(),next=nextWorkout(),recent=mostRecentWorkout(),c=getReadiness(),score=checkinScore(c),body=lastBody();
+  const greeting=profile.name?`, ${esc(profile.name.split(" ")[0])}`:"";
+  const hoje=todayWorkout();
+  const todayP=hoje?workoutProgressOn(todayISO(),hoje.day):null;
+  const series=weekSeries(8),tend=volumeTrend(series),streak=currentStreak(),best=bestSetOfWeek();
+  const volSemana=series.at(-1)?.volume||0;
+  const alvo=Number(profile.weeklyTarget)||w.planned;
+  return document.getElementById("app").innerHTML=wrapV2(`
+    <div class="v2hero">
+      <div><div class="v2eyebrow">UL Treino · 2.0</div><h1>Seu treino${greeting}</h1><div class="v2muted">Treino, recuperação e evolução no mesmo lugar.</div></div>
+      <span class="v2badge">${w.completed}/${alvo} semana</span>
+    </div>
+    <main class="v2page">
+      <div class="v2grid">
+        <div class="v2stat"><b>${w.sets}</b><span>séries concluídas nesta semana</span></div>
+        <div class="v2stat"><b>${volSemana.toLocaleString("pt-BR")}</b><span>kg·reps nesta semana</span></div>
+        <div class="v2stat"><b>${streak}</b><span>${streak===1?"treino seguido sem falhar":"treinos seguidos sem falhar"}</span></div>
+        <div class="v2stat"><b>${body&&body.weight?body.weight+" kg":"—"}</b><span>último peso corporal</span></div>
+      </div>
+
+      <section class="v2section">
+        <div class="v2section-title"><span>${hoje?"Treino de hoje":"Próximo treino"}</span><small>${hoje?hoje.day.label:(next?next.date.toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"}):"")}</small></div>
+        <div class="v2card v2next">
+          <div style="min-width:0"><div class="name">${hoje?esc(hoje.day.foco):(next?esc(next.day.foco):"Recuperação")}</div>
+          <div class="meta">${hoje?(todayP.done+"/"+todayP.total+" exercícios · "+todayP.sets+" séries concluídas"):(next?next.day.exercicios.length+" exercícios programados":"")}</div>
+          ${hoje&&hoje.foraDeEscala?`<div class="v2note">Hoje não é dia previsto, mas há séries registradas nesta sessão.</div>`:""}</div>
+          ${(hoje||next)?`<button class="v2secondary" style="width:auto" data-action="open-day" data-day="${(hoje?hoje.day:next.day).id}">Abrir</button>`:""}
+        </div>
+      </section>
+
+      <section class="v2section">
+        <div class="v2section-title"><span>Volume por semana</span><small>${tend==null?"últimas 8 semanas":(tend>0?"+":"")+tend+"% vs. semana anterior"}</small></div>
+        <div class="v2card">
+          ${renderVolumeChart(series)}
+          <div class="v2muted" style="margin-top:10px">Volume é carga × repetições das séries concluídas. Barra cheia destacada indica semana com todos os treinos completos.</div>
+        </div>
+      </section>
+
+      ${best?`<section class="v2section">
+        <div class="v2section-title"><span>Destaque da semana</span><small>${fmtDate(best.date)}</small></div>
+        <div class="v2card">
+          <b style="font-size:14px">${esc(best.name)}</b>
+          <div class="v2muted" style="margin-top:4px">${best.load} kg × ${best.reps} reps · equivale a cerca de ${Math.round(best.est)} kg de 1RM estimado</div>
+          <div class="v2note">Estimativa por fórmula (Epley), útil para comparar séries entre si — não é uma carga para tentar.</div>
+        </div>
+      </section>`:""}
+
+      <section class="v2section">
+        <div class="v2section-title"><span>Check-in de hoje</span><small>${score?score+"% prontidão":"20 segundos"}</small></div>
+        <div class="v2card">
+          <div class="v2muted">Registre rapidamente como você chegou ao treino. Isso não altera o programa sozinho; serve para comparar recuperação e desempenho.</div>
+          ${["energy","sleep","motivation"].map((k,idx)=>{
+             const labels=["Energia","Sono","Disposição"];const val=c[k]||0;
+             return `<div style="margin-top:10px"><div style="font-size:10px;color:#858990;margin-bottom:5px">${labels[idx]}</div>
+               <div class="readiness">${[1,3,5].map(v=>`<button class="readybtn ${val===v?"on":""}" data-action="checkin" data-field="${k}" data-value="${v}">${v===1?"Baixo":v===3?"Médio":"Alto"}</button>`).join("")}</div>
+             </div>`;
+          }).join("")}
+        </div>
+      </section>
+
+      <section class="v2section">
+        <div class="v2section-title"><span>Resumo do mês</span><small>${new Date().toLocaleDateString("pt-BR",{month:"long"})}</small></div>
+        <div class="v2card">${renderMonthStatsCard()}</div>
+      </section>
+
+      <section class="v2section">
+        <div class="v2section-title"><span>Última atividade</span><small>${recent?fmtLong(recent.date):""}</small></div>
+        <div class="v2card">
+          ${recent?`<b style="font-size:14px">${esc(recent.day.foco)}</b><div class="v2muted" style="margin-top:4px">${recent.p.sets} séries registradas · ${recent.p.done}/${recent.p.total} exercícios completos</div>`:`<div class="v2empty">Seu histórico vai aparecer aqui depois do primeiro treino registrado.</div>`}
+        </div>
+      </section>
+    </main>`);
+}
+function renderWorkouts(){const app=document.getElementById("app");app.innerHTML=wrapV2(`<div class="v2hero"><div><div class="v2eyebrow">Programa atual</div><h1>Treinos</h1><div class="v2muted">Upper / Lower · 4 dias por semana · registro série por série.</div></div><span class="v2badge">4× semana</span></div><main class="v2page"><div class="days">${DIAS.map(d=>{const n=dayDoneCount(d,todayISO());return `<button class="day" data-action="open-day" data-day="${d.id}"><span class="bar" style="background:${d.cor}"></span><div class="daytop"><div><div class="dayname">${d.label}</div><div class="focus">${d.foco}</div></div><div class="dayright">${ringSVG(n/d.exercicios.length,34,4,d.cor,"#2A2D33")}<span class="count" style="color:${d.cor};border:1px solid ${d.cor}55">${n}/${d.exercicios.length}</span></div></div></button>`}).join("")}<div class="rest">Quarta, sábado e domingo — recuperação</div></div><div class="tools"><div class="tooltitle">Ferramentas</div><div class="toolrow"><button class="toolbtn" data-action="open-calc">🧮 Anilhas</button><button class="toolbtn" data-action="open-pending">🎬 Vídeos</button></div></div><div class="tools"><div class="tooltitle">Dados</div><div class="toolsub">Treinos persistidos no IndexedDB. O backup continua compatível com o histórico anterior.</div><div class="toolrow"><button class="toolbtn" data-action="export-backup">Exportar backup</button><button class="toolbtn" data-action="import-backup">Importar backup</button><button class="toolbtn" data-action="export-migration-snapshot">Snapshot migração</button><input id="import-file" type="file" accept="application/json,.json"></div></div></main>`);animateRings()}
+function renderCalendar(){
+  const y=calCursor.getFullYear(),m=calCursor.getMonth();
+  const first=new Date(y,m,1),days=new Date(y,m+1,0).getDate(),offset=(first.getDay()+6)%7;
+  const cells=[];
+  for(let i=0;i<offset;i++)cells.push(`<button class="calday blank"></button>`);
+  for(let d=1;d<=days;d++){
+    const dt=new Date(y,m,d),iso=isoFromDate(dt),wd=workoutDayForDate(dt);
+    let cls="",title="";
+    if(wd){const p=workoutProgressOn(iso,wd);if(p.done===p.total&&p.total)cls="done";else if(p.sets)cls="partial";title=wd.foco}
+    if(iso===todayISO())cls+=" today";
+    cells.push(`<button class="calday ${cls}" data-action="${wd?"calendar-open":""}" data-date="${iso}" data-day="${wd?wd.id:""}" title="${esc(title)}">${d}</button>`);
+  }
+  document.getElementById("app").innerHTML=wrapV2(`
+    <div class="v2hero"><div><div class="v2eyebrow">Histórico</div><h1>Calendário</h1><div class="v2muted">Dias verdes: treino completo. Dourado: sessão iniciada.</div></div></div>
+    <main class="v2page">
+      <div class="v2card">
+        <div class="calhead"><button class="calnav" data-action="cal-prev">‹</button><div class="caltitle">${calCursor.toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}</div><button class="calnav" data-action="cal-next">›</button></div>
+        <div class="calgrid">${["S","T","Q","Q","S","S","D"].map(x=>`<div class="calwd">${x}</div>`).join("")}${cells.join("")}</div>
+      </div>
+      <section class="v2section"><div class="v2card"><b style="font-size:13px">Como usar</b><div class="v2muted" style="margin-top:5px">Toque em um dia de treino para abrir aquela sessão e consultar ou corrigir o histórico.</div></div></section>
+    </main>`);
+}
+function bodyChart(field){
+  const pts=bodyLog.filter(x=>x[field]!==""&&x[field]!=null&&Number.isFinite(+x[field])).sort((a,b)=>a.date>b.date?1:-1).slice(-12);
+  if(pts.length<2)return `<div class="v2empty">Registre pelo menos duas medições para gerar o gráfico.</div>`;
+  const vals=pts.map(p=>+p[field]),min=Math.min(...vals),max=Math.max(...vals),range=max-min||1,W=300,H=115,pad=10;
+  const cs=pts.map((p,i)=>({x:pad+i*(W-pad*2)/(pts.length-1),y:H-pad-(+p[field]-min)/range*(H-pad*2)}));
+  const line=cs.map((c,i)=>(i?"L":"M")+c.x.toFixed(1)+" "+c.y.toFixed(1)).join(" ");
+  return `<div class="v2chart"><svg viewBox="0 0 ${W} ${H}"><path d="${line}" fill="none" stroke="#D4A72C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>${cs.map(c=>`<circle cx="${c.x}" cy="${c.y}" r="3" fill="#D4A72C"/>`).join("")}</svg><div class="v2chart-foot"><span>${fmtLong(pts[0].date)} · ${pts[0][field]}</span><span>${fmtLong(pts.at(-1).date)} · ${pts.at(-1)[field]}</span></div></div>`;
+}
+
+function estimated1RM(load,reps){
+  load=Number(load);reps=Number(reps);
+  if(!Number.isFinite(load)||!Number.isFinite(reps)||load<=0||reps<=0)return null;
+  if(reps===1)return load;
+  if(reps>15)return null;
+  return load*(1+reps/30);
+}
+function exerciseRecords(dayId,e){
+  let bestLoad=null,bestE1RM=null,bestVolumeSet=null,bestDate=null;
+  Object.keys(sessions).sort().forEach(date=>{
+    const s=getSession(date,dayId,e.exerciseId);if(!s)return;
+    s.sets.filter(x=>!x.deletedAt&&x.done).forEach(x=>{
+      const load=Number(x.load),reps=Number(x.reps);
+      if(Number.isFinite(load)&&load>0&&(bestLoad==null||load>bestLoad)){bestLoad=load;bestDate=date}
+      const one=estimated1RM(load,reps);
+      if(one!=null&&(bestE1RM==null||one>bestE1RM))bestE1RM=one;
+      const vol=load*reps;
+      if(Number.isFinite(vol)&&vol>0&&(bestVolumeSet==null||vol>bestVolumeSet))bestVolumeSet=vol;
+    })
+  });
+  return{bestLoad,bestE1RM,bestVolumeSet,bestDate}
+}
+function currentSessionPRs(dayId,e,s){
+  const hist=exerciseRecords(dayId,e);
+  const vals=s.sets.filter(x=>!x.deletedAt&&x.done);
+  if(!vals.length)return[];
+  const maxLoad=Math.max(...vals.map(x=>Number(x.load)).filter(Number.isFinite),-Infinity);
+  const maxE=Math.max(...vals.map(x=>estimated1RM(x.load,x.reps)).filter(x=>x!=null),-Infinity);
+  const maxV=Math.max(...vals.map(x=>Number(x.load)*Number(x.reps)).filter(Number.isFinite),-Infinity);
+  const prior=priorSessions(dayId,e);
+  let prevLoad=-Infinity,prevE=-Infinity,prevV=-Infinity;
+  prior.forEach(ps=>ps.sets.filter(x=>!x.deletedAt&&x.done).forEach(x=>{
+    const l=Number(x.load),r=Number(x.reps),er=estimated1RM(l,r),v=l*r;
+    if(Number.isFinite(l))prevLoad=Math.max(prevLoad,l);
+    if(er!=null)prevE=Math.max(prevE,er);
+    if(Number.isFinite(v))prevV=Math.max(prevV,v);
+  }));
+  const out=[];
+  if(Number.isFinite(maxLoad)&&maxLoad>prevLoad)out.push("PR carga");
+  if(Number.isFinite(maxE)&&maxE>prevE)out.push("PR e1RM");
+  if(Number.isFinite(maxV)&&maxV>prevV)out.push("PR série");
+  return out;
+}
+function monthStats(date=new Date()){
+  const y=date.getFullYear(),m=date.getMonth(),prefix=y+"-"+String(m+1).padStart(2,"0")+"-";
+  const rows=allSessionRecords().filter(s=>s.date.startsWith(prefix));
+  const completedSets=rows.reduce((n,s)=>n+s.sets.filter(x=>!x.deletedAt&&x.done).length,0);
+  const dates=new Set(rows.filter(s=>s.sets.some(x=>!x.deletedAt&&x.done)).map(s=>s.date));
+  let volume=0;
+  rows.forEach(s=>s.sets.filter(x=>!x.deletedAt&&x.done).forEach(x=>{const l=Number(x.load),r=Number(x.reps);if(Number.isFinite(l)&&Number.isFinite(r))volume+=l*r}));
+  const body=bodyLog.filter(x=>x.date.startsWith(prefix)).sort((a,b)=>a.date.localeCompare(b.date));
+  const weightDelta=body.length>=2&&body[0].weight&&body.at(-1).weight?(Number(body.at(-1).weight)-Number(body[0].weight)):null;
+  return{workoutDays:dates.size,completedSets,volume:Math.round(volume),weightDelta}
+}
+function warmupPlan(load,e){
+  load=Number(load);
+  if(!Number.isFinite(load)||load<=0)return[];
+  const compound=["Peito","Costas","Quadríceps","Posterior","Glúteos"].includes(e.grupo);
+  const p=compound?[[.4,8],[.6,5],[.75,3],[.88,1]]:[[.5,8],[.7,4]];
+  return p.map(([pct,reps],i)=>({label:"Aquecimento "+(i+1),load:Math.max(1,Math.round(load*pct*2)/2),reps,pct:Math.round(pct*100)}));
+}
+function openWarmup(dayId,idx){
+  const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.exerciseId,e.series);
+  const activeSets=s.sets.filter(x=>!x.deletedAt);
+  const entered=activeSets.map(x=>Number(x.load)).find(x=>Number.isFinite(x)&&x>0);
+  const prev=priorSessions(dayId,e)[0];
+  const prevLoad=prev?.sets?.map(x=>Number(x.load)).find(x=>Number.isFinite(x)&&x>0);
+  const target=entered||prevLoad;
+  if(!target){alert("Digite a carga de trabalho ou tenha uma sessão anterior para calcular o aquecimento.");return}
+  const plan=warmupPlan(target,e);
+  const root=document.getElementById("modal-root");
+  root.innerHTML=`<div class="modal-overlay"><div class="modal" data-stop><div class="modal-title">Aquecimento · ${esc(e.nome)}</div><div class="modal-sub">Baseado em ${target} kg de carga de trabalho. Séries de aquecimento não contam como séries efetivas.</div><div class="warmbox">${plan.map(x=>`<div class="warmrow"><span>${x.label} · ${x.pct}%</span><b>${x.load} kg × ${x.reps}</b></div>`).join("")}</div><div class="modal-actions"><button data-action="close-calc">Fechar</button></div></div></div>`;
+}
+
+function allPRs(){
+  // Um exercício pode estar em mais de um dia (ex.: remada na segunda e na quinta).
+  // O recorde é do movimento, não da posição no programa: agrupa por exerciseId.
+  const porExercicio=new Map();
+  DIAS.forEach(d=>d.exercicios.forEach(e=>{
+    Object.keys(sessions||{}).forEach(date=>{
+      const s=getSession(date,d.id,e.exerciseId);
+      if(!s||!Array.isArray(s.sets))return;
+      s.sets.forEach(x=>{
+        const v=parseFloat(x.load);
+        if(!Number.isFinite(v)||!x.done||x.deletedAt)return;
+        const atual=porExercicio.get(e.exerciseId);
+        if(!atual)porExercicio.set(e.exerciseId,{name:e.nome,value:v,group:e.grupo});
+        else if(v>atual.value)atual.value=v;
+      });
+    });
+  }));
+  return [...porExercicio.values()].sort((a,b)=>b.value-a.value);
+}
+function renderProgress(){
+  const fields=[["weight","Peso"],["waist","Cintura"],["chest","Peito"],["arm","Braço"],["thigh","Coxa"]];
+  const prs=allPRs();
+  const latest=lastBody();
+  document.getElementById("app").innerHTML=wrapV2(`
+    <div class="v2hero"><div><div class="v2eyebrow">Dados reais</div><h1>Evolução</h1><div class="v2muted">Corpo e desempenho ao longo do tempo.</div></div></div>
+    <main class="v2page">
+      <div class="v2tabs">${fields.map(([id,l])=>`<button class="v2tab ${progressMetric===id?"on":""}" data-action="metric" data-metric="${id}">${l}</button>`).join("")}</div>
+      <section class="v2section"><div class="v2section-title"><span>${fields.find(x=>x[0]===progressMetric)[1]}</span><small>${latest&&latest[progressMetric]?latest[progressMetric]+(progressMetric==="weight"?" kg":" cm"):"sem dados"}</small></div><div class="v2card">${bodyChart(progressMetric)}</div></section>
+      <section class="v2section"><div class="v2section-title"><span>Recordes de carga</span><small>${prs.length} exercícios</small></div><div class="v2card">${prs.length?`<div class="prlist">${prs.slice(0,12).map(x=>`<div class="pritem"><div><b>${esc(x.name)}</b><div class="v2muted">${x.group}</div></div><span>${x.value} kg</span></div>`).join("")}</div>`:`<div class="v2empty">Os recordes aparecem automaticamente quando você registra séries concluídas.</div>`}</div></section>
+    </main>`);
+}
+function renderProfile(){
+  const latest=lastBody();
+  const rows=bodyLog.slice().sort((a,b)=>a.date<b.date?1:-1).slice(0,6);
+  document.getElementById("app").innerHTML=wrapV2(`
+    <div class="v2hero"><div><div class="v2eyebrow">Seus dados</div><h1>Perfil</h1><div class="v2muted">Tudo permanece salvo apenas neste dispositivo e entra no backup.</div></div></div>
+    <main class="v2page">
+      <section class="v2section"><div class="v2section-title"><span>Inteligência do treino</span><small>progressão v2</small></div><div class="v2card">
+<div class="v2muted">O app mantém seu Upper/Lower atual, mas a base já fica preparada para outros programas. Exercícios-âncora recebem análise mais criteriosa antes de sugerir aumento.</div>
+<div class="v2row" style="margin-top:10px"><span class="v2pill">Modo: ${progressionModeLabel()}</span><button class="v2secondary" data-action="cycle-progression-mode">Alterar modo</button></div>
+<div class="v2row" style="margin-top:8px"><span class="v2pill">${productPrefs.showWhy?"Explicações ligadas":"Explicações desligadas"}</span><button class="v2secondary" data-action="toggle-why">Mostrar por quê</button></div>
+<div style="margin-top:10px" class="v2muted">Âncoras atuais: ${DIAS.flatMap(d=>d.exercicios).filter(isAnchorExercise).map(e=>esc(e.nome)).join(" · ")}</div>
+</div></section><section class="v2section"><div class="v2section-title"><span>Fotos de evolução</span><small>armazenadas só neste aparelho</small></div><div class="v2card">
+        <div class="v2muted">As fotos são reduzidas no próprio aparelho e salvas no IndexedDB. Elas não saem do dispositivo nesta versão.</div>
+        ${lastBody()?`<label class="v2primary" style="display:block;text-align:center;margin-top:10px">Adicionar foto<input id="body-photo-input" type="file" accept="image/*" capture="environment" style="display:none"></label>`:`<div class="v2empty">Salve pelo menos uma medição corporal antes de adicionar fotos.</div>`}
+        ${bodyPhotos.length?`<div class="photo-grid">${bodyPhotos.slice(0,12).map(p=>`<div class="photo-tile"><img src="${esc(photoUrl(p))}" alt="Foto de evolução"><button class="photo-del" data-action="delete-photo" data-id="${esc(p.id)}">×</button></div>`).join("")}</div>`:""}
+      </div></section>
+      <section class="v2section"><div class="v2section-title"><span>Base técnica</span><small>schema 2</small></div><div class="v2card"><div class="v2muted">Histórico em IndexedDB, IDs estáveis por exercício, timestamps e soft-delete. A área de mídia fica separada para fotos futuras.</div><div class="v2row" style="margin-top:10px"><button class="v2secondary" data-action="integrity-check">Verificar integridade</button><button class="v2secondary" data-action="migration-report">Relatório de migração</button></div><div class="v2row" style="margin-top:8px"><button class="v2secondary" data-action="open-diagnostics">Abrir diagnóstico completo</button></div></div></section>
+      <section class="v2section"><div class="v2section-title"><span>Objetivo e rotina</span></div><div class="v2card">
+        <div class="v2form">
+          <div class="v2field full"><label>Nome</label><input class="v2input" data-action="profile-field" data-field="name" value="${esc(profile.name||"")}" placeholder="Opcional"></div>
+          <div class="v2field"><label>Objetivo</label><select class="v2select" data-action="profile-field" data-field="goal"><option ${profile.goal==="Hipertrofia"?"selected":""}>Hipertrofia</option><option ${profile.goal==="Força + hipertrofia"?"selected":""}>Força + hipertrofia</option><option ${profile.goal==="Manutenção"?"selected":""}>Manutenção</option></select></div>
+          <div class="v2field"><label>Meta semanal</label><select class="v2select" data-action="profile-field" data-field="weeklyTarget">${[3,4,5].map(n=>`<option value="${n}" ${+profile.weeklyTarget===n?"selected":""}>${n} treinos</option>`).join("")}</select></div>
+        </div>
+      </div></section>
+
+      <section class="v2section"><div class="v2section-title"><span>Nova medição corporal</span><small>${latest?fmtLong(latest.date):"primeiro registro"}</small></div><div class="v2card">
+        <div class="v2form">
+          <div class="v2field"><label>Peso (kg)</label><input id="body-weight" class="v2input" inputmode="decimal" placeholder="Ex: 82.5"></div>
+          <div class="v2field"><label>Cintura (cm)</label><input id="body-waist" class="v2input" inputmode="decimal" placeholder="Ex: 88"></div>
+          <div class="v2field"><label>Peito (cm)</label><input id="body-chest" class="v2input" inputmode="decimal"></div>
+          <div class="v2field"><label>Braço (cm)</label><input id="body-arm" class="v2input" inputmode="decimal"></div>
+          <div class="v2field"><label>Coxa (cm)</label><input id="body-thigh" class="v2input" inputmode="decimal"></div>
+          <div class="v2field"><label>Data</label><input id="body-date" type="date" class="v2input" value="${todayISO()}"></div>
+        </div>
+        <button class="v2primary bodysave" data-action="body-save">Salvar medição</button>
+      </div></section>
+
+      <section class="v2section"><div class="v2section-title"><span>Últimas medições</span><small>${bodyLog.length} registros</small></div><div class="v2card">${rows.length?`<div class="bodylist">${rows.map(x=>`<div class="bodyentry"><div><b style="font-size:11.5px">${x.weight?x.weight+" kg":"Medição"}</b><div class="date">${fmtLong(x.date)}</div></div><div class="vals">${[x.waist&&"Cintura "+x.waist,x.chest&&"Peito "+x.chest,x.arm&&"Braço "+x.arm,x.thigh&&"Coxa "+x.thigh].filter(Boolean).join(" · ")||"—"}</div></div>`).join("")}</div>`:`<div class="v2empty">Nenhuma medição corporal registrada ainda.</div>`}</div></section>
+    </main>`);
+}
 
 function renderDay(){
   const app=document.getElementById("app"),d=DIAS.find(x=>x.id===active),date=curDate(),n=dayDoneCount(d,date);
@@ -360,10 +1319,10 @@ function renderDay(){
 }
 
 function exerciseCard(d,e,i,date){
-  const s=sessionFor(date,d.id,e.nome,e.series),count=setCount(s,e);
+  const s=sessionFor(date,d.id,e.exerciseId,e.series),activeSets=s.sets.filter(x=>!x.deletedAt),count=e.series+(s.extra||0);
   const done=exerciseDone(date,d.id,e),vid=videoFor(d.id,e),prior=priorSessions(d.id,e),legacy=legacyHistory(d.id,e);
-  const prev=prior[0],rec=recommendation(e,s),points=trendPoints(d.id,e);
-  const k=key(d.id,e.nome);
+  const prev=prior[0],rec=recommendation(d.id,e,s),points=trendPoints(d.id,e);
+  const k=stableKey(d.id,e.exerciseId);
   const ord=orderedIdx(d),pos=ord.indexOf(i);
 
   const previousHtml=prev
@@ -381,7 +1340,7 @@ function exerciseCard(d,e,i,date){
     ?`<div class="spark"><div class="sparkhead"><span>Evolução da melhor carga</span><span>${points[0].v} → ${points.at(-1).v}kg</span></div>${sparkSVG(points,d.cor)}<div class="sparkfoot"><span>${fmtDate(points[0].d)}</span><span>${fmtDate(points.at(-1).d)}</span></div></div>`
     :"";
 
-  const rows=s.sets.slice(0,count).map((x,si)=>`<div class="setrow ${si>=e.series?"bonus":""}">
+  const rows=activeSets.slice(0,count).map((x,si)=>`<div class="setrow ${si>=e.series?"bonus":""}">
     <div class="setlabel">${si>=e.series?"+"+(si-e.series+1):si+1}</div>
     <input class="field" inputmode="decimal" data-action="set-field" data-day="${d.id}" data-idx="${i}" data-set="${si}" data-field="load" placeholder="kg" value="${esc(x.load)}">
     <input class="field" inputmode="numeric" data-action="set-field" data-day="${d.id}" data-idx="${i}" data-set="${si}" data-field="reps" placeholder="reps" value="${esc(x.reps)}">
@@ -393,7 +1352,7 @@ function exerciseCard(d,e,i,date){
     <div class="cardhead">
       <div style="min-width:0">
         <div class="meta" style="color:${d.cor}">${e.grupo}</div>
-        <div class="exname">${e.nome}${e.ancora?'<span class="anchor">âncora</span>':""}<span class="videobadge ${vid.status==="pending"||vid.status==="unverified"?"pending":"ok"}">${videoLabel(vid.status)}</span></div>
+        <div class="exname">${e.nome}${e.ancora?'<span class="anchor">âncora</span>':""}<span class="videobadge ${vid.status==="pending"||vid.status==="unverified"||vid.status==="reference"?"pending":"ok"}">${videoLabel(vid.status)}</span></div>
       </div>
       <div class="movebox">
         <button class="movebtn" data-action="move-up" data-day="${d.id}" data-idx="${i}" ${pos<=0?"disabled":""} aria-label="Subir">↑</button>
@@ -409,7 +1368,7 @@ function exerciseCard(d,e,i,date){
       <b>Pontos-chave</b><ul>${e.dicas.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
       <b class="mistake">Evite</b><ul>${e.erros.map(x=>`<li class="mistake">${esc(x)}</li>`).join("")}</ul>
       <div class="videorow">${vid.url
-        ?`<a class="watch" style="color:${d.cor};border-color:${d.cor}" href="${vid.url}" target="_blank" rel="noopener noreferrer">▶ Ver execução</a><button class="editvid" data-action="set-video" data-day="${d.id}" data-idx="${i}">${vid.custom?"editar vídeo":"trocar vídeo"}</button>`
+        ?`<a class="watch" style="color:${d.cor};border-color:${d.cor}" href="${esc(vid.url)}" target="_blank" rel="noopener noreferrer">▶ Ver execução</a><button class="editvid" data-action="set-video" data-day="${d.id}" data-idx="${i}">${vid.custom?"editar vídeo":"trocar vídeo"}</button>`
         :`<span class="novideo">Ainda sem vídeo validado.</span><button class="vidbtn" data-action="set-video" data-day="${d.id}" data-idx="${i}">adicionar link</button>`}</div>
     </div></details>
 
@@ -427,7 +1386,7 @@ function exerciseCard(d,e,i,date){
 
     <textarea class="note" data-action="ex-note" data-day="${d.id}" data-idx="${i}" placeholder="Observação do exercício: banco posição 4, máquina diferente, desconforto, execução...">${esc(s.note||"")}</textarea>
 
-    ${rec?`<div class="recommend ${rec.cls}">${rec.txt}</div>`:""}
+    ${rec?`<div class="recommend ${rec.cls||""}" style="display:block">${rec.txt}${productPrefs.showWhy&&rec.why?`<div style="margin-top:6px;font-size:10px;opacity:.78"><b>Por quê:</b> ${rec.why}</div>`:""}${rec.confidence?`<div style="margin-top:4px;font-size:9.5px;opacity:.72">Confiança: ${rec.confidence}${isAnchorExercise(e)?" · exercício-âncora":""}</div>`:""}</div>`:""}${(()=>{const p=currentSessionPRs(d.id,e,s);return p.length?`<div class="prbadges">${p.map(x=>`<span class="prbadge">${x}</span>`).join("")}</div>`:""})()}
     ${history||spark?`<details class="hist" data-dk="hist|${k}"><summary>Histórico e evolução</summary>${spark}<div class="histlist">${history}</div></details>`:""}
   </div>`
 }
@@ -452,15 +1411,29 @@ function updateDayHeader(){
   animateRings();
 }
 
-function render(){if(active==="__videos")renderPending();else if(active)renderDay();else renderHome()}
+function render(){
+  if(active==="__videos")renderPending();
+  else if(active)renderDay();
+  else if(mainView==="dashboard")renderDashboard();
+  else if(mainView==="calendar")renderCalendar();
+  else if(mainView==="workouts")renderWorkouts();
+  else if(mainView==="progress")renderProgress();
+  else if(mainView==="profile")renderProfile();
+  else if(mainView==="diagnostics")renderDiagnostics();
+  else renderDashboard();
+}
 
-function setField(dayId,idx,setIdx,field,val){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.nome,e.series);val=String(val).trim().replace(",",".");if(val!==""&&!Number.isFinite(Number(val)))return;s.sets[setIdx][field]=val;save()}
-function toggleSet(dayId,idx,setIdx){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.nome,e.series),x=s.sets[setIdx];x.done=!x.done;vibrate(x.done?[30,40]:15);save();if(x.done&&isToday())startTimer(e.rest,e.nome);updateCard(dayId,idx)}
-function toggleExercise(dayId,idx){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.nome,e.series),c=setCount(s,e),newState=!s.sets.slice(0,c).every(x=>x.done);s.sets.slice(0,c).forEach(x=>x.done=newState);vibrate([30,40]);save();updateCard(dayId,idx)}
-function setExNote(dayId,idx,val){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.nome,e.series);s.note=val;save()}
+function setField(dayId,idx,setIdx,field,val){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.exerciseId,e.series);val=String(val).trim().replace(",",".");if(val!==""&&!Number.isFinite(Number(val)))return;
+  if(val!==""&&Number(val)<0)return;
+  if(field==="rir"&&val!==""&&(Number(val)<0||Number(val)>10))return;
+  if(field==="reps"&&val!==""&&Number(val)>100)return;
+  if(field==="load"&&val!==""&&Number(val)>1000)return;const a=s.sets.filter(x=>!x.deletedAt);if(!a[setIdx])return;a[setIdx][field]=val;a[setIdx].updatedAt=nowISO();touchSession(s);save()}
+function toggleSet(dayId,idx,setIdx){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.exerciseId,e.series),a=s.sets.filter(x=>!x.deletedAt),x=a[setIdx];if(!x)return;x.done=!x.done;x.updatedAt=nowISO();touchSession(s);vibrate(x.done?[30,40]:15);save();if(x.done&&isToday())startTimer(e.rest,e.nome);updateCard(dayId,idx)}
+function toggleExercise(dayId,idx){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.exerciseId,e.series),a=s.sets.filter(x=>!x.deletedAt),c=e.series+(s.extra||0),newState=!a.slice(0,c).every(x=>x.done);a.slice(0,c).forEach(x=>{x.done=newState;x.updatedAt=nowISO()});touchSession(s);vibrate([30,40]);save();updateCard(dayId,idx)}
+function setExNote(dayId,idx,val){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.exerciseId,e.series);s.note=val;touchSession(s);save()}
 function setDayNote(dayId,val){const date=curDate();if(!dayNotes[date])dayNotes[date]={};dayNotes[date][dayId]=val;save()}
-function setVideo(id,i){const ex=DIAS.find(x=>x.id===id).exercicios[i],k=key(id,ex.nome),current=customVideos[k]?.url||ex.video||"";const raw=prompt(ex.nome+"\n\nCole o link do vídeo de execução. Deixe vazio para voltar ao vídeo padrão/remover.",current);if(raw===null)return;const url=raw.trim();if(!url){delete customVideos[k];save();render();return}if(!isValidUrl(url)){alert("Link inválido. Use https://");return}const fonte=(prompt("Nome do canal ou referência (opcional):",customVideos[k]?.fonte||"")||"").trim();customVideos[k]={url,fonte};save();render()}
-function clearDay(){const date=curDate();if(!confirm("Limpar apenas as marcações ✓ de "+(date===todayISO()?"hoje":fmtDate(date))+"? Carga, reps, RIR e notas serão mantidos."))return;const d=DIAS.find(x=>x.id===active);d.exercicios.forEach(e=>{const s=getSession(date,d.id,e.nome);if(s)s.sets.forEach(x=>x.done=false)});save();renderDay()}
+function setVideo(id,i){const ex=DIAS.find(x=>x.id===id).exercicios[i],k=stableKey(id,ex.exerciseId),current=customVideos[k]?.url||ex.video||"";const raw=prompt(ex.nome+"\n\nCole o link do vídeo de execução. Deixe vazio para voltar ao vídeo padrão/remover.",current);if(raw===null)return;const url=raw.trim();if(!url){delete customVideos[k];save();render();return}if(!isValidUrl(url)){alert("Link inválido. Use https://");return}const fonte=(prompt("Nome do canal ou referência (opcional):",customVideos[k]?.fonte||"")||"").trim();customVideos[k]={url,fonte};save();render()}
+function clearDay(){const date=curDate();if(!confirm("Limpar apenas as marcações ✓ de "+(date===todayISO()?"hoje":fmtDate(date))+"? Carga, reps, RIR e notas serão mantidos."))return;const d=DIAS.find(x=>x.id===active);d.exercicios.forEach(e=>{const s=getSession(date,d.id,e.exerciseId);if(s){s.sets.filter(x=>!x.deletedAt).forEach(x=>{x.done=false;x.updatedAt=nowISO()});touchSession(s)}});save();renderDay()}
 
 let timerEnd=0,timerInterval=null,timerLabel="";
 function persistTimer(){
@@ -522,17 +1495,16 @@ function renderPending(){
   const app=document.getElementById("app");
   const todos=[];
   DIAS.forEach(d=>d.exercicios.forEach((e,i)=>todos.push({d,e,i,v:videoFor(d.id,e)})));
-  const rever=todos.filter(x=>x.v.status==="unverified"||x.v.status==="pending");
+  const rever=todos.filter(x=>x.v.status==="unverified"||x.v.status==="pending"||x.v.status==="reference");
   const ok=todos.filter(x=>x.v.status==="confirmed"||x.v.status==="custom");
-  const ref=todos.filter(x=>x.v.status==="reference");
 
   const card=({d,e,i,v})=>`<div class="vidcard">
     <div class="vday" style="color:${d.cor}">${d.label} · ${d.foco}</div>
-    <div class="vname">${esc(e.nome)}<span class="videobadge ${v.status==="pending"||v.status==="unverified"?"pending":"ok"}">${videoLabel(v.status)}</span></div>
+    <div class="vname">${esc(e.nome)}<span class="videobadge ${v.status==="pending"||v.status==="unverified"||v.status==="reference"?"pending":"ok"}">${videoLabel(v.status)}</span></div>
     <div class="vgrp">${e.grupo} · ${e.series} × ${e.reps} · RIR ${e.rir}</div>
     ${v.fonte?`<div class="vsrc">${esc(v.fonte)}</div>`:""}
     <div class="vidactions">
-      ${v.url?`<a href="${v.url}" target="_blank" rel="noopener noreferrer">▶ abrir</a>`:""}
+      ${v.url?`<a href="${esc(v.url)}" target="_blank" rel="noopener noreferrer">▶ abrir</a>`:""}
       <a class="searchlink" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e.nome+" execução")}" target="_blank" rel="noopener noreferrer">buscar</a>
       <button data-action="set-video" data-day="${d.id}" data-idx="${i}">${v.url?"trocar":"colar link"}</button>
     </div>
@@ -548,21 +1520,99 @@ function renderPending(){
       <button class="back" data-action="back">‹ Semana</button>
       <div class="toprow"><div>
         <div class="workout-title">Revisar vídeos</div>
-        <div class="focus2" style="color:#D4A72C">${rever.length} para conferir · ${ok.length+ref.length} prontos</div>
+        <div class="focus2" style="color:#D4A72C">${rever.length} para conferir · ${ok.length} prontos</div>
       </div></div>
     </div>
 
     <div class="guide"><b>Por que esta tela existe:</b> os links marcados como "conferir" foram sugeridos automaticamente e ninguém validou se o vídeo é do exercício certo. Abra, veja se bate com o movimento e o equipamento da sua academia, e então marque como conferido — ou cole outro link.</div>
 
     ${rever.length?`<div class="vsection">Para conferir (${rever.length})</div><div class="vidlist">${rever.map(card).join("")}</div>`:`<div class="vidempty">Nada pendente de conferência.</div>`}
-    ${ref.length?`<div class="vsection">Referências já em uso (${ref.length})</div><div class="vidlist">${ref.map(card).join("")}</div>`:""}
     ${ok.length?`<div class="vsection">Conferidos e personalizados (${ok.length})</div><div class="vidlist">${ok.map(card).join("")}</div>`:""}
   </div>`;
 }
 
-function exportBackup(){const payload={app:"Upper/Lower",version:6,exportedAt:new Date().toISOString(),sessions,dayNotes,customVideos,legacyLoads,legacyDone,exOrder,videoOk};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="upper-lower-v2-backup-"+todayISO()+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);localStorage.setItem("treino-ul-ultimo-backup",new Date().toISOString())}
+
+function exportMigrationSnapshot(){
+  const payload={
+    app:"Upper/Lower migration snapshot",
+    version:1,
+    exportedAt:nowISO(),
+    legacySnapshot:LEGACY_SESSION_SNAPSHOT,
+    normalizedSessions:allSessionRecords(),
+    migrationReport:migrationReport(),
+    integrity:runIntegrityCheck()
+  };
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="ul-migration-snapshot-"+todayISO()+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function exportBackup(){const payload=buildBackupPayloadObject();const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="upper-lower-v2-foundation-backup-"+todayISO()+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);localStorage.setItem("treino-ul-ultimo-backup",new Date().toISOString())}
 function chooseBackup(){document.getElementById("import-file")?.click()}
-async function importBackupFile(file){if(!file)return;try{const data=JSON.parse(await file.text());if(!data||typeof data!=="object")throw new Error();if(!confirm("Restaurar este backup? Os dados atuais serão substituídos."))return;if(data.version>=5){sessions=data.sessions||{};dayNotes=data.dayNotes||{};customVideos=data.customVideos||{};legacyLoads=data.legacyLoads||{};legacyDone=data.legacyDone||{};exOrder=data.exOrder||{};videoOk=data.videoOk||{}}else{legacyLoads=data.loads||legacyLoads;legacyDone=data.doneWeeks||legacyDone;customVideos=data.customVideos||customVideos}savingLegacy();save();alert("Backup restaurado.");render()}catch{alert("Backup inválido ou incompatível.")}}
+
+function buildBackupPayloadObject(){
+  return {app:"Upper/Lower",version:8,schemaVersion:2,exportedAt:nowISO(),sessionRecords:allSessionRecords(),dayNotes,customVideos,legacyLoads,legacyDone,exOrder,videoOk,profile,bodyLog,checkins:Object.values(checkins)};
+}
+function validateRoundTrip(){
+  const payload=buildBackupPayloadObject();
+  const prepared=prepareImportedBackup(payload);
+  const a=payload.sessionRecords.length,b=prepared.sessions.length;
+  const idsA=new Set(payload.sessionRecords.map(x=>x.id));
+  const idsB=new Set(prepared.sessions.map(x=>x.id));
+  const missing=[...idsA].filter(x=>!idsB.has(x));
+  return {ok:a===b&&missing.length===0,exported:a,imported:b,missing};
+}
+function showRoundTripTest(){
+  const r=validateRoundTrip();
+  alert(r.ok?`Backup round-trip OK.\n\n${r.exported} sessões exportadas e ${r.imported} validadas para reimportação.`:`Falha no round-trip.\n\nExportadas: ${r.exported}\nImportadas: ${r.imported}\nIDs ausentes: ${r.missing.length}`);
+}
+
+function prepareImportedBackup(data){
+  if(!data||typeof data!=="object")throw new Error("Formato inválido");
+  const prepared={sessions:[],dayNotes:{},customVideos:{},legacyLoads:{},legacyDone:{},exOrder:{},videoOk:{},profile:profile,bodyLog:[],checkins:{}};
+  if(data.version>=8&&Array.isArray(data.sessionRecords)){
+    for(const raw of data.sessionRecords){
+      if(!raw?.date||!raw?.dayId||!raw?.exerciseId)throw new Error("Sessão incompleta no backup");
+      const e=exerciseById(raw.exerciseId);if(!e)throw new Error("Exercício desconhecido: "+raw.exerciseId);
+      prepared.sessions.push(normalizeSession(raw,{date:raw.date,dayId:raw.dayId,exerciseId:raw.exerciseId,series:e.series}));
+    }
+    Object.assign(prepared,{dayNotes:data.dayNotes||{},customVideos:data.customVideos||{},legacyLoads:data.legacyLoads||{},legacyDone:data.legacyDone||{},exOrder:data.exOrder||{},videoOk:data.videoOk||{},profile:data.profile||profile,bodyLog:Array.isArray(data.bodyLog)?data.bodyLog:[]});
+    (Array.isArray(data.checkins)?data.checkins:Object.values(data.checkins||{})).forEach(x=>{if(x?.date)prepared.checkins[x.date]=x});
+  }else if(data.version>=5){
+    for(const [date,byDay] of Object.entries(data.sessions||{}))for(const [day,byName] of Object.entries(byDay||{}))for(const [name,raw] of Object.entries(byName||{})){
+      const eid=exerciseIdFromName(name)||name,e=exerciseById(eid);if(!e)continue;
+      prepared.sessions.push(normalizeSession(raw,{date,dayId:day,exerciseId:eid,series:e.series}));
+    }
+    prepared.dayNotes=data.dayNotes||{};prepared.customVideos=migrateKeyedObject(data.customVideos||{});prepared.legacyLoads=data.legacyLoads||{};prepared.legacyDone=data.legacyDone||{};prepared.exOrder=data.exOrder||{};prepared.videoOk=migrateKeyedObject(data.videoOk||{});
+    if(data.version>=7){prepared.profile=data.profile||profile;prepared.bodyLog=Array.isArray(data.bodyLog)?data.bodyLog:[];prepared.checkins=data.checkins||{}}
+  }else{
+    prepared.legacyLoads=data.loads||legacyLoads;prepared.legacyDone=data.doneWeeks||legacyDone;prepared.customVideos=migrateKeyedObject(data.customVideos||customVideos);
+  }
+  return prepared;
+}
+async function importBackupFile(file){
+  if(!file)return;
+  try{
+    const data=JSON.parse(await file.text());
+    const p=prepareImportedBackup(data); // valida tudo antes de apagar qualquer dado
+    if(!confirm("Backup validado. Restaurar agora? Os dados atuais serão substituídos."))return;
+
+    const oldSnapshot=allSessionRecords().map(x=>structuredClone(x));
+    try{
+      if(ULDB.db)await ULDB.clear("sessions");
+      sessions={};
+      for(const s of p.sessions){cacheSession(s);if(ULDB.db)await ULDB.put("sessions",s)}
+      dayNotes=p.dayNotes;customVideos=p.customVideos;legacyLoads=p.legacyLoads;legacyDone=p.legacyDone;exOrder=p.exOrder;videoOk=p.videoOk;profile=p.profile;bodyLog=p.bodyLog;checkins=p.checkins;
+      migrateOrder();savingLegacy();save();await saveV2();
+      if(ULDB.db){for(const x of bodyLog)await ULDB.put("bodyEntries",x);for(const x of Object.values(checkins))await ULDB.put("checkins",x)}
+      alert("Backup restaurado e validado.");render();
+    }catch(writeErr){
+      console.error("Falha durante restauração; tentando rollback",writeErr);
+      if(ULDB.db){await ULDB.clear("sessions");for(const s of oldSnapshot)await ULDB.put("sessions",s)}
+      sessions={};oldSnapshot.forEach(cacheSession);
+      throw writeErr;
+    }
+  }catch(err){console.error(err);alert("Backup inválido, incompatível ou não pôde ser restaurado. Nenhum dado válido foi apagado.")}
+}
 function savingLegacy(){localStorage.setItem("treino-cargas-ul-v1",JSON.stringify(legacyLoads));localStorage.setItem("treino-feitos-ul-v1",JSON.stringify(legacyDone))}
 
 document.addEventListener("click",ev=>{
@@ -571,8 +1621,35 @@ document.addEventListener("click",ev=>{
   const el=ev.target.closest("[data-action]");
   if(!el||el.disabled)return;
   const a=el.dataset.action;
-  if(a==="open-day"){active=el.dataset.day;viewDate=todayISO();render()}
-  else if(a==="back"){releaseWakeLock();active=null;viewDate=null;render()}
+  if(a==="v2-nav"){active=null;viewDate=null;mainView=el.dataset.view;saveV2();render()}
+  else if(a==="checkin"){const date=todayISO(),c=checkins[date]||{id:"checkin:"+date,schemaVersion:2,date,energy:0,sleep:0,motivation:0,createdAt:nowISO(),updatedAt:nowISO(),deletedAt:null};c[el.dataset.field]=Number(el.dataset.value);c.updatedAt=nowISO();checkins[date]=c;if(ULDB.db)ULDB.put("checkins",c).catch(err=>{storageHealth={ok:false,lastError:String(err?.message||err),lastWriteAt:storageHealth.lastWriteAt}});saveV2();renderDashboard()}
+  else if(a==="cal-prev"){calCursor=new Date(calCursor.getFullYear(),calCursor.getMonth()-1,1);renderCalendar()}
+  else if(a==="cal-next"){calCursor=new Date(calCursor.getFullYear(),calCursor.getMonth()+1,1);renderCalendar()}
+  else if(a==="calendar-open"){active=el.dataset.day;viewDate=el.dataset.date;mainView="calendar";renderDay()}
+  else if(a==="metric"){progressMetric=el.dataset.metric;renderProgress()}
+  else if(a==="integrity-check"){showIntegrityCheck()}
+  else if(a==="migration-report"){showMigrationReport()}
+  else if(a==="cycle-progression-mode"){const modes=["conservative","balanced","push"];productPrefs.progressionMode=modes[(modes.indexOf(productPrefs.progressionMode)+1)%modes.length];saveProductPrefs();renderProfile()}
+  else if(a==="toggle-why"){productPrefs.showWhy=!productPrefs.showWhy;saveProductPrefs();renderProfile()}
+  else if(a==="open-warmup"){openWarmup(el.dataset.day,Number(el.dataset.idx))}
+  else if(a==="delete-photo"){deleteBodyPhoto(el.dataset.id)}
+  else if(a==="open-diagnostics"){active=null;mainView="diagnostics";saveV2();renderDiagnostics()}
+  else if(a==="diag-storage-test"){storageSelfTest().then(()=>alert("Teste do IndexedDB concluído com sucesso.")).catch(err=>{console.error(err);alert("Falha no teste do IndexedDB: "+(err?.message||err))})}
+  else if(a==="export-diagnostics"){exportDiagnostics()}
+  else if(a==="diag-roundtrip"){showRoundTripTest()}
+  else if(a==="recovery-save"){saveLocalRecoveryPoint().then(s=>{alert("Ponto de recuperação criado.");renderDiagnostics()}).catch(err=>{console.error(err);alert("Não foi possível criar o ponto de recuperação.")})}
+  else if(a==="recovery-restore"){restoreLocalRecoveryPoint().then(ok=>{if(ok){alert("Ponto de recuperação restaurado.");renderDiagnostics()}}).catch(err=>{console.error(err);alert("Não foi possível restaurar: "+(err?.message||err))})}
+  else if(a==="recovery-export"){exportRecoveryPoint()}
+  else if(a==="body-save"){
+    const val=id=>(document.getElementById(id)?.value||"").trim().replace(",",".");
+    const date=val("body-date")||todayISO(),prev=bodyLog.find(x=>x.date===date),entry={id:prev?.id||uid("body"),schemaVersion:2,date,weight:val("body-weight"),waist:val("body-waist"),chest:val("body-chest"),arm:val("body-arm"),thigh:val("body-thigh"),createdAt:prev?.createdAt||nowISO(),updatedAt:nowISO(),deletedAt:null};
+    if(![entry.weight,entry.waist,entry.chest,entry.arm,entry.thigh].some(Boolean)){alert("Preencha pelo menos uma medida.");return}
+    const numeric=[["Peso",entry.weight],["Cintura",entry.waist],["Peito",entry.chest],["Braço",entry.arm],["Coxa",entry.thigh]];
+    for(const [label,v] of numeric){if(v!==""&&!Number.isFinite(Number(v))){alert(label+" inválido.");return}if(v!==""&&Number(v)<=0){alert(label+" deve ser maior que zero.");return}}
+    bodyLog=bodyLog.filter(x=>x.date!==entry.date);bodyLog.push(entry);bodyLog.sort((a,b)=>a.date>b.date?1:-1);if(ULDB.db)ULDB.put("bodyEntries",entry).catch(err=>{storageHealth={ok:false,lastError:String(err?.message||err),lastWriteAt:storageHealth.lastWriteAt}});saveV2();vibrate(25);renderProfile();
+  }
+  else if(a==="open-day"){active=el.dataset.day;viewDate=todayISO();mainView="workouts";saveV2();render()}
+  else if(a==="back"){releaseWakeLock();active=null;viewDate=null;if(mainView!=="workouts")mainView="workouts";saveV2();render()}
   else if(a==="open-pending"){active="__videos";render()}
   else if(a==="toggle-set")toggleSet(el.dataset.day,Number(el.dataset.idx),Number(el.dataset.set));
   else if(a==="toggle-ex")toggleExercise(el.dataset.day,Number(el.dataset.idx));
@@ -595,6 +1672,7 @@ document.addEventListener("click",ev=>{
   else if(a==="close-calc")closePlateCalculator();
   else if(a==="calc-plates")computePlates();
   else if(a==="export-backup")exportBackup();
+  else if(a==="export-migration-snapshot")exportMigrationSnapshot();
   else if(a==="import-backup")chooseBackup();
 });
 document.addEventListener("input",ev=>{
@@ -604,30 +1682,34 @@ document.addEventListener("input",ev=>{
 });
 // carga/reps/RIR salvam ao sair do campo, para nao gravar valores parciais
 document.addEventListener("change",ev=>{
+  if(ev.target?.id==="body-photo-input"){
+    const file=ev.target.files?.[0],owner=lastBody()?.id;
+    addBodyPhoto(file,owner);
+    ev.target.value="";
+    return;
+  }
   const el=ev.target;
   if(el.dataset.action==="set-field"){setField(el.dataset.day,Number(el.dataset.idx),Number(el.dataset.set),el.dataset.field,el.value);updateCard(el.dataset.day,Number(el.dataset.idx))}
   else if(el.dataset.action==="date-pick")setDate(el.value);
+  else if(el.dataset.action==="profile-field"){profile[el.dataset.field]=el.dataset.field==="weeklyTarget"?Number(el.value):el.value;saveV2();}
 });
 document.addEventListener("focusout",ev=>{
   const el=ev.target;
   if(el.dataset&&el.dataset.action==="set-field")setField(el.dataset.day,Number(el.dataset.idx),Number(el.dataset.set),el.dataset.field,el.value);
 });
 document.addEventListener("change",ev=>{if(ev.target?.id==="import-file"){importBackupFile(ev.target.files?.[0]);ev.target.value=""}});
-// Versão de arquivo único: sem service worker (ele exige um arquivo .js separado).
-// O app continua funcionando instalado na tela de início; o cache normal do
-// navegador cobre a maior parte do uso offline.
-render();restoreTimer();
-</script>
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")flushSessionWrites()});
+window.addEventListener("pagehide",()=>flushSessionWrites());
 
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(err => {
-      console.warn("Service worker não registrado:", err);
-    });
+// Service worker: registrado apenas quando o app é servido por http(s) e o
+// sw.js existe ao lado. Em file:// ou no HTML avulso sem sw.js, o register
+// falha e é ignorado — o app segue funcionando pelo cache normal do navegador.
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.register("./sw.js").catch(()=>{});
   });
 }
+document.getElementById("app").innerHTML=`<div class="wrap"><div class="v2page"><div class="v2card"><b>Preparando seus dados…</b><div class="v2muted" style="margin-top:6px">Migrando o histórico com segurança. Nada é apagado do armazenamento antigo.</div></div></div></div>`;initFoundation().then(()=>{render();restoreTimer()});
 </script>
-
 </body>
 </html>
