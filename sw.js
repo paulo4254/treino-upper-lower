@@ -3,8 +3,8 @@
 //   navegação/HTML  -> network-first (senão o usuário fica preso numa versão antiga)
 //   demais assets   -> cache-first (ícones e manifest praticamente não mudam)
 // Trocar CACHE a cada release limpa o cache anterior no activate.
-const CACHE = "ul-treino-v2-fase2";
-const PRECACHE = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png"];
+const CACHE = "ul-treino-v2-iconfix1";
+const PRECACHE = ["./", "./index.html", "./manifest.json?v=iconfix1", "./icon-192.png?v=iconfix1", "./icon-512.png?v=iconfix1"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)).catch(() => {}));
