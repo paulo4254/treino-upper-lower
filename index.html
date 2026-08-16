@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14161A">
+<title>Treino Upper / Lower</title>
+<!-- Versão final auditada. Hospede esta pasta em HTTPS para instalação como PWA. -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="UL Treino">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+<!-- Manifest e ícones embutidos: este arquivo é autossuficiente. -->
+<link rel="icon" type="image/png" sizes="512x512" href="data:image/png;base64,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AKcIAAA4RQAAwCkCAABOEQAAcIoAAIBTBAAAnCIAAOAUAQAApwgAADhFAADAKQIAAE4RAABwigAAgFMEAACcIgAA4BQBAACnCAAAOEUAAMApAgAAThEAAHCKAACAUwQAAJwiAADgFAEAAKcIAAA4RQAAwCkCAABOEQAAcIoAAIBTBAAAnCIAAOAUAQAApwgAADhFAADAKQIAAE4RAABwigAAgFMEAACcIgAA4BQBAACnCAAAOEUAAMApAgAAThEAAHCKAACAUwQAAJwiAADgFAEAAKcIAAA4RQAAwCkCAABOEQAAcIoAAIBTBAAAnCIAAOAUAQAApwgAADhFAADAKQIAAE4RAABwigAAgFMEAACcIgAA4BQBAACnCAAAOEUAAMApAgAAThEAAHCKAACAUwQAAJwiAADgFAEAAKcIAAA4RQAAwCkCAABOEQAAcIoAAIBTBAAAnCIAAOAUAQAApwgAADhFAADAKQIAAE4RAABwigAAgFMEAACcIgAA4BQBAACnCAAAOEUAAMApAgAAThEAAHCKAACAUwQAAJwiAADgFAEAAKcIAAA4RQAAwCkCAABOEQAAcIoAAIBTBAAAnCIAAOAUAQAApwgAADhFAADAKQIAAE4RAABwigAAgFMEAACcIgAA4BQBAACn/g+4FJtNH4CzvQAAAABJRU5ErkJggg==">
+<meta name="description" content="Registro de treino Upper/Lower 4x por semana com carga, reps e RIR por série.">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{overscroll-behavior-y:none}
+body{margin:0;background:#14161A;color:#F2F0EA;font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",sans-serif;padding-bottom:env(safe-area-inset-bottom);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overscroll-behavior-y:none}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid #D4A72C;outline-offset:2px;border-radius:8px}
+.wrap{min-height:100vh}
+.header{padding:26px 20px 14px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:9px;color:#9A9DA3;font-size:12px;letter-spacing:2px;text-transform:uppercase}.brand b{color:#D4A72C;font-size:20px}.title{font-size:31px;font-weight:800;margin:6px 0 4px;letter-spacing:-.5px}.sub{color:#9A9DA3;font-size:13px;line-height:1.4}
+.weekring{flex-shrink:0;text-align:center}.ringwrap{position:relative;width:58px;height:58px}.ringnum{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;font-variant-numeric:tabular-nums}.wlabel{font-size:10px;color:#9A9DA3;letter-spacing:1px;text-transform:uppercase;margin-top:6px;font-variant-numeric:tabular-nums}
+.days{padding:16px 20px 34px;display:flex;flex-direction:column;gap:12px}.day{position:relative;text-align:left;width:100%;background:#1D2025;border:1px solid #2A2D33;border-radius:16px;padding:19px 20px;color:#F2F0EA;overflow:hidden;transition:transform .15s,border-color .15s,background .15s}.day:active{transform:scale(.985);background:#20242A}.bar{position:absolute;left:0;top:0;width:4px;height:100%}.daytop{display:flex;justify-content:space-between;align-items:center;gap:14px}.dayname{font-size:19px;font-weight:750}.focus{font-size:13.5px;color:#9A9DA3;margin-top:3px}.dayright{display:flex;align-items:center;gap:10px}.count{font-size:11.5px;border-radius:999px;padding:4px 10px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}.rest{margin-top:4px;padding:15px;border:1px dashed #2A2D33;border-radius:16px;color:#82868D;font-size:13px;text-align:center}
+.summarybox,.tools{margin:0 20px 16px;padding:15px;background:#1D2025;border:1px solid #2A2D33;border-radius:16px}.summarygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.metric{background:#14161A;border:1px solid #2A2D33;border-radius:12px;padding:10px}.metric b{display:block;font-size:16px}.metric span{font-size:10px;color:#82868D}.tooltitle{font-size:13px;font-weight:800;margin-bottom:5px}.toolsub{font-size:11px;color:#82868D;margin-bottom:12px;line-height:1.45}.toolrow{display:flex;gap:8px}.toolbtn{flex:1;border:1px solid #33373e;background:#14161A;color:#F2F0EA;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700}#import-file{display:none}
+.top{padding:20px 20px 14px;border-bottom:1px solid #2A2D33;position:sticky;top:0;background:#14161AF5;backdrop-filter:blur(12px);z-index:8}.back{border:0;background:none;color:#9A9DA3;padding:0;margin:0 0 11px;font-size:14px}.toprow{display:flex;justify-content:space-between;align-items:end;gap:10px}.workout-title{font-size:25px;font-weight:800;margin:0}.focus2{font-size:13px;font-weight:700;margin-top:4px}.donecount{color:#9A9DA3;font-size:13px;text-align:right;display:flex;align-items:center;gap:8px}
+.guide{margin:14px 20px 0;padding:12px 14px;border-radius:12px;background:#D4A72C10;border:1px solid #D4A72C33;color:#C9C4B7;font-size:11.5px;line-height:1.45}.guide b{color:#D4A72C}
+.list{padding:14px 20px 40px;display:flex;flex-direction:column;gap:12px}.card{background:#1D2025;border:1px solid #2A2D33;border-radius:16px;padding:16px;transition:opacity .2s,border-color .2s}.card.done{border-color:#33543D}.meta{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;font-weight:800}.exname{font-size:17px;font-weight:760;margin-top:4px;padding-right:42px}.anchor,.videobadge{font-size:9px;border-radius:6px;padding:2px 6px;margin-left:6px;font-weight:800;letter-spacing:.35px;vertical-align:middle;text-transform:uppercase}.anchor{background:#D4A72C22;color:#D4A72C}.videobadge.ok{background:#5FBF7A18;color:#5FBF7A}.videobadge.pending{background:#82868D18;color:#82868D}.sets{font-size:13px;color:#9A9DA3;margin-top:3px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.rir{color:#D4A72C;font-weight:700}.source{font-size:11px;color:#82868D;margin-top:5px}.checkex{width:32px;height:32px;border-radius:50%;border:1.5px solid #3A3D43;background:transparent;float:right;display:flex;align-items:center;justify-content:center;padding:0}.checkex.on{background:#5FBF7A;border-color:#5FBF7A}.checkex svg{width:16px;height:16px}.checkex path{stroke:#14161A;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.tech{margin-top:11px;border-top:1px solid #2A2D33;padding-top:10px}.tech summary,.hist summary{font-size:11.5px;color:#9A9DA3;cursor:pointer;list-style:none;user-select:none;font-weight:700}.tech summary::-webkit-details-marker,.hist summary::-webkit-details-marker{display:none}.tech summary:before,.hist summary:before{content:"▸ ";display:inline-block;transition:transform .15s}.tech[open] summary:before,.hist[open] summary:before{transform:rotate(90deg)}.techbody{margin-top:9px;font-size:11.5px;color:#B7B9BD;line-height:1.5}.techbody ul{padding-left:18px;margin:6px 0}.techbody li{margin:4px 0}.mistake{color:#D8A18F}.videorow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.watch{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:transparent;border:1px solid;border-radius:10px;padding:8px 11px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap}.editvid,.vidbtn{border:0;background:none;color:#82868D;font-size:10.5px;padding:3px 0;text-decoration:underline}.novideo{font-size:11px;color:#82868D;font-style:italic}
+.prevbox{margin-top:11px;background:#14161A;border:1px solid #2A2D33;border-radius:10px;padding:9px 10px;font-size:11px;color:#9A9DA3;line-height:1.45}.prevbox b{color:#F2F0EA}.recommend{margin-top:9px;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:750;padding:5px 9px;border-radius:999px;background:#D4A72C18;color:#D4A72C}.recommend.good{background:#5FBF7A18;color:#5FBF7A}.recommend.warn{background:#E8542A18;color:#E88A70}
+.settable{margin-top:12px;display:flex;flex-direction:column;gap:7px}.setrow{display:grid;grid-template-columns:32px minmax(74px,1fr) 64px 58px 36px;gap:6px;align-items:center}.setlabel{font-size:11px;font-weight:800;color:#82868D;text-align:center}.field{min-width:0;background:#14161A;border:1px solid #2A2D33;border-radius:9px;padding:9px 7px;color:#F2F0EA;outline:none;font-size:14px;text-align:center}.field:focus{border-color:#D4A72C55}.setdone{width:34px;height:34px;border-radius:9px;border:1px solid #3A3D43;background:#14161A;color:#82868D;font-weight:900}.setdone.on{background:#5FBF7A;color:#14161A;border-color:#5FBF7A}.sethead{display:grid;grid-template-columns:32px minmax(74px,1fr) 64px 58px 36px;gap:6px;font-size:9px;color:#6F737A;text-align:center;text-transform:uppercase;letter-spacing:.5px;margin-top:10px}.autotimer{font-size:10px;color:#6F737A;margin-top:7px}.note{width:100%;margin-top:10px;resize:vertical;min-height:42px;background:#14161A;border:1px solid #2A2D33;border-radius:9px;padding:9px;color:#F2F0EA;outline:none;font-size:12px}.note:focus{border-color:#D4A72C55}
+.hist{margin-top:11px}.histlist{display:flex;flex-direction:column;gap:6px;margin-top:8px}.histitem{background:#14161A;border:1px solid #2A2D33;border-radius:9px;padding:8px 9px;font-size:10.5px;color:#9A9DA3;line-height:1.45}.histitem b{color:#F2F0EA}.legacy{opacity:.72}.spark{margin-top:10px;background:#14161A;border:1px solid #2A2D33;border-radius:10px;padding:9px 10px}.sparkhead{display:flex;justify-content:space-between;font-size:9.5px;color:#82868D;text-transform:uppercase;font-weight:700;margin-bottom:5px}.spark svg{display:block;width:100%;height:42px}.sparkfoot{display:flex;justify-content:space-between;font-size:9px;color:#82868D;margin-top:3px}
+.daynote{margin:0 20px 28px;padding:14px;background:#1D2025;border:1px solid #2A2D33;border-radius:14px}.daynote label{font-size:12px;font-weight:800;display:block;margin-bottom:7px}.daynote textarea{width:100%;min-height:60px;resize:vertical;background:#14161A;border:1px solid #2A2D33;border-radius:10px;padding:10px;color:#F2F0EA;outline:none;font-size:12px}
+.clear{display:block;margin:0 20px calc(95px + env(safe-area-inset-bottom));border:1px solid #33373e;background:#1D2025;color:#9A9DA3;border-radius:10px;padding:9px 12px;font-size:12px;width:calc(100% - 40px)}
+.timerfab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:20;border:1px solid #D4A72C;background:#1D2025;color:#D4A72C;border-radius:999px;min-width:54px;height:54px;padding:0 15px;font-weight:800;box-shadow:0 8px 24px #0008;font-variant-numeric:tabular-nums}.timerfab.running{background:#D4A72C;color:#14161A}.timerpanel{position:fixed;right:18px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:21;width:min(292px,calc(100vw - 36px));background:#1D2025;border:1px solid #33373e;border-radius:16px;padding:14px;box-shadow:0 14px 34px #000a}.timerhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.timerhead b{font-size:14px}.timerclose{border:0;background:none;color:#9A9DA3;font-size:20px}.timercontext{font-size:11px;color:#82868D;margin-bottom:10px;line-height:1.4}.timeropts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.timeropt{border:1px solid #3A3D43;background:#14161A;color:#F2F0EA;border-radius:10px;padding:10px 5px;font-weight:800}.timerstop{width:100%;margin-top:8px;border:1px solid #3A3D43;background:transparent;color:#9A9DA3;border-radius:10px;padding:9px}
+.bkalert{margin:0 20px 14px;padding:12px 14px;border-radius:12px;background:#D4A72C14;border:1px solid #D4A72C44;color:#D4A72C;font-size:12px;line-height:1.45;display:flex;gap:9px}.ring-fg{transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)}
+@media(max-width:420px){.setrow,.sethead{grid-template-columns:28px minmax(66px,1fr) 58px 52px 34px;gap:4px}.field{padding:9px 4px;font-size:13px}.summarygrid{grid-template-columns:1fr 1fr}.metric:last-child{grid-column:1/-1}.header{align-items:flex-start}.title{font-size:28px}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+/* ===== ajustes v3 ===== */
+.datebar{display:flex;align-items:center;gap:8px;margin-top:12px}
+.datebar input[type=date]{flex:1;min-width:0;background:#14161A;border:1px solid #2A2D33;border-radius:10px;padding:8px 10px;color:#F2F0EA;font-size:13px;outline:none}
+.datebar input[type=date]:focus{border-color:#D4A72C55}
+.datenav{border:1px solid #33373e;background:#1D2025;color:#9A9DA3;border-radius:10px;padding:8px 11px;font-size:14px;font-weight:800;line-height:1}
+.todaybtn{border:1px solid #D4A72C55;background:transparent;color:#D4A72C;border-radius:10px;padding:8px 11px;font-size:11.5px;font-weight:800}
+.pastwarn{margin:12px 20px 0;padding:10px 13px;border-radius:11px;background:#5B5FE915;border:1px solid #5B5FE955;color:#9FA2F0;font-size:11.5px;line-height:1.45}
+
+.cardhead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.movebox{display:flex;gap:4px;flex-shrink:0}
+.movebtn{border:1px solid #2A2D33;background:#14161A;color:#82868D;border-radius:8px;width:28px;height:26px;font-size:12px;line-height:1;padding:0}
+.movebtn:disabled{opacity:.3}
+.movebtn:active{border-color:#D4A72C}
+
+.setextra{display:flex;gap:8px;margin-top:8px}
+.setextra button{flex:1;border:1px dashed #33373e;background:transparent;color:#82868D;border-radius:9px;padding:7px;font-size:11px;font-weight:700}
+.setextra button:active{border-color:#D4A72C;color:#D4A72C}
+.setrow.bonus .setlabel{color:#D4A72C}
+
+/* modal calculadora */
+.modal-overlay{position:fixed;inset:0;background:#000b;backdrop-filter:blur(3px);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:#1D2025;border:1px solid #33373e;border-radius:18px;width:100%;max-width:340px;padding:20px;box-shadow:0 14px 40px #000c}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.modal-close{background:none;border:0;color:#9A9DA3;font-size:22px;line-height:1;padding:0 4px}
+.modal-field{margin-bottom:12px}
+.modal-field label{font-size:11px;color:#82868D;display:block;margin-bottom:5px}
+.modal-input{width:100%;background:#14161A;border:1px solid #2A2D33;border-radius:10px;padding:10px;color:#F2F0EA;font-size:15px;outline:none}
+.modal-input:focus{border-color:#D4A72C55}
+.plate-result{background:#14161A;border:1px solid #2A2D33;border-radius:10px;padding:12px;font-size:13px;margin-top:14px;color:#D4A72C;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;line-height:1.55}
+.plate-result.err{color:#E8542A}
+.plate-result small{color:#82868D;font-size:11px}
+
+/* tela de videos pendentes */
+.vidlist{padding:16px 20px 40px;display:flex;flex-direction:column;gap:10px}
+.vidcard{background:#1D2025;border:1px solid #2A2D33;border-radius:14px;padding:14px}
+.vidcard .vday{font-size:10px;letter-spacing:1.1px;text-transform:uppercase;font-weight:800}
+.vidcard .vname{font-size:15px;font-weight:750;margin-top:3px}
+.vidcard .vgrp{font-size:11.5px;color:#82868D;margin-top:2px}
+.vidactions{display:flex;gap:8px;margin-top:11px}
+.vidactions button,.vidactions a{flex:1;text-align:center;border-radius:9px;padding:9px;font-size:11.5px;font-weight:700;text-decoration:none;border:1px solid #33373e;background:#14161A;color:#F2F0EA}
+.vidactions .searchlink{border-color:#3A3D43;color:#9A9DA3}
+.vsection{margin:20px 20px 0;font-size:10.5px;letter-spacing:1.3px;text-transform:uppercase;font-weight:800;color:#82868D}
+.vsection+.vidlist{padding-top:10px}
+.vidcard .vsrc{font-size:11px;color:#6E727A;margin-top:5px;line-height:1.4}
+.vidconfirm{width:100%;margin-top:8px;border:1px solid #D4A72C55;background:transparent;color:#D4A72C;border-radius:9px;padding:9px;font-size:11.5px;font-weight:700}
+.vidconfirm.done{border-color:#5FBF7A55;color:#5FBF7A}
+.vidempty{margin:20px;padding:22px;text-align:center;border:1px dashed #2A2D33;border-radius:14px;color:#82868D;font-size:13px;line-height:1.5}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="modal-root"></div>
+<script>
+const DIAS=[
+{id:"segunda",label:"Segunda",foco:"Upper A · Peito",cor:"#E8542A",exercicios:[
+{nome:"Supino reto na máquina",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Peito",video:"https://youtu.be/0bFkkO9AanU",fonte:"Vídeo indicado por você · supino reto na máquina",videoStatus:"reference",ancora:true,dicas:["Ajuste o banco para a pegada ficar aproximadamente na linha média do peitoral.","Mantenha escápulas apoiadas e tronco estável.","Controle a volta e use uma amplitude confortável para o ombro."],erros:["Banco alto/baixo demais.","Perder estabilidade para mover mais carga.","Encerrar a descida só porque a carga está pesada."]},
+{nome:"Supino inclinado com halteres",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Peito",video:"https://www.youtube.com/watch?v=1mXT4WEiBdc&t=168s",fonte:"Laércio Refundini · a partir de 2:48",videoStatus:"reference",dicas:["Banco com inclinação moderada.","Desça com controle e mantenha punhos estáveis.","Procure movimento do braço sem elevar os ombros."],erros:["Inclinação excessiva transformando em desenvolvimento.","Bater halteres no topo.","Perder controle na descida."]},
+{nome:"Remada com apoio no peito",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Costas",video:"https://youtu.be/0UBRfiO4zDs",fonte:"Chest Supported Row",videoStatus:"reference",dicas:["Mantenha o peito no apoio durante toda a série.","Puxe com cotovelos numa trajetória repetível.","Controle a fase de retorno."],erros:["Tirar o peito do apoio para roubar.","Transformar o movimento em encolhimento.","Soltar a carga na volta."]},
+{nome:"Puxada neutra",series:3,reps:"8-12",rir:"1-2",rest:120,grupo:"Costas",video:"https://youtu.be/ej9Z_jMQpLY",fonte:"Vídeo de referência atual",videoStatus:"reference",dicas:["Tronco estável com leve inclinação confortável.","Puxe até a amplitude que mantém o ombro bem posicionado.","Controle o alongamento na volta."],erros:["Balançar o tronco.","Puxar só com bíceps.","Encurtar a amplitude para usar mais carga."]},
+{nome:"Elevação lateral",series:3,reps:"12-15",rir:"1",rest:90,grupo:"Ombro",video:"https://youtu.be/c7zMmbWkUPw",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Use carga que permita trajetória limpa.","Eleve o braço sem dar impulso com o tronco.","Mantenha tensão e controle na descida."],erros:["Encolher o trapézio para mover a carga.","Balançar o corpo.","Acelerar demais a fase excêntrica."]},
+{nome:"Tríceps acima da cabeça na polia",series:2,reps:"10-12",rir:"1",rest:90,grupo:"Tríceps",video:"https://www.youtube.com/watch?v=NvCgPutyMrc",fonte:"Execução correta · Overhead Rope Triceps Extension",videoStatus:"reference",dicas:["Mantenha os cotovelos estáveis.","Busque boa amplitude sem dor no ombro/cotovelo.","Controle o retorno."],erros:["Abrir e fechar demais os cotovelos.","Usar o tronco para empurrar.","Cortar a amplitude."]},
+{nome:"Rosca Scott",series:2,reps:"8-10",rir:"1",rest:90,grupo:"Bíceps",video:"https://youtu.be/zpTK6eihdSA",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Mantenha o braço apoiado.","Controle especialmente a descida.","Use amplitude que não cause desconforto no cotovelo."],erros:["Levantar o braço do banco.","Soltar a barra na descida.","Exagerar na carga e perder amplitude."]}
+]},
+{id:"terca",label:"Terça",foco:"Lower A · Quadríceps",cor:"#5B5FE9",exercicios:[
+{nome:"Hack squat",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Quadríceps",video:"https://youtu.be/hzvwXKUDWIc",fonte:"Laércio Refundini",videoStatus:"reference",ancora:true,dicas:["Posicione os pés para conseguir profundidade confortável.","Mantenha costas e pelve apoiadas.","Desça com controle e suba sem perder alinhamento."],erros:["Reduzir muito a amplitude para usar mais carga.","Joelhos colapsando para dentro.","Descer sem controle."]},
+{nome:"Leg press",series:3,reps:"10-12",rir:"1-2",rest:150,grupo:"Quadríceps",video:"https://youtu.be/nY8UsiAqwds",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Mantenha a pelve apoiada no fundo.","Use amplitude máxima que você controla.","Empurre mantendo alinhamento dos joelhos."],erros:["Arredondar a lombar no fundo.","Travar os joelhos agressivamente.","Encurtar amplitude para aumentar carga."]},
+{nome:"Cadeira extensora",series:2,reps:"12-15",rir:"1",rest:90,grupo:"Quadríceps",video:"https://youtu.be/el3oHblB5DM",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Alinhe o eixo da máquina com o joelho.","Mantenha quadril encostado.","Suba firme e desça controlando."],erros:["Banco mal ajustado.","Jogar o tronco para gerar impulso.","Deixar o peso despencar."]},
+{nome:"Cadeira/mesa flexora",series:3,reps:"8-10",rir:"1-2",rest:120,grupo:"Posterior",video:"https://youtu.be/2-ULaRrQa7c",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Ajuste a máquina para o eixo do joelho.","Mantenha quadril estável.","Controle a volta até alongar sem perder posição."],erros:["Levantar o quadril.","Usar impulso.","Cortar a fase alongada."]},
+{nome:"Elevação pélvica na máquina",series:2,reps:"8-10",rir:"1-2",rest:120,grupo:"Glúteo",video:"https://www.youtube.com/watch?v=9UPvhCLa1IQ",fonte:"Elevação pélvica na máquina · execução",videoStatus:"reference",dicas:["Nas primeiras sessões use carga conservadora.","Ajuste o apoio para ficar confortável sobre a pelve.","Suba até extensão de quadril sem hiperestender a lombar."],erros:["Aprender o exercício já com carga alta.","Hiperestender a lombar no topo.","Pés muito longe/perto sem testar a posição."]},
+{nome:"Panturrilha em pé",series:3,reps:"8-12",rir:"1",rest:90,grupo:"Panturrilha",video:"https://youtu.be/824pMjvGXgc",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Desça até alongar com controle.","Faça breve pausa na posição alongada.","Suba sem quicar."],erros:["Repetições curtas.","Usar impulso.","Acelerar a descida."]},
+{nome:"Abdômen na polia",series:3,reps:"10-15",rir:"1-2",rest:75,grupo:"Core",video:"https://www.youtube.com/watch?v=Ea2igVmZdks",fonte:"Abdominal na polia ajoelhada · execução",videoStatus:"reference",dicas:["Pense em aproximar costelas e pelve.","Mantenha quadril relativamente estável.","Controle a volta sem deixar o peso puxar você."],erros:["Transformar em flexão de quadril.","Puxar só com os braços.","Amplitude muito curta."]}
+]},
+{id:"quinta",label:"Quinta",foco:"Upper B · Costas",cor:"#2A9D8F",exercicios:[
+{nome:"Remada com apoio no peito",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Costas",video:"https://youtu.be/0UBRfiO4zDs",fonte:"Chest Supported Row",videoStatus:"reference",ancora:true,dicas:["Mantenha o peito no apoio.","Use trajetória reproduzível.","Controle a fase excêntrica."],erros:["Roubar tirando o tronco do apoio.","Encolher os ombros.","Perder amplitude com aumento de carga."]},
+{nome:"Puxada unilateral",series:3,reps:"8-10",rir:"1-2",rest:120,grupo:"Costas",video:"https://www.youtube.com/watch?v=NlkOPj8y65k",fonte:"Puxada unilateral na polia alta · execução",videoStatus:"reference",dicas:["Estabilize o tronco antes de puxar.","Mantenha o ombro em posição confortável.","Controle o alongamento no retorno."],erros:["Rodar demais o tronco.","Puxar com impulso.","Perder controle da escápula."]},
+{nome:"Supino inclinado na máquina",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Peito",video:"https://www.youtube.com/watch?v=Ao2lm6GBUro",fonte:"Supino inclinado na máquina · execução",videoStatus:"reference",dicas:["Ajuste o banco para a pegada chegar ao peitoral superior sem desconforto.","Mantenha escápulas apoiadas.","Controle a descida."],erros:["Banco alto demais, levando esforço ao ombro.","Perder contato com o encosto.","Amplitude curta por excesso de carga."]},
+{nome:"Crucifixo na polia",series:2,reps:"10-12",rir:"1",rest:90,grupo:"Peito",video:"https://youtu.be/pdMWt71MPlw",fonte:"Crossover na polia",videoStatus:"reference",dicas:["Mantenha leve flexão do cotovelo.","Pense em aproximar os braços pelo peitoral.","Controle a fase alongada."],erros:["Transformar em press.","Abrir demais até perder posição do ombro.","Usar balanço do corpo."]},
+{nome:"Elevação lateral na polia",series:3,reps:"12-15",rir:"1",rest:90,grupo:"Ombro",video:"https://www.youtube.com/watch?v=79kNM5LbFXE",fonte:"Elevação lateral na polia · execução",videoStatus:"reference",dicas:["Ajuste a polia para tensão confortável desde o início.","Use trajetória sem impulso.","Controle a descida."],erros:["Compensar com tronco.","Encolher trapézio.","Carga excessiva."]},
+{nome:"Reverse pec deck",series:2,reps:"12-15",rir:"1-2",rest:90,grupo:"Ombro",video:"https://youtu.be/wjlX-5DTjBQ",fonte:"Voador invertido",videoStatus:"reference",dicas:["Apoie o peito e mantenha tronco estável.","Abra os braços sem encolher os ombros.","Controle o retorno."],erros:["Usar lombar para roubar.","Transformar em remada.","Perder controle no retorno."]},
+{nome:"Rosca inclinada",series:2,reps:"8-10",rir:"1",rest:90,grupo:"Bíceps",video:"https://youtu.be/aTYlqC_JacQ",fonte:"Incline Dumbbell Curl",videoStatus:"reference",dicas:["Mantenha o braço estável atrás do tronco.","Não avance o cotovelo durante a subida.","Desça com controle."],erros:["Balançar o tronco.","Avançar o ombro.","Cortar a descida."]},
+{nome:"Tríceps corda",series:2,reps:"10-12",rir:"1",rest:90,grupo:"Tríceps",video:"https://youtu.be/btj6dDfAQ2w",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Mantenha cotovelos próximos ao corpo.","Estenda sem balançar o tronco.","Controle a volta."],erros:["Mover ombro e cotovelo juntos.","Inclinar demais o corpo.","Usar impulso."]}
+]},
+{id:"sexta",label:"Sexta",foco:"Lower B · Posterior",cor:"#D4A72C",exercicios:[
+{nome:"Stiff / Romanian deadlift",series:3,reps:"6-8",rir:"2",rest:180,grupo:"Posterior",video:"https://youtu.be/_oyxCn2iSjU",fonte:"Jeff Nippard",videoStatus:"reference",ancora:true,dicas:["Pense em levar o quadril para trás.","Mantenha coluna e tronco rígidos.","Desça só até onde consegue manter tensão e posição."],erros:["Transformar em agachamento.","Arredondar a lombar.","Forçar amplitude além da mobilidade."]},
+{nome:"Cadeira flexora",series:3,reps:"10-12",rir:"1-2",rest:120,grupo:"Posterior",video:"https://youtu.be/2-ULaRrQa7c",fonte:"Leandro Twin · referência de flexora",videoStatus:"reference",dicas:["Ajuste eixo do joelho.","Mantenha quadril estável.","Controle a volta."],erros:["Levantar o quadril.","Soltar a carga.","Usar impulso."]},
+{nome:"Hack squat ou Smith",series:3,reps:"8-10",rir:"1-2",rest:150,grupo:"Quadríceps",video:"https://youtu.be/hzvwXKUDWIc",fonte:"Laércio Refundini · Hack squat",videoStatus:"reference",dicas:["Escolha uma variação e mantenha por várias semanas.","Use amplitude confortável e padronizada.","Controle a descida."],erros:["Alternar Hack/Smith toda sessão.","Mudar posição dos pés constantemente.","Perder amplitude por excesso de carga."]},
+{nome:"Afundo búlgaro",series:2,reps:"8-10 por perna",rir:"1-2",rest:120,grupo:"Quadríceps",video:"https://www.youtube.com/watch?v=XZpWTmbcMWY",fonte:"Fabrício Pacholok · execução do agachamento búlgaro",videoStatus:"reference",dicas:["Aprenda equilíbrio antes de aumentar carga.","Mantenha o pé da frente estável.","Use amplitude que não cause dor."],erros:["Carga alta antes de dominar estabilidade.","Passo curto/longuíssimo sem objetivo.","Empurrar demais com a perna de trás."]},
+{nome:"Cadeira extensora",series:2,reps:"12-15",rir:"1",rest:90,grupo:"Quadríceps",video:"https://youtu.be/el3oHblB5DM",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Alinhe eixo do joelho.","Mantenha quadril apoiado.","Desça controlando."],erros:["Roubar com o tronco.","Descer rápido.","Usar amplitude inconsistente."]},
+{nome:"Panturrilha sentada",series:3,reps:"10-12",rir:"1",rest:90,grupo:"Panturrilha",video:"https://youtu.be/jMWs_p-W9gY",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Amplitude completa confortável.","Pausa curta no alongamento.","Evite quicar."],erros:["Repetições parciais involuntárias.","Descer sem controle.","Usar impulso."]},
+{nome:"Elevação de pernas",series:3,reps:"10-15",rir:"1-2",rest:75,grupo:"Core",video:"https://www.youtube.com/watch?v=A63IRokDdy8",fonte:"Abdominal com elevação de pernas · execução",videoStatus:"reference",dicas:["Controle a pelve, não apenas as pernas.","Pare antes da lombar perder posição.","Evite balanço."],erros:["Usar impulso.","Fazer só flexão de quadril sem controle pélvico.","Aumentar amplitude às custas da lombar."]}
+]}
+];
+
+function safeGet(k,f){try{const x=localStorage.getItem(k);return x?JSON.parse(x):f}catch{return f}}
+function todayISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function weekKey(date){const d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));const dayNum=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()-dayNum+3);const firstThursday=new Date(Date.UTC(d.getUTCFullYear(),0,4));const week=1+Math.round(((d-firstThursday)/86400000-3+((firstThursday.getUTCDay()+6)%7))/7);return d.getUTCFullYear()+"-W"+String(week).padStart(2,"0")}
+function fmtDate(iso){const [y,m,d]=iso.split("-");return d+"/"+m}
+function key(d,n){return d+"|"+n}
+function parseRange(s){const a=(String(s).match(/\d+/g)||[]).map(Number);return{lo:a[0]||0,hi:a[1]||a[0]||0}}
+function rirMin(s){const a=(String(s).match(/\d+/g)||[]).map(Number);return a.length?Math.min(...a):0}
+function esc(s){return String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
+
+let sessions=safeGet("treino-sessoes-ul-v2",{});
+let exOrder=safeGet("treino-ordem-ul-v2",{});
+let videoOk=safeGet("treino-videos-ok-ul",{});
+let viewDate=null;
+let customVideos=safeGet("treino-videos-ul-v1",{});
+let legacyLoads=safeGet("treino-cargas-ul-v1",{});
+let legacyDone=safeGet("treino-feitos-ul-v1",{});
+let dayNotes=safeGet("treino-notas-dia-ul-v2",{});
+const WK=weekKey(new Date());
+let active=null;
+
+// ---------- tela acesa durante o treino ----------
+let wakeLock=null;
+async function requestWakeLock(){
+  if(!("wakeLock" in navigator)||wakeLock)return;
+  try{wakeLock=await navigator.wakeLock.request("screen");wakeLock.addEventListener("release",()=>{wakeLock=null});}catch(e){wakeLock=null}
+}
+function releaseWakeLock(){if(wakeLock){try{wakeLock.release()}catch(e){}wakeLock=null}}
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState==="visible"){if(active&&active!=="__videos")requestWakeLock();restoreTimer();}
+});
+
+function vibrate(p){if(navigator.vibrate){try{navigator.vibrate(p)}catch(e){}}}
+
+// ---------- data em edicao ----------
+function curDate(){return viewDate||todayISO()}
+function isToday(){return curDate()===todayISO()}
+function shiftDate(days){
+  const [y,m,d]=curDate().split("-").map(Number);
+  const dt=new Date(y,m-1,d);
+  dt.setDate(dt.getDate()+days);
+  viewDate=dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0")+"-"+String(dt.getDate()).padStart(2,"0");
+  if(viewDate>todayISO())viewDate=todayISO();
+  renderDay();
+}
+function setDate(v){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(v||""))return;
+  viewDate=v>todayISO()?todayISO():v;
+  renderDay();
+}
+function fmtDateLong(iso){
+  const [y,m,d]=iso.split("-").map(Number);
+  const dt=new Date(y,m-1,d);
+  const dias=["domingo","segunda","terça","quarta","quinta","sexta","sábado"];
+  return dias[dt.getDay()]+", "+String(d).padStart(2,"0")+"/"+String(m).padStart(2,"0");
+}
+
+// ---------- preserva <details> abertos entre renders ----------
+function detailsState(){
+  const m={};
+  document.querySelectorAll("details[data-dk]").forEach(el=>{if(el.open)m[el.dataset.dk]=1});
+  return m;
+}
+function restoreDetails(m){
+  if(!m)return;
+  document.querySelectorAll("details[data-dk]").forEach(el=>{if(m[el.dataset.dk])el.open=true});
+}
+
+// ---------- ordem personalizada dos exercicios ----------
+function orderedIdx(d){
+  const saved=exOrder[d.id];
+  const all=d.exercicios.map((e,i)=>i);
+  if(!Array.isArray(saved))return all;
+  const byName=new Map(d.exercicios.map((e,i)=>[e.nome,i]));
+  const out=[];
+  saved.forEach(n=>{if(byName.has(n)&&!out.includes(byName.get(n)))out.push(byName.get(n))});
+  all.forEach(i=>{if(!out.includes(i))out.push(i)});
+  return out;
+}
+function moveExercise(dayId,idx,dir){
+  const d=DIAS.find(x=>x.id===dayId);
+  const ord=orderedIdx(d);
+  const pos=ord.indexOf(idx);
+  const target=pos+dir;
+  if(pos<0||target<0||target>=ord.length)return;
+  ord.splice(target,0,ord.splice(pos,1)[0]);
+  exOrder[d.id]=ord.map(i=>d.exercicios[i].nome);
+  vibrate(15);
+  save();
+  renderDay();
+}
+function resetOrder(){
+  const d=DIAS.find(x=>x.id===active);
+  if(!d)return;
+  delete exOrder[d.id];
+  save();
+  renderDay();
+}
+
+// ---------- series extras ----------
+function setCount(s,e){return Math.max(e.series,e.series+(s.extra||0))}
+function addSet(dayId,idx){
+  const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx];
+  const s=sessionFor(curDate(),dayId,e.nome,e.series);
+  if((s.extra||0)>=4)return;
+  s.extra=(s.extra||0)+1;
+  while(s.sets.length<setCount(s,e))s.sets.push({load:"",reps:"",rir:"",done:false});
+  vibrate(15);
+  save();
+  updateCard(dayId,idx);
+}
+function removeSet(dayId,idx){
+  const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx];
+  const s=sessionFor(curDate(),dayId,e.nome,e.series);
+  if(!s.extra)return;
+  s.extra-=1;
+  s.sets=s.sets.slice(0,setCount(s,e));
+  vibrate(15);
+  save();
+  updateCard(dayId,idx);
+}
+
+function save(){localStorage.setItem("treino-sessoes-ul-v2",JSON.stringify(sessions));localStorage.setItem("treino-ordem-ul-v2",JSON.stringify(exOrder));localStorage.setItem("treino-videos-ok-ul",JSON.stringify(videoOk));localStorage.setItem("treino-videos-ul-v1",JSON.stringify(customVideos));localStorage.setItem("treino-notas-dia-ul-v2",JSON.stringify(dayNotes))}
+function sessionFor(date,dayId,exName,series){if(!sessions[date])sessions[date]={};if(!sessions[date][dayId])sessions[date][dayId]={};if(!sessions[date][dayId][exName])sessions[date][dayId][exName]={sets:Array.from({length:series},()=>({load:"",reps:"",rir:"",done:false})),note:"",extra:0};const x=sessions[date][dayId][exName];if(x.extra==null)x.extra=0;const need=series+x.extra;while(x.sets.length<need)x.sets.push({load:"",reps:"",rir:"",done:false});return x}
+function getSession(date,dayId,exName){return sessions?.[date]?.[dayId]?.[exName]||null}
+function exerciseDone(date,dayId,e){const s=getSession(date,dayId,e.nome);if(!s)return false;const c=setCount(s,e);return s.sets.slice(0,c).length===c&&s.sets.slice(0,c).every(x=>x.done)}
+function dayDoneCount(d,date){return d.exercicios.filter(e=>exerciseDone(date||todayISO(),d.id,e)).length}
+function completedSetsToday(){let n=0,total=0;DIAS.forEach(d=>d.exercicios.forEach(e=>{total+=e.series;const s=getSession(todayISO(),d.id,e.nome);if(s)n+=s.sets.slice(0,setCount(s,e)).filter(x=>x.done).length}));return{n,total}}
+function videoFor(d,e){
+  const k=key(d,e.nome),c=customVideos[k];
+  if(c?.url)return{url:c.url,fonte:c.fonte||"Vídeo cadastrado por você",custom:true,status:"custom"};
+  if(!e.video)return{url:"",fonte:"",custom:false,status:"pending"};
+  const st=videoOk[k]?"confirmed":(e.videoStatus||"reference");
+  return{url:e.video,fonte:e.fonte||"",custom:false,status:st};
+}
+function videoLabel(st){
+  return st==="custom"?"seu vídeo":st==="confirmed"?"conferido":st==="unverified"?"conferir":st==="pending"?"sem vídeo":"vídeo";
+}
+function needsReview(){
+  const out=[];
+  DIAS.forEach(d=>d.exercicios.forEach((e,i)=>{const v=videoFor(d.id,e);if(v.status==="unverified"||v.status==="pending")out.push({d,e,i,v})}));
+  return out;
+}
+function confirmVideo(dayId,idx){
+  const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx];
+  videoOk[key(dayId,e.nome)]=1;
+  vibrate(20);
+  save();
+  render();
+}
+function unconfirmVideo(dayId,idx){
+  const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx];
+  delete videoOk[key(dayId,e.nome)];
+  save();
+  render();
+}
+function isValidUrl(u){try{const x=new URL(u);return x.protocol==="http:"||x.protocol==="https:"}catch{return false}}
+
+function ringSVG(pct,size,stroke,color,track){const r=(size-stroke)/2,c=2*Math.PI*r;return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${track}" stroke-width="${stroke}"/><circle class="ring-fg" data-target="${c*(1-pct)}" cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-dasharray="${c}" stroke-dashoffset="${c}" stroke-linecap="round" transform="rotate(-90 ${size/2} ${size/2})"/></svg>`}
+function animateRings(){requestAnimationFrame(()=>document.querySelectorAll(".ring-fg").forEach(el=>el.style.strokeDashoffset=el.dataset.target))}
+function checkIcon(){return `<svg viewBox="0 0 16 16"><path d="M3 8.5L6.2 11.5L13 4.5"/></svg>`}
+
+function priorSessions(dayId,e){const out=[];Object.keys(sessions).sort().reverse().forEach(date=>{if(date===curDate())return;const s=getSession(date,dayId,e.nome);if(s&&s.sets.some(x=>x.done||x.load||x.reps))out.push({date,...s})});return out}
+function legacyHistory(dayId,e){return (legacyLoads[key(dayId,e.nome)]||[]).slice().sort((a,b)=>a.d<b.d?1:-1)}
+function sessionSummary(s){const sets=s.sets.filter(x=>x.done||x.load||x.reps);if(!sets.length)return"sem dados";return sets.map(x=>`${x.load?x.load+"kg":"—"} × ${x.reps||"—"}${x.rir!==""?` · RIR ${x.rir}`:""}`).join(" | ")}
+function recommendation(e,s){const sets=s.sets.slice(0,e.series);if(!sets.every(x=>x.done))return null;const {lo,hi}=parseRange(e.reps),minR=rirMin(e.rir);const reps=sets.map(x=>Number(x.reps));const rirs=sets.map(x=>Number(x.rir));if(reps.some(Number.isNaN))return{txt:"Treino concluído — registre reps para liberar recomendação.",cls:""};const allTop=reps.every(r=>r>=hi);const allAtLeastLo=reps.every(r=>r>=lo);const rirOk=rirs.every(r=>Number.isNaN(r)||r>=minR);if(allTop&&rirOk)return{txt:"Topo da faixa atingido com RIR adequado — considere subir a carga na próxima sessão.",cls:"good"};if(!allAtLeastLo||rirs.filter(r=>!Number.isNaN(r)&&r===0).length>=2)return{txt:"Desempenho abaixo do alvo ou esforço alto — mantenha a carga e revise execução/recuperação.",cls:"warn"};return{txt:"Boa sessão — mantenha a carga e tente acumular repetições dentro da faixa.",cls:""}}
+function trendPoints(dayId,e){const pts=[];Object.keys(sessions).sort().forEach(date=>{const s=getSession(date,dayId,e.nome);if(!s)return;const vals=s.sets.filter(x=>x.done&&x.load).map(x=>Number(x.load)).filter(Number.isFinite);if(vals.length)pts.push({d:date,v:Math.max(...vals)})});legacyHistory(dayId,e).slice().reverse().forEach(h=>{const v=Number(h.v);if(Number.isFinite(v))pts.push({d:h.d,v,legacy:true})});pts.sort((a,b)=>a.d.localeCompare(b.d));return pts.slice(-12)}
+function sparkSVG(points,color){const W=100,H=30,pad=3,vals=points.map(p=>p.v),min=Math.min(...vals),max=Math.max(...vals),range=(max-min)||1;const c=points.map((p,i)=>({x:(i/(points.length-1||1))*(W-pad*2)+pad,y:H-pad-((p.v-min)/range)*(H-pad*2)}));const line=c.map((p,i)=>(i?"L":"M")+p.x.toFixed(2)+" "+p.y.toFixed(2)).join(" ");return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><path d="${line}" fill="none" stroke="${color}" stroke-width="1.6" vector-effect="non-scaling-stroke"/>${c.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="1.8" fill="${color}"/>`).join("")}</svg>`}
+
+function backupInfo(){let iso=null;try{iso=localStorage.getItem("treino-ul-ultimo-backup")}catch{}const tem=Object.keys(sessions).length||Object.keys(legacyLoads).length;if(!iso)return{atrasado:!!tem,nunca:true,dias:null};const d=new Date(iso),dias=Math.floor((Date.now()-d)/86400000);return{atrasado:!!tem&&dias>=14,nunca:false,dias,data:d}}
+function backupAlertHtml(){const i=backupInfo();if(!i.atrasado)return"";return `<div class="bkalert"><div>⚠</div><div><b>Backup pendente</b><br>${i.nunca?"Você já tem dados e ainda não exportou backup.":`Último backup há ${i.dias} dias.`}</div></div>`}
+
+function renderHome(){const app=document.getElementById("app"),totalEx=DIAS.reduce((s,d)=>s+d.exercicios.length,0),done=DIAS.reduce((s,d)=>s+dayDoneCount(d),0),setp=completedSetsToday();app.innerHTML=`<div class="wrap"><div class="header"><div><div class="brand"><b>◉</b> Semana de treino</div><div class="title">Upper / Lower</div><div class="sub">4 dias · registro série por série · RIR real · descanso automático</div></div><div class="weekring"><div class="ringwrap">${ringSVG(done/totalEx,58,5,"#D4A72C","#2A2D33")}<div class="ringnum">${Math.round(done/totalEx*100)}%</div></div><div class="wlabel">${done}/${totalEx} exercícios</div></div></div><div class="days">${DIAS.map(d=>{const n=dayDoneCount(d);return `<button class="day" data-action="open-day" data-day="${d.id}"><span class="bar" style="background:${d.cor}"></span><div class="daytop"><div><div class="dayname">${d.label}</div><div class="focus">${d.foco}</div></div><div class="dayright">${ringSVG(n/d.exercicios.length,34,4,d.cor,"#2A2D33")}<span class="count" style="color:${d.cor};border:1px solid ${d.cor}55">${n}/${d.exercicios.length}</span></div></div></button>`}).join("")}<div class="rest">Quarta, sábado e domingo — recuperação</div></div><div class="summarybox"><div class="tooltitle">Resumo de hoje</div><div class="summarygrid"><div class="metric"><b>${setp.n}</b><span>séries concluídas</span></div><div class="metric"><b>${done}</b><span>exercícios concluídos</span></div><div class="metric"><b>4x</b><span>estrutura semanal</span></div></div></div>${backupAlertHtml()}<div class="tools"><div class="tooltitle">Ferramentas</div><div class="toolsub">${needsReview().length?needsReview().length+" vídeo(s) sugeridos automaticamente ainda não foram conferidos.":"Todos os vídeos foram conferidos."}</div><div class="toolrow"><button class="toolbtn" data-action="open-calc">🧮 Anilhas</button><button class="toolbtn" data-action="open-pending">🎬 Revisar vídeos${needsReview().length?" ("+needsReview().length+")":""}</button></div></div><div class="tools"><div class="tooltitle">Dados do treino</div><div class="toolsub">O backup agora inclui registros série por série, notas, vídeos personalizados e também o histórico antigo.</div><div class="toolrow"><button class="toolbtn" data-action="export-backup">Exportar backup</button><button class="toolbtn" data-action="import-backup">Importar backup</button><input id="import-file" type="file" accept="application/json,.json"></div></div></div>`;animateRings()}
+
+function renderDay(){
+  const app=document.getElementById("app"),d=DIAS.find(x=>x.id===active),date=curDate(),n=dayDoneCount(d,date);
+  const st=detailsState();
+  const ord=orderedIdx(d);
+  const custom=Array.isArray(exOrder[d.id]);
+
+  app.innerHTML=`<div class="wrap">
+    <div class="top">
+      <button class="back" data-action="back">‹ Semana</button>
+      <div class="toprow">
+        <div>
+          <div class="workout-title">${d.label}</div>
+          <div class="focus2" style="color:${d.cor}">${d.foco}</div>
+        </div>
+        <div class="donecount" id="day-progress">${ringSVG(n/d.exercicios.length,30,4,d.cor,"#2A2D33")}<div>${n}/${d.exercicios.length} feitos</div></div>
+      </div>
+      <div class="datebar">
+        <button class="datenav" data-action="date-prev" aria-label="Dia anterior">‹</button>
+        <input type="date" data-action="date-pick" value="${date}" max="${todayISO()}">
+        <button class="datenav" data-action="date-next" aria-label="Próximo dia" ${date>=todayISO()?"disabled":""}>›</button>
+        ${!isToday()?`<button class="todaybtn" data-action="date-today">hoje</button>`:""}
+      </div>
+    </div>
+
+    ${!isToday()?`<div class="pastwarn">Você está editando <b>${fmtDateLong(date)}</b>. Tudo que registrar aqui entra nessa data, não em hoje.</div>`:""}
+
+    <div class="guide"><b>Como usar:</b> registre carga, reps e RIR de cada série. Ao marcar ✓, o descanso do exercício inicia automaticamente. Só considere subir a carga quando o topo da faixa vier com o RIR planejado.${custom?` <button class="todaybtn" data-action="reset-order" style="margin-top:8px">restaurar ordem original</button>`:""}</div>
+
+    <div class="list">${ord.map(i=>exerciseCard(d,d.exercicios[i],i,date)).join("")}</div>
+
+    <div class="daynote"><label>Nota da sessão</label><textarea data-action="day-note" data-day="${d.id}" placeholder="Ex.: dormi mal, máquina ocupada, joelho ótimo, treino muito forte...">${esc(dayNotes[date]?.[d.id]||"")}</textarea></div>
+
+    <button class="clear" data-action="clear-day">Limpar apenas as marcações de ${isToday()?"hoje":fmtDate(date)}</button>
+
+    <button class="timerfab" id="timer-fab" data-action="timer-toggle">⏱ Descanso</button>
+    <div class="timerpanel" id="timer-panel" hidden>
+      <div class="timerhead"><b>Timer de descanso</b><button class="timerclose" data-action="timer-toggle">×</button></div>
+      <div class="timercontext" id="timer-context">Escolha um tempo ou conclua uma série para iniciar automaticamente.</div>
+      <div class="timeropts">${[60,75,90,120,150,180].map(x=>`<button class="timeropt" data-action="timer-start" data-seconds="${x}">${x}s</button>`).join("")}</div>
+      <button class="timerstop" data-action="timer-stop">Parar timer</button>
+    </div>
+  </div>`;
+
+  restoreDetails(st);
+  animateRings();
+  updateTimerUI();
+  requestWakeLock();
+}
+
+function exerciseCard(d,e,i,date){
+  const s=sessionFor(date,d.id,e.nome,e.series),count=setCount(s,e);
+  const done=exerciseDone(date,d.id,e),vid=videoFor(d.id,e),prior=priorSessions(d.id,e),legacy=legacyHistory(d.id,e);
+  const prev=prior[0],rec=recommendation(e,s),points=trendPoints(d.id,e);
+  const k=key(d.id,e.nome);
+  const ord=orderedIdx(d),pos=ord.indexOf(i);
+
+  const previousHtml=prev
+    ?`<div class="prevbox"><b>Última sessão ${fmtDate(prev.date)}</b><br>${esc(sessionSummary(prev))}</div>`
+    :legacy[0]
+      ?`<div class="prevbox legacy"><b>Histórico antigo ${fmtDate(legacy[0].d)}</b><br>${esc(legacy[0].v||"—")}kg${legacy[0].r!=null?` · ${legacy[0].r} reps`:""}</div>`
+      :`<div class="prevbox">Primeira sessão detalhada neste exercício.</div>`;
+
+  const history=[
+    ...prior.slice(0,6).map(x=>`<div class="histitem"><b>${fmtDate(x.date)}</b><br>${esc(sessionSummary(x))}${x.note?`<br>Nota: ${esc(x.note)}`:""}</div>`),
+    ...legacy.slice(0,4).map(h=>`<div class="histitem legacy"><b>${fmtDate(h.d)} · histórico antigo</b><br>${esc(h.v||"—")}kg${h.r!=null?` · ${h.r} reps`:""}</div>`)
+  ].join("");
+
+  const spark=points.length>=2
+    ?`<div class="spark"><div class="sparkhead"><span>Evolução da melhor carga</span><span>${points[0].v} → ${points.at(-1).v}kg</span></div>${sparkSVG(points,d.cor)}<div class="sparkfoot"><span>${fmtDate(points[0].d)}</span><span>${fmtDate(points.at(-1).d)}</span></div></div>`
+    :"";
+
+  const rows=s.sets.slice(0,count).map((x,si)=>`<div class="setrow ${si>=e.series?"bonus":""}">
+    <div class="setlabel">${si>=e.series?"+"+(si-e.series+1):si+1}</div>
+    <input class="field" inputmode="decimal" data-action="set-field" data-day="${d.id}" data-idx="${i}" data-set="${si}" data-field="load" placeholder="kg" value="${esc(x.load)}">
+    <input class="field" inputmode="numeric" data-action="set-field" data-day="${d.id}" data-idx="${i}" data-set="${si}" data-field="reps" placeholder="reps" value="${esc(x.reps)}">
+    <input class="field" inputmode="numeric" data-action="set-field" data-day="${d.id}" data-idx="${i}" data-set="${si}" data-field="rir" placeholder="RIR" value="${esc(x.rir)}">
+    <button class="setdone ${x.done?"on":""}" data-action="toggle-set" data-day="${d.id}" data-idx="${i}" data-set="${si}">${x.done?"✓":"○"}</button>
+  </div>`).join("");
+
+  return `<div class="card ${done?"done":""}" data-card="${d.id}|${i}">
+    <div class="cardhead">
+      <div style="min-width:0">
+        <div class="meta" style="color:${d.cor}">${e.grupo}</div>
+        <div class="exname">${e.nome}${e.ancora?'<span class="anchor">âncora</span>':""}<span class="videobadge ${vid.status==="pending"||vid.status==="unverified"?"pending":"ok"}">${videoLabel(vid.status)}</span></div>
+      </div>
+      <div class="movebox">
+        <button class="movebtn" data-action="move-up" data-day="${d.id}" data-idx="${i}" ${pos<=0?"disabled":""} aria-label="Subir">↑</button>
+        <button class="movebtn" data-action="move-down" data-day="${d.id}" data-idx="${i}" ${pos>=ord.length-1?"disabled":""} aria-label="Descer">↓</button>
+        <button class="checkex ${done?"on":""}" data-action="toggle-ex" data-day="${d.id}" data-idx="${i}">${checkIcon()}</button>
+      </div>
+    </div>
+
+    <div class="sets">${e.series} × ${e.reps} reps · <span class="rir">RIR ${e.rir}</span> · descanso ${Math.round(e.rest/60*10)/10} min</div>
+    ${vid.fonte?`<div class="source">${esc(vid.fonte)}</div>`:""}
+
+    <details class="tech" data-dk="tech|${k}"><summary>Técnica e erros comuns</summary><div class="techbody">
+      <b>Pontos-chave</b><ul>${e.dicas.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+      <b class="mistake">Evite</b><ul>${e.erros.map(x=>`<li class="mistake">${esc(x)}</li>`).join("")}</ul>
+      <div class="videorow">${vid.url
+        ?`<a class="watch" style="color:${d.cor};border-color:${d.cor}" href="${vid.url}" target="_blank" rel="noopener noreferrer">▶ Ver execução</a><button class="editvid" data-action="set-video" data-day="${d.id}" data-idx="${i}">${vid.custom?"editar vídeo":"trocar vídeo"}</button>`
+        :`<span class="novideo">Ainda sem vídeo validado.</span><button class="vidbtn" data-action="set-video" data-day="${d.id}" data-idx="${i}">adicionar link</button>`}</div>
+    </div></details>
+
+    ${previousHtml}
+
+    <div class="sethead"><span>Série</span><span>Carga kg</span><span>Reps</span><span>RIR</span><span>✓</span></div>
+    <div class="settable">${rows}</div>
+
+    <div class="setextra">
+      <button data-action="add-set" data-day="${d.id}" data-idx="${i}">＋ série extra</button>
+      ${s.extra?`<button data-action="remove-set" data-day="${d.id}" data-idx="${i}">− remover extra</button>`:""}
+    </div>
+
+    <div class="autotimer">✓ Concluir série inicia ${e.rest}s de descanso automaticamente.</div>
+
+    <textarea class="note" data-action="ex-note" data-day="${d.id}" data-idx="${i}" placeholder="Observação do exercício: banco posição 4, máquina diferente, desconforto, execução...">${esc(s.note||"")}</textarea>
+
+    ${rec?`<div class="recommend ${rec.cls}">${rec.txt}</div>`:""}
+    ${history||spark?`<details class="hist" data-dk="hist|${k}"><summary>Histórico e evolução</summary>${spark}<div class="histlist">${history}</div></details>`:""}
+  </div>`
+}
+
+function updateCard(dayId,idx){
+  const d=DIAS.find(x=>x.id===dayId);
+  if(!d)return;
+  const el=document.querySelector('.card[data-card="'+dayId+"|"+idx+'"]');
+  if(!el){renderDay();return}
+  const st=detailsState();
+  el.outerHTML=exerciseCard(d,d.exercicios[idx],idx,curDate());
+  restoreDetails(st);
+  updateDayHeader();
+}
+
+function updateDayHeader(){
+  const d=DIAS.find(x=>x.id===active);
+  const box=document.getElementById("day-progress");
+  if(!d||!box)return;
+  const n=dayDoneCount(d,curDate());
+  box.innerHTML=`${ringSVG(n/d.exercicios.length,30,4,d.cor,"#2A2D33")}<div>${n}/${d.exercicios.length} feitos</div>`;
+  animateRings();
+}
+
+function render(){if(active==="__videos")renderPending();else if(active)renderDay();else renderHome()}
+
+function setField(dayId,idx,setIdx,field,val){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.nome,e.series);val=String(val).trim().replace(",",".");if(val!==""&&!Number.isFinite(Number(val)))return;s.sets[setIdx][field]=val;save()}
+function toggleSet(dayId,idx,setIdx){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.nome,e.series),x=s.sets[setIdx];x.done=!x.done;vibrate(x.done?[30,40]:15);save();if(x.done&&isToday())startTimer(e.rest,e.nome);updateCard(dayId,idx)}
+function toggleExercise(dayId,idx){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.nome,e.series),c=setCount(s,e),newState=!s.sets.slice(0,c).every(x=>x.done);s.sets.slice(0,c).forEach(x=>x.done=newState);vibrate([30,40]);save();updateCard(dayId,idx)}
+function setExNote(dayId,idx,val){const d=DIAS.find(x=>x.id===dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.nome,e.series);s.note=val;save()}
+function setDayNote(dayId,val){const date=curDate();if(!dayNotes[date])dayNotes[date]={};dayNotes[date][dayId]=val;save()}
+function setVideo(id,i){const ex=DIAS.find(x=>x.id===id).exercicios[i],k=key(id,ex.nome),current=customVideos[k]?.url||ex.video||"";const raw=prompt(ex.nome+"\n\nCole o link do vídeo de execução. Deixe vazio para voltar ao vídeo padrão/remover.",current);if(raw===null)return;const url=raw.trim();if(!url){delete customVideos[k];save();render();return}if(!isValidUrl(url)){alert("Link inválido. Use https://");return}const fonte=(prompt("Nome do canal ou referência (opcional):",customVideos[k]?.fonte||"")||"").trim();customVideos[k]={url,fonte};save();render()}
+function clearDay(){const date=curDate();if(!confirm("Limpar apenas as marcações ✓ de "+(date===todayISO()?"hoje":fmtDate(date))+"? Carga, reps, RIR e notas serão mantidos."))return;const d=DIAS.find(x=>x.id===active);d.exercicios.forEach(e=>{const s=getSession(date,d.id,e.nome);if(s)s.sets.forEach(x=>x.done=false)});save();renderDay()}
+
+let timerEnd=0,timerInterval=null,timerLabel="";
+function persistTimer(){
+  try{
+    if(timerEnd)localStorage.setItem("treino-timer-ul",JSON.stringify({end:timerEnd,label:timerLabel}));
+    else localStorage.removeItem("treino-timer-ul");
+  }catch(e){}
+}
+// o iOS congela o app em segundo plano: retoma o descanso pelo horario-alvo salvo
+function restoreTimer(){
+  try{
+    const raw=localStorage.getItem("treino-timer-ul");
+    if(!raw){timerEnd=0;updateTimerUI();return}
+    const t=JSON.parse(raw);
+    if(!t||!t.end||t.end<=Date.now()){localStorage.removeItem("treino-timer-ul");timerEnd=0;updateTimerUI();return}
+    timerEnd=t.end;timerLabel=t.label||"";
+    if(timerInterval)clearInterval(timerInterval);
+    timerInterval=setInterval(updateTimerUI,250);
+    updateTimerUI();
+  }catch(e){}
+}
+function formatTimer(sec){sec=Math.max(0,sec);return String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")}
+function startTimer(seconds,label=""){timerEnd=Date.now()+seconds*1000;timerLabel=label;persistTimer();if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(updateTimerUI,250);const p=document.getElementById("timer-panel");if(p)p.hidden=true;updateTimerUI()}
+function stopTimer(){if(timerInterval)clearInterval(timerInterval);timerInterval=null;timerEnd=0;timerLabel="";persistTimer();updateTimerUI()}
+function updateTimerUI(){const fab=document.getElementById("timer-fab"),ctx=document.getElementById("timer-context");if(!fab)return;if(!timerEnd){fab.textContent="⏱ Descanso";fab.classList.remove("running");return}const left=Math.max(0,Math.ceil((timerEnd-Date.now())/1000));fab.textContent="⏱ "+formatTimer(left);fab.classList.add("running");if(ctx&&timerLabel)ctx.textContent=timerLabel+" · descanso em andamento";if(left<=0){clearInterval(timerInterval);timerInterval=null;timerEnd=0;timerLabel="";persistTimer();fab.textContent="✓ Descanso";fab.classList.remove("running");vibrate([200,100,200,100,300]);setTimeout(updateTimerUI,1800)}}
+function toggleTimerPanel(){const p=document.getElementById("timer-panel");if(p)p.hidden=!p.hidden}
+
+const ANILHAS=[25,20,15,10,5,2.5,1.25];
+function openPlateCalculator(){
+  vibrate(15);
+  document.getElementById("modal-root").innerHTML=`<div class="modal-overlay" data-action="close-calc"><div class="modal" data-stop="1">
+    <div class="modal-title"><span>Calculadora de anilhas</span><button class="modal-close" data-action="close-calc">×</button></div>
+    <div class="modal-field"><label>Peso total desejado (barra + anilhas, kg)</label><input type="number" id="calc-total" class="modal-input" placeholder="Ex: 80" inputmode="decimal" step="0.5"></div>
+    <div class="modal-field"><label>Peso da barra (kg)</label><input type="number" id="calc-bar" class="modal-input" value="20" inputmode="decimal" step="0.5"></div>
+    <button class="toolbtn" style="width:100%" data-action="calc-plates">Calcular por lado</button>
+    <div id="calc-output"></div>
+  </div></div>`;
+  const t=document.getElementById("calc-total");if(t)t.focus();
+}
+function closePlateCalculator(){const r=document.getElementById("modal-root");if(r)r.innerHTML=""}
+function computePlates(){
+  const out=document.getElementById("calc-output");if(!out)return;
+  const total=parseFloat(String(document.getElementById("calc-total").value).replace(",","."));
+  const bar=parseFloat(String(document.getElementById("calc-bar").value).replace(",","."))||0;
+  if(!Number.isFinite(total)){out.innerHTML=`<div class="plate-result err">Informe o peso total.</div>`;return}
+  if(total<bar){out.innerHTML=`<div class="plate-result err">O peso total não pode ser menor que a barra.</div>`;return}
+  if(total===bar){out.innerHTML=`<div class="plate-result">Só a barra — sem anilhas.</div>`;return}
+  let rem=Math.round(((total-bar)/2)*100)/100;
+  const usadas=[];
+  for(const pl of ANILHAS){const c=Math.floor(rem/pl);if(c>0){usadas.push(c+"× "+pl+"kg");rem=Math.round((rem-c*pl)*100)/100}}
+  const sobra=rem>0?`<br><small>Faltam ${rem}kg por lado — o mais próximo montável é ${total-rem*2}kg.</small>`:"";
+  out.innerHTML=`<div class="plate-result"><b>Por lado da barra:</b><br>${usadas.length?usadas.join("<br>"):"—"}${sobra}</div>`;
+  vibrate(15);
+}
+
+// ---- tela de videos pendentes ----
+function pendingVideos(){return needsReview()}
+function renderPending(){
+  const app=document.getElementById("app");
+  const todos=[];
+  DIAS.forEach(d=>d.exercicios.forEach((e,i)=>todos.push({d,e,i,v:videoFor(d.id,e)})));
+  const rever=todos.filter(x=>x.v.status==="unverified"||x.v.status==="pending");
+  const ok=todos.filter(x=>x.v.status==="confirmed"||x.v.status==="custom");
+  const ref=todos.filter(x=>x.v.status==="reference");
+
+  const card=({d,e,i,v})=>`<div class="vidcard">
+    <div class="vday" style="color:${d.cor}">${d.label} · ${d.foco}</div>
+    <div class="vname">${esc(e.nome)}<span class="videobadge ${v.status==="pending"||v.status==="unverified"?"pending":"ok"}">${videoLabel(v.status)}</span></div>
+    <div class="vgrp">${e.grupo} · ${e.series} × ${e.reps} · RIR ${e.rir}</div>
+    ${v.fonte?`<div class="vsrc">${esc(v.fonte)}</div>`:""}
+    <div class="vidactions">
+      ${v.url?`<a href="${v.url}" target="_blank" rel="noopener noreferrer">▶ abrir</a>`:""}
+      <a class="searchlink" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e.nome+" execução")}" target="_blank" rel="noopener noreferrer">buscar</a>
+      <button data-action="set-video" data-day="${d.id}" data-idx="${i}">${v.url?"trocar":"colar link"}</button>
+    </div>
+    ${v.url&&v.status!=="custom"
+      ? v.status==="confirmed"
+        ? `<button class="vidconfirm done" data-action="unconfirm-video" data-day="${d.id}" data-idx="${i}">✓ conferido — desmarcar</button>`
+        : `<button class="vidconfirm" data-action="confirm-video" data-day="${d.id}" data-idx="${i}">marcar como conferido</button>`
+      :""}
+  </div>`;
+
+  app.innerHTML=`<div class="wrap">
+    <div class="top">
+      <button class="back" data-action="back">‹ Semana</button>
+      <div class="toprow"><div>
+        <div class="workout-title">Revisar vídeos</div>
+        <div class="focus2" style="color:#D4A72C">${rever.length} para conferir · ${ok.length+ref.length} prontos</div>
+      </div></div>
+    </div>
+
+    <div class="guide"><b>Por que esta tela existe:</b> os links marcados como "conferir" foram sugeridos automaticamente e ninguém validou se o vídeo é do exercício certo. Abra, veja se bate com o movimento e o equipamento da sua academia, e então marque como conferido — ou cole outro link.</div>
+
+    ${rever.length?`<div class="vsection">Para conferir (${rever.length})</div><div class="vidlist">${rever.map(card).join("")}</div>`:`<div class="vidempty">Nada pendente de conferência.</div>`}
+    ${ref.length?`<div class="vsection">Referências já em uso (${ref.length})</div><div class="vidlist">${ref.map(card).join("")}</div>`:""}
+    ${ok.length?`<div class="vsection">Conferidos e personalizados (${ok.length})</div><div class="vidlist">${ok.map(card).join("")}</div>`:""}
+  </div>`;
+}
+
+function exportBackup(){const payload={app:"Upper/Lower",version:6,exportedAt:new Date().toISOString(),sessions,dayNotes,customVideos,legacyLoads,legacyDone,exOrder,videoOk};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="upper-lower-v2-backup-"+todayISO()+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);localStorage.setItem("treino-ul-ultimo-backup",new Date().toISOString())}
+function chooseBackup(){document.getElementById("import-file")?.click()}
+async function importBackupFile(file){if(!file)return;try{const data=JSON.parse(await file.text());if(!data||typeof data!=="object")throw new Error();if(!confirm("Restaurar este backup? Os dados atuais serão substituídos."))return;if(data.version>=5){sessions=data.sessions||{};dayNotes=data.dayNotes||{};customVideos=data.customVideos||{};legacyLoads=data.legacyLoads||{};legacyDone=data.legacyDone||{};exOrder=data.exOrder||{};videoOk=data.videoOk||{}}else{legacyLoads=data.loads||legacyLoads;legacyDone=data.doneWeeks||legacyDone;customVideos=data.customVideos||customVideos}savingLegacy();save();alert("Backup restaurado.");render()}catch{alert("Backup inválido ou incompatível.")}}
+function savingLegacy(){localStorage.setItem("treino-cargas-ul-v1",JSON.stringify(legacyLoads));localStorage.setItem("treino-feitos-ul-v1",JSON.stringify(legacyDone))}
+
+document.addEventListener("click",ev=>{
+  const ov=ev.target.closest(".modal-overlay");
+  if(ov&&!ev.target.closest("[data-stop]")){closePlateCalculator();return}
+  const el=ev.target.closest("[data-action]");
+  if(!el||el.disabled)return;
+  const a=el.dataset.action;
+  if(a==="open-day"){active=el.dataset.day;viewDate=todayISO();render()}
+  else if(a==="back"){releaseWakeLock();active=null;viewDate=null;render()}
+  else if(a==="open-pending"){active="__videos";render()}
+  else if(a==="toggle-set")toggleSet(el.dataset.day,Number(el.dataset.idx),Number(el.dataset.set));
+  else if(a==="toggle-ex")toggleExercise(el.dataset.day,Number(el.dataset.idx));
+  else if(a==="add-set")addSet(el.dataset.day,Number(el.dataset.idx));
+  else if(a==="remove-set")removeSet(el.dataset.day,Number(el.dataset.idx));
+  else if(a==="move-up")moveExercise(el.dataset.day,Number(el.dataset.idx),-1);
+  else if(a==="move-down")moveExercise(el.dataset.day,Number(el.dataset.idx),1);
+  else if(a==="reset-order")resetOrder();
+  else if(a==="date-prev")shiftDate(-1);
+  else if(a==="date-next")shiftDate(1);
+  else if(a==="date-today"){viewDate=todayISO();renderDay()}
+  else if(a==="set-video")setVideo(el.dataset.day,Number(el.dataset.idx));
+  else if(a==="confirm-video")confirmVideo(el.dataset.day,Number(el.dataset.idx));
+  else if(a==="unconfirm-video")unconfirmVideo(el.dataset.day,Number(el.dataset.idx));
+  else if(a==="clear-day")clearDay();
+  else if(a==="timer-toggle")toggleTimerPanel();
+  else if(a==="timer-start")startTimer(Number(el.dataset.seconds));
+  else if(a==="timer-stop")stopTimer();
+  else if(a==="open-calc")openPlateCalculator();
+  else if(a==="close-calc")closePlateCalculator();
+  else if(a==="calc-plates")computePlates();
+  else if(a==="export-backup")exportBackup();
+  else if(a==="import-backup")chooseBackup();
+});
+document.addEventListener("input",ev=>{
+  const el=ev.target;
+  if(el.dataset.action==="ex-note")setExNote(el.dataset.day,Number(el.dataset.idx),el.value);
+  else if(el.dataset.action==="day-note")setDayNote(el.dataset.day,el.value);
+});
+// carga/reps/RIR salvam ao sair do campo, para nao gravar valores parciais
+document.addEventListener("change",ev=>{
+  const el=ev.target;
+  if(el.dataset.action==="set-field"){setField(el.dataset.day,Number(el.dataset.idx),Number(el.dataset.set),el.dataset.field,el.value);updateCard(el.dataset.day,Number(el.dataset.idx))}
+  else if(el.dataset.action==="date-pick")setDate(el.value);
+});
+document.addEventListener("focusout",ev=>{
+  const el=ev.target;
+  if(el.dataset&&el.dataset.action==="set-field")setField(el.dataset.day,Number(el.dataset.idx),Number(el.dataset.set),el.dataset.field,el.value);
+});
+document.addEventListener("change",ev=>{if(ev.target?.id==="import-file"){importBackupFile(ev.target.files?.[0]);ev.target.value=""}});
+// Versão de arquivo único: sem service worker (ele exige um arquivo .js separado).
+// O app continua funcionando instalado na tela de início; o cache normal do
+// navegador cobre a maior parte do uso offline.
+render();restoreTimer();
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(err => {
+      console.warn("Service worker não registrado:", err);
+    });
+  });
+}
+</script>
+
+</body>
+</html>
