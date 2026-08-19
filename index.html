@@ -3248,7 +3248,7 @@ function renderPending(){
 
   app.innerHTML=`<div class="wrap">
     <div class="top">
-      <button class="back" data-action="back" aria-label="Voltar">← <span>Voltar</span></button>
+      <button class="back" id="videos-back" type="button" aria-label="Voltar">← <span>Voltar</span></button>
       <div class="toprow"><div>
         <div class="workout-title">Revisar vídeos</div>
         <div class="focus2" style="color:#D4A72C">${rever.length} para conferir · ${ok.length} prontos</div>
@@ -3260,6 +3260,23 @@ function renderPending(){
     ${rever.length?`<div class="vsection">Para conferir (${rever.length})</div><div class="vidlist">${rever.map(card).join("")}</div>`:`<div class="vidempty">Nada pendente de conferência.</div>`}
     ${ok.length?`<div class="vsection">Conferidos e personalizados (${ok.length})</div><div class="vidlist">${ok.map(card).join("")}</div>`:""}
   </div>`;
+
+  // Botão desta tela usa listener direto para não depender da delegação global.
+  // Isso evita o caso observado no iPhone/PWA em que o botão aparecia mas o toque
+  // não retornava à lista de treinos.
+  const backBtn=document.getElementById("videos-back");
+  if(backBtn){
+    backBtn.addEventListener("click",ev=>{
+      ev.preventDefault();
+      ev.stopPropagation();
+      releaseWakeLock();
+      active=null;
+      viewDate=null;
+      mainView="workouts";
+      renderWorkouts();
+      saveV2();
+    },{once:true});
+  }
 }
 
 
