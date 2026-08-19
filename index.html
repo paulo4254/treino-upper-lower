@@ -313,7 +313,7 @@ button{min-height:44px}
 
 /* Workout screen: one-hand friendly and visually closer to native fitness apps */
 .top{padding:calc(12px + env(safe-area-inset-top)) 16px 12px;background:rgba(15,17,21,.88);border-bottom-color:rgba(255,255,255,.055);backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%)}
-.back{min-height:34px;margin-bottom:6px;padding:0 4px 0 0;color:#A7ABB2}
+.back{min-height:44px;margin-bottom:10px;padding:0 14px;display:inline-flex;align-items:center;gap:7px;border:1px solid #30363E;border-radius:13px;background:#1A1E24;color:#F4F5F7;font-size:14px;font-weight:750;line-height:1;box-shadow:0 1px 0 rgba(255,255,255,.03) inset;transition:transform .12s ease,background .12s ease,border-color .12s ease}.back:active{transform:scale(.97);background:#22272E;border-color:#3B424C}.back span{display:inline-block}
 .workout-title{font-size:27px;letter-spacing:-.75px}.focus2{font-size:12px}
 .list{padding:12px 14px 42px;gap:11px;max-width:760px;margin:0 auto}
 .card{border-radius:18px;padding:16px}.card.done{border-color:rgba(99,196,126,.42);background:linear-gradient(180deg,#1B2420,var(--surface))}
@@ -2759,7 +2759,7 @@ function renderProgramEdit(){
   if(!p){mainView="programs";return render()}
   document.getElementById("app").innerHTML=wrapV2(`
     <div class="top">
-      <button class="back" data-action="prog-back">‹ Programas</button>
+      <button class="back" data-action="prog-back" aria-label="Voltar">← <span>Voltar</span></button>
       <div class="toprow">
         <div style="min-width:0">
           <div class="workout-title">${esc(p.name)}</div>
@@ -2804,7 +2804,7 @@ function renderProgramDay(){
   if(!d){mainView="programs";editingDayId=null;return render()}
   document.getElementById("app").innerHTML=wrapV2(`
     <div class="top">
-      <button class="back" data-action="day-back">‹ ${esc(p.name)}</button>
+      <button class="back" data-action="day-back" aria-label="Voltar">← <span>Voltar</span></button>
       <div class="toprow">
         <div style="min-width:0">
           <div class="workout-title">${esc(d.label)}</div>
@@ -2868,7 +2868,7 @@ function renderLibrary(){
   const atual=atualId?exerciseLibrary[atualId]:null;
   document.getElementById("app").innerHTML=wrapV2(`
     <div class="top">
-      <button class="back" data-action="lib-back">‹ Voltar</button>
+      <button class="back" data-action="lib-back" aria-label="Voltar">← <span>Voltar</span></button>
       <div class="toprow"><div style="min-width:0"><div class="workout-title">${trocando?"Trocar exercício":(adicionando?"Escolher exercício":"Biblioteca")}</div><div class="focus2" style="color:#D4A72C">${lista.length} opções</div></div></div>
     </div>
     <main class="v2page pro-library-page">
@@ -2898,7 +2898,7 @@ function renderLibrary(){
 function renderGym(){
   const g=activeGym();
   document.getElementById("app").innerHTML=wrapV2(`
-    <div class="top"><button class="back" data-action="gym-back">‹ Programas</button><div class="toprow"><div><div class="workout-title">Minha academia</div><div class="focus2" style="color:#D4A72C">equipamentos disponíveis</div></div></div></div>
+    <div class="top"><button class="back" data-action="gym-back" aria-label="Voltar">← <span>Voltar</span></button><div class="toprow"><div><div class="workout-title">Minha academia</div><div class="focus2" style="color:#D4A72C">equipamentos disponíveis</div></div></div></div>
     <main class="v2page">
       <div class="v2card">
         <label class="fieldlabel">Nome</label>
@@ -2974,7 +2974,7 @@ function renderDay(){
 
   app.innerHTML=`<div class="wrap">
     <div class="top">
-      <button class="back" data-action="back">‹ Semana</button>
+      <button class="back" data-action="back" aria-label="Voltar">← <span>Voltar</span></button>
       <div class="toprow">
         <div>
           <div class="workout-title">${d.label}</div>
@@ -3248,7 +3248,7 @@ function renderPending(){
 
   app.innerHTML=`<div class="wrap">
     <div class="top">
-      <button class="back" data-action="back">‹ Semana</button>
+      <button class="back" data-action="back" aria-label="Voltar">← <span>Voltar</span></button>
       <div class="toprow"><div>
         <div class="workout-title">Revisar vídeos</div>
         <div class="focus2" style="color:#D4A72C">${rever.length} para conferir · ${ok.length} prontos</div>
