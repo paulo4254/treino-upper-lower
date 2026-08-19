@@ -452,7 +452,7 @@ const DIAS=[
 ];
 
 // Versão exibida no Perfil. Ao relatar um problema, é o que identifica o build.
-const APP_VERSION="4.5";
+const APP_VERSION="4.8";
 const APP_BUILD="2026-08-19";
 
 function safeGet(k,f){try{const x=localStorage.getItem(k);return x?JSON.parse(x):f}catch{return f}}
@@ -481,6 +481,13 @@ let mainView=localStorage.getItem("ul-v2-main-view")||"dashboard";
 // Modo degradado: o armazenamento não pôde ser aberto (navegação privada no
 // Safari, cota esgotada, ou o iOS tendo limpado o site). O app continua
 // utilizável, mas NADA é salvo — e isso precisa ficar visível na tela.
+// Referência do wake lock (tela acesa durante o treino). Nunca foi declarada:
+// releaseWakeLock() lançava ReferenceError ao tocar em "voltar".
+// De qual tela o treino foi aberto. Sem isso, "voltar" mandava sempre para a
+// aba Treino: quem abria o dia pelo painel ou pelo calendário era jogado em
+// outro lugar e tinha de navegar de volta na mão.
+let dayOrigin=null;
+let wakeLock=null;
 let storageUnavailable=false;
 let storageError="";
 let profile={name:"",goal:"Hipertrofia",weeklyTarget:4,height:"",useRir:false};
@@ -1382,9 +1389,36 @@ async function saveV2(){
     storageHealth={ok:false,lastError:String(err?.message||err),lastWriteAt:storageHealth.lastWriteAt};
   }
 }
+/**
+ * Mantém a tela acesa durante o treino.
+ *
+ * A função era CHAMADA em dois lugares e nunca existiu: lançava
+ * ReferenceError no fim de renderDay e — pior — dentro do visibilitychange,
+ * antes de restoreTimer(). Efeito prático: ao voltar para o app com um treino
+ * aberto, o timer de descanso não era restaurado.
+ *
+ * A API tem suporte irregular (o Safari só ganhou wake lock em versões
+ * recentes), então toda falha é silenciosa: não conseguir manter a tela acesa
+ * é um incômodo, não um motivo para quebrar o treino.
+ */
+async function requestWakeLock(){
+  try{
+    if(!navigator.wakeLock?.request)return null;
+    if(wakeLock)return wakeLock;
+    wakeLock=await navigator.wakeLock.request("screen");
+    // O sistema pode soltar sozinho ao trocar de app; limpamos a referência
+    // para que a próxima tentativa peça de novo em vez de achar que já tem.
+    wakeLock.addEventListener?.("release",()=>{wakeLock=null});
+    return wakeLock;
+  }catch(e){wakeLock=null;return null}
+}
 function releaseWakeLock(){if(wakeLock){try{wakeLock.release()}catch(e){}wakeLock=null}}
 document.addEventListener("visibilitychange",()=>{
-  if(document.visibilityState==="visible"){if(active&&active!=="__videos")requestWakeLock();restoreTimer();}
+  if(document.visibilityState!=="visible")return;
+  // restoreTimer PRIMEIRO: é o que o usuário percebe. Se o wake lock falhar,
+  // o descanso não pode ser perdido junto.
+  try{restoreTimer()}catch(e){console.error(e)}
+  if(active&&active!=="__videos"){try{requestWakeLock()}catch(e){}}
 });
 
 function vibrate(p){if(navigator.vibrate){try{navigator.vibrate(p)}catch(e){}}}
@@ -3429,7 +3463,7 @@ document.addEventListener("click",ev=>{
   else if(a==="checkin"){const date=todayISO(),c=checkins[date]||{id:"checkin:"+date,schemaVersion:2,date,energy:0,sleep:0,motivation:0,createdAt:nowISO(),updatedAt:nowISO(),deletedAt:null};c[el.dataset.field]=Number(el.dataset.value);c.updatedAt=nowISO();checkins[date]=c;if(ULDB.db)ULDB.put("checkins",c).catch(err=>{storageHealth={ok:false,lastError:String(err?.message||err),lastWriteAt:storageHealth.lastWriteAt}});saveV2();renderDashboard()}
   else if(a==="cal-prev"){calCursor=new Date(calCursor.getFullYear(),calCursor.getMonth()-1,1);renderCalendar()}
   else if(a==="cal-next"){calCursor=new Date(calCursor.getFullYear(),calCursor.getMonth()+1,1);renderCalendar()}
-  else if(a==="calendar-open"){active=el.dataset.day;viewDate=el.dataset.date;mainView="calendar";renderDay()}
+  else if(a==="calendar-open"){dayOrigin="calendar";active=el.dataset.day;viewDate=el.dataset.date;mainView="calendar";renderDay()}
   else if(a==="metric"){progressMetric=el.dataset.metric;renderProgress()}
   else if(a==="integrity-check"){showIntegrityCheck()}
   else if(a==="migration-report"){showMigrationReport()}
@@ -3452,8 +3486,17 @@ document.addEventListener("click",ev=>{
     for(const [label,v] of numeric){if(v!==""&&!Number.isFinite(Number(v))){alert(label+" inválido.");return}if(v!==""&&Number(v)<=0){alert(label+" deve ser maior que zero.");return}}
     bodyLog=bodyLog.filter(x=>x.date!==entry.date);bodyLog.push(entry);bodyLog.sort((a,b)=>a.date>b.date?1:-1);if(ULDB.db)ULDB.put("bodyEntries",entry).catch(err=>{storageHealth={ok:false,lastError:String(err?.message||err),lastWriteAt:storageHealth.lastWriteAt}});saveV2();vibrate(25);renderProfile();
   }
-  else if(a==="open-day"){active=el.dataset.day;viewDate=todayISO();mainView="workouts";saveV2();render()}
-  else if(a==="back"){releaseWakeLock();active=null;viewDate=null;if(mainView!=="workouts")mainView="workouts";saveV2();render()}
+  else if(a==="open-day"){dayOrigin=mainView;active=el.dataset.day;viewDate=todayISO();mainView="workouts";saveV2();render()}
+  else if(a==="back"){
+    releaseWakeLock();
+    active=null;viewDate=null;
+    // Volta para a tela de onde o treino foi aberto. Antes ia sempre para
+    // "workouts", então quem entrava pelo painel ou pelo calendário era
+    // despejado noutra aba e precisava navegar de volta na mão.
+    mainView=dayOrigin&&dayOrigin!=="workouts"?dayOrigin:"workouts";
+    dayOrigin=null;
+    saveV2();render();
+  }
   else if(a==="open-pending"){active="__videos";render()}
   else if(a==="toggle-set")toggleSet(el.dataset.day,Number(el.dataset.idx),Number(el.dataset.set));
   else if(a==="toggle-ex")toggleExercise(el.dataset.day,Number(el.dataset.idx));
@@ -3463,7 +3506,7 @@ document.addEventListener("click",ev=>{
   else if(a==="next-incomplete"){if(!focusWorkoutTarget(el.dataset.day))document.getElementById("workout-finish-slot")?.scrollIntoView({behavior:"smooth",block:"center"})}
   else if(a==="expand-done"){workoutExpandedDoneCards.add(el.dataset.key);updateCard(el.dataset.day,Number(el.dataset.idx))}
   else if(a==="collapse-done"){workoutExpandedDoneCards.delete(el.dataset.key);updateCard(el.dataset.day,Number(el.dataset.idx))}
-  else if(a==="finish-workout"){releaseWakeLock();active=null;viewDate=null;mainView="workouts";saveV2();render()}
+  else if(a==="finish-workout"){releaseWakeLock();active=null;viewDate=null;mainView=dayOrigin&&dayOrigin!=="workouts"?dayOrigin:"workouts";dayOrigin=null;saveV2();render()}
   else if(a==="add-set")addSet(el.dataset.day,Number(el.dataset.idx));
   else if(a==="remove-set")removeSet(el.dataset.day,Number(el.dataset.idx));
   else if(a==="move-up")moveExercise(el.dataset.day,Number(el.dataset.idx),-1);
