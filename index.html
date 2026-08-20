@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#14161A">
-<title>Treino 3.0</title>
+<title>Treino 5.7</title>
 <!-- Arquivo único, autossuficiente. Basta hospedar este .html. -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -400,6 +400,28 @@ button{min-height:44px}
    isso vem no topo, em vermelho, e não é dispensável por toque. */
 .storagewarn{margin:0 0 14px;padding:12px 13px;border-radius:14px;background:#E0554C14;border:1px solid #E0554C55;color:#E8A79E;font-size:11.5px;line-height:1.5}
 .storagewarn b{color:#F5C7C0}
+.errline{padding:8px 9px;margin-bottom:6px;border-radius:9px;background:#E0554C0D;border:1px solid #E0554C33;font-size:10.5px;line-height:1.45;color:#D9A79E}
+.errline b{color:#F0C4BB}
+.errwhere{color:#8A8E95;font-size:9.5px;margin-top:3px;word-break:break-all}
+
+/* ===== Correção: o botão de descanso cobria a bolinha ✓ =====
+ *
+ * Encontrado no uso real, na academia. O botão flutuante ficava fixo no canto
+ * INFERIOR DIREITO — exatamente sobre a coluna "FEITA" das séries. Ao tocar no
+ * círculo, o toque caía no botão do cronômetro e a série nunca era marcada.
+ *
+ * Nenhum dos testes automatizados pegava isso: todos chamam o handler
+ * diretamente, sem passar pelo teste de acerto do toque na tela real.
+ *
+ * Solução: move para a ESQUERDA, onde só existe o número da série (não
+ * interativo), e reserva espaço no fim da lista para nada ficar sob ele. */
+.timerfab{right:auto;left:16px}
+.timerpanel{right:auto;left:16px}
+/* respiro no fim do conteúdo do treino, para a última série nunca ficar
+   embaixo do botão mesmo com a rolagem no limite */
+.wrap{padding-bottom:calc(120px + env(safe-area-inset-bottom))}
+.tapbox{margin:8px 0;padding:9px 10px;border-radius:10px;background:#43C7C50D;border:1px solid #43C7C540;color:#8FE3E0;font-size:10.5px;line-height:1.5;font-family:ui-monospace,monospace}
+.tapbox b{display:block;color:#B8F0EE;margin-bottom:4px;font-size:10px;letter-spacing:.4px}
 
 </style>
 </head>
@@ -415,45 +437,45 @@ button{min-height:44px}
  */
 const DIAS=[
 {id:"segunda",label:"Segunda",foco:"Upper A · Peito",cor:"#E8542A",exercicios:[
-{nome:"Supino inclinado na máquina",exerciseId:"incline_machine_press",series:3,reps:"6-10",rest:180,grupo:"Peito",equipamento:"Máquina",loadType:"per_side_total",video:"https://www.youtube.com/watch?v=Ao2lm6GBUro",fonte:"Supino inclinado na máquina · referência de execução",videoStatus:"reference",ancora:true,dicas:["Ajuste o banco para a pegada chegar ao peitoral superior sem desconforto.","Mantenha escápulas apoiadas e tronco estável.","Controle a descida e use amplitude confortável."],erros:["Banco alto demais, levando esforço ao ombro.","Perder contato com o encosto.","Encurtar a amplitude por excesso de carga."]},
-{nome:"Voador",exerciseId:"pec_deck_fly",series:3,reps:"10-15",rest:120,grupo:"Peito",equipamento:"Máquina",loadType:"stack",video:"https://youtu.be/Pf9sMLw_1Ag",fonte:"Treino Mestre · Voador / Peck Deck",videoStatus:"reference",dicas:["Ajuste o banco para os braços ficarem alinhados com o peito.","Mantenha o tronco apoiado e faça o movimento pelo peitoral.","Controle a abertura sem forçar o ombro."],erros:["Usar impulso.","Deixar os ombros avançarem no final.","Fechar demais os braços perdendo tensão."]},
-{nome:"Remada apoiada",exerciseId:"chest_supported_row",series:3,reps:"8-12",rest:120,grupo:"Costas",equipamento:"Máquina",loadType:"per_side_total",video:"https://youtu.be/0UBRfiO4zDs",fonte:"Chest Supported Row",videoStatus:"reference",dicas:["Mantenha o peito no apoio durante toda a série.","Puxe os cotovelos numa trajetória repetível.","Controle a volta."],erros:["Tirar o peito do apoio para roubar.","Transformar o movimento em encolhimento.","Soltar a carga na volta."]},
-{nome:"Puxada alta aberta",exerciseId:"wide_grip_lat_pulldown",series:3,reps:"8-12",rest:120,grupo:"Costas",equipamento:"Polia",loadType:"stack",video:"https://youtu.be/BOW9my4J_ek",fonte:"Treino Mestre · Puxada alta aberta",videoStatus:"reference",dicas:["Mantenha o tronco estável.","Puxe a barra em direção à parte alta do peito.","Controle o alongamento na volta."],erros:["Balançar o tronco.","Puxar atrás da cabeça.","Encurtar a amplitude para usar mais carga."]},
-{nome:"Elevação lateral",exerciseId:"dumbbell_lateral_raise",series:3,reps:"12-20",rest:90,grupo:"Ombro",equipamento:"Halteres",loadType:"per_dumbbell",video:"https://youtu.be/c7zMmbWkUPw",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Use carga que permita trajetória limpa.","Eleve os braços sem impulso do tronco.","Controle a descida."],erros:["Encolher o trapézio para mover a carga.","Balançar o corpo.","Acelerar demais a fase excêntrica."]},
-{nome:"Rosca Scott",exerciseId:"preacher_curl",series:2,reps:"8-12",rest:90,grupo:"Bíceps",equipamento:"Máquina/Barra",loadType:"total",video:"https://youtu.be/zpTK6eihdSA",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Mantenha o braço apoiado.","Controle especialmente a descida.","Use amplitude confortável para o cotovelo."],erros:["Levantar o braço do banco.","Soltar a carga na descida.","Exagerar na carga e perder amplitude."]},
-{nome:"Tríceps na corda",exerciseId:"rope_triceps_pushdown",series:2,reps:"10-15",rest:90,grupo:"Tríceps",equipamento:"Polia",loadType:"stack",video:"https://youtu.be/btj6dDfAQ2w",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Mantenha cotovelos próximos ao corpo.","Estenda sem balançar o tronco.","Controle a volta."],erros:["Mover ombro e cotovelo juntos.","Inclinar demais o corpo.","Usar impulso."]}
+{nome:"Supino inclinado na máquina",exerciseId:"incline_machine_press",series:3,reps:"6-10",rest:180,grupo:"Peito",equipamento:"Máquina",loadType:"per_side_total",video:"https://www.youtube.com/watch?v=s20MPQbKIHQ",fonte:"Supino inclinado na máquina · referência de execução",videoStatus:"reference",ancora:true,dicas:["Ajuste o banco para a pegada chegar ao peitoral superior sem desconforto.","Mantenha escápulas apoiadas e tronco estável.","Controle a descida e use amplitude confortável."],erros:["Banco alto demais, levando esforço ao ombro.","Perder contato com o encosto.","Encurtar a amplitude por excesso de carga."]},
+{nome:"Voador",exerciseId:"pec_deck_fly",series:3,reps:"10-15",rest:120,grupo:"Peito",equipamento:"Máquina",loadType:"stack",video:"https://www.youtube.com/watch?v=fvIAmcLpDr8",fonte:"Treino Mestre · Voador / Peck Deck",videoStatus:"reference",dicas:["Ajuste o banco para os braços ficarem alinhados com o peito.","Mantenha o tronco apoiado e faça o movimento pelo peitoral.","Controle a abertura sem forçar o ombro."],erros:["Usar impulso.","Deixar os ombros avançarem no final.","Fechar demais os braços perdendo tensão."]},
+{nome:"Remada apoiada",exerciseId:"chest_supported_row",series:3,reps:"8-12",rest:120,grupo:"Costas",equipamento:"Máquina",loadType:"per_side_total",video:"https://www.youtube.com/watch?v=CvSunh39wzQ",fonte:"Chest Supported Row",videoStatus:"reference",dicas:["Mantenha o peito no apoio durante toda a série.","Puxe os cotovelos numa trajetória repetível.","Controle a volta."],erros:["Tirar o peito do apoio para roubar.","Transformar o movimento em encolhimento.","Soltar a carga na volta."]},
+{nome:"Puxada alta aberta",exerciseId:"wide_grip_lat_pulldown",series:3,reps:"8-12",rest:120,grupo:"Costas",equipamento:"Polia",loadType:"stack",video:"https://www.youtube.com/watch?v=e_4k9XoORe0",fonte:"Treino Mestre · Puxada alta aberta",videoStatus:"reference",dicas:["Mantenha o tronco estável.","Puxe a barra em direção à parte alta do peito.","Controle o alongamento na volta."],erros:["Balançar o tronco.","Puxar atrás da cabeça.","Encurtar a amplitude para usar mais carga."]},
+{nome:"Elevação lateral",exerciseId:"dumbbell_lateral_raise",series:3,reps:"12-20",rest:90,grupo:"Ombro",equipamento:"Halteres",loadType:"per_dumbbell",video:"https://www.youtube.com/watch?v=3vcBrnneAy4",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Use carga que permita trajetória limpa.","Eleve os braços sem impulso do tronco.","Controle a descida."],erros:["Encolher o trapézio para mover a carga.","Balançar o corpo.","Acelerar demais a fase excêntrica."]},
+{nome:"Rosca Scott",exerciseId:"preacher_curl",series:2,reps:"8-12",rest:90,grupo:"Bíceps",equipamento:"Máquina/Barra",loadType:"total",video:"https://www.youtube.com/watch?v=LjBQs7Wn8m0",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Mantenha o braço apoiado.","Controle especialmente a descida.","Use amplitude confortável para o cotovelo."],erros:["Levantar o braço do banco.","Soltar a carga na descida.","Exagerar na carga e perder amplitude."]},
+{nome:"Tríceps na corda",exerciseId:"rope_triceps_pushdown",series:2,reps:"10-15",rest:90,grupo:"Tríceps",equipamento:"Polia",loadType:"stack",video:"https://www.youtube.com/watch?v=_nQKcW-Dc4o",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Mantenha cotovelos próximos ao corpo.","Estenda sem balançar o tronco.","Controle a volta."],erros:["Mover ombro e cotovelo juntos.","Inclinar demais o corpo.","Usar impulso."]}
 ]},
 {id:"terca",label:"Terça",foco:"Lower A · Quadríceps",cor:"#5B5FE9",exercicios:[
-{nome:"Hack squat",exerciseId:"hack_squat",series:3,reps:"6-10",rest:180,grupo:"Quadríceps",equipamento:"Máquina",loadType:"per_side_total",video:"https://youtu.be/hzvwXKUDWIc",fonte:"Laércio Refundini",videoStatus:"reference",ancora:true,dicas:["Posicione os pés para conseguir profundidade confortável.","Mantenha costas e pelve apoiadas.","Desça com controle e suba sem perder alinhamento."],erros:["Reduzir muito a amplitude para usar mais carga.","Joelhos colapsando para dentro.","Descer sem controle."]},
-{nome:"Leg press",exerciseId:"leg_press",series:3,reps:"10-15",rest:120,grupo:"Quadríceps",equipamento:"Máquina",loadType:"per_side_total",video:"https://youtu.be/nY8UsiAqwds",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Mantenha a pelve apoiada.","Use a maior amplitude que consegue controlar.","Mantenha alinhamento dos joelhos."],erros:["Arredondar a lombar no fundo.","Travar os joelhos agressivamente.","Encurtar amplitude para aumentar carga."]},
-{nome:"Flexora sentada",exerciseId:"seated_leg_curl",series:3,reps:"8-12",rest:120,grupo:"Posterior",equipamento:"Máquina",loadType:"stack",video:"https://youtu.be/2-ULaRrQa7c",fonte:"Leandro Twin · referência de flexora",videoStatus:"reference",dicas:["Ajuste o eixo da máquina ao joelho.","Mantenha o quadril estável.","Controle a volta até alongar sem perder posição."],erros:["Levantar o quadril.","Usar impulso.","Soltar a carga no retorno."]},
-{nome:"Cadeira extensora",exerciseId:"leg_extension",series:2,reps:"12-15",rest:90,grupo:"Quadríceps",equipamento:"Máquina",loadType:"stack",video:"https://youtu.be/el3oHblB5DM",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Alinhe o eixo da máquina com o joelho.","Mantenha quadril encostado.","Suba firme e desça controlando."],erros:["Banco mal ajustado.","Jogar o tronco para gerar impulso.","Deixar o peso despencar."]},
-{nome:"Elevação pélvica",exerciseId:"machine_hip_thrust",series:2,reps:"8-12",rest:120,grupo:"Glúteo",equipamento:"Máquina",loadType:"total",video:"https://www.youtube.com/watch?v=9UPvhCLa1IQ",fonte:"Elevação pélvica na máquina · execução",videoStatus:"reference",dicas:["Ajuste o apoio sobre a pelve.","Mantenha os pés firmes.","Suba até extensão do quadril sem hiperestender a lombar."],erros:["Hiperestender a lombar no topo.","Usar impulso.","Posicionar os pés sem estabilidade."]},
-{nome:"Panturrilha",exerciseId:"standing_calf_raise",series:3,reps:"10-15",rest:90,grupo:"Panturrilha",equipamento:"Máquina",loadType:"total",video:"https://youtu.be/824pMjvGXgc",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Desça até alongar com controle.","Faça uma breve pausa no alongamento.","Suba sem quicar."],erros:["Repetições curtas.","Usar impulso.","Acelerar a descida."]}
+{nome:"Hack squat",exerciseId:"hack_squat",series:3,reps:"6-10",rest:180,grupo:"Quadríceps",equipamento:"Máquina",loadType:"per_side_total",video:"https://www.youtube.com/watch?v=kS5lWlM6l74",fonte:"Laércio Refundini",videoStatus:"reference",ancora:true,dicas:["Posicione os pés para conseguir profundidade confortável.","Mantenha costas e pelve apoiadas.","Desça com controle e suba sem perder alinhamento."],erros:["Reduzir muito a amplitude para usar mais carga.","Joelhos colapsando para dentro.","Descer sem controle."]},
+{nome:"Leg press",exerciseId:"leg_press",series:3,reps:"10-15",rest:120,grupo:"Quadríceps",equipamento:"Máquina",loadType:"per_side_total",video:"https://www.youtube.com/watch?v=Qx1CDAXTwfI",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Mantenha a pelve apoiada.","Use a maior amplitude que consegue controlar.","Mantenha alinhamento dos joelhos."],erros:["Arredondar a lombar no fundo.","Travar os joelhos agressivamente.","Encurtar amplitude para aumentar carga."]},
+{nome:"Flexora sentada",exerciseId:"seated_leg_curl",series:3,reps:"8-12",rest:120,grupo:"Posterior",equipamento:"Máquina",loadType:"stack",video:"https://www.youtube.com/watch?v=t-p7vX77P9Q",fonte:"Leandro Twin · referência de flexora",videoStatus:"reference",dicas:["Ajuste o eixo da máquina ao joelho.","Mantenha o quadril estável.","Controle a volta até alongar sem perder posição."],erros:["Levantar o quadril.","Usar impulso.","Soltar a carga no retorno."]},
+{nome:"Cadeira extensora",exerciseId:"leg_extension",series:2,reps:"12-15",rest:90,grupo:"Quadríceps",equipamento:"Máquina",loadType:"stack",video:"https://www.youtube.com/watch?v=33L9_tT5_G4",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Alinhe o eixo da máquina com o joelho.","Mantenha quadril encostado.","Suba firme e desça controlando."],erros:["Banco mal ajustado.","Jogar o tronco para gerar impulso.","Deixar o peso despencar."]},
+{nome:"Elevação pélvica",exerciseId:"machine_hip_thrust",series:2,reps:"8-12",rest:120,grupo:"Glúteo",equipamento:"Máquina",loadType:"total",video:"https://www.youtube.com/watch?v=F5290bX-h9s",fonte:"Elevação pélvica na máquina · execução",videoStatus:"reference",dicas:["Ajuste o apoio sobre a pelve.","Mantenha os pés firmes.","Suba até extensão do quadril sem hiperestender a lombar."],erros:["Hiperestender a lombar no topo.","Usar impulso.","Posicionar os pés sem estabilidade."]},
+{nome:"Panturrilha",exerciseId:"standing_calf_raise",series:3,reps:"10-15",rest:90,grupo:"Panturrilha",equipamento:"Máquina",loadType:"total",video:"https://www.youtube.com/watch?v=6-Ni_mzSNIM",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Desça até alongar com controle.","Faça uma breve pausa no alongamento.","Suba sem quicar."],erros:["Repetições curtas.","Usar impulso.","Acelerar a descida."]}
 ]},
 {id:"quinta",label:"Quinta",foco:"Upper B · Costas",cor:"#2A9D8F",exercicios:[
-{nome:"Remada articulada",exerciseId:"articulated_row",series:3,reps:"8-12",rest:120,grupo:"Costas",equipamento:"Máquina",loadType:"per_side_total",video:"https://youtu.be/waqyTVrxFbQ",fonte:"Treino Mestre · Remada articulada (variações)",videoStatus:"reference",ancora:true,dicas:["Ajuste o apoio para manter o tronco estável.","Puxe com os cotovelos sem perder o apoio.","Controle a volta."],erros:["Usar balanço do tronco.","Encolher os ombros.","Cortar a amplitude para aumentar carga."]},
-{nome:"Puxada fechada",exerciseId:"close_grip_lat_pulldown",series:3,reps:"8-12",rest:120,grupo:"Costas",equipamento:"Polia",loadType:"stack",video:"https://youtu.be/IFDUGxHRIKA",fonte:"Treino Mestre · Puxada fechada",videoStatus:"reference",dicas:["Mantenha o tronco estável.","Puxe a pegada em direção à parte alta do peito.","Controle o alongamento na volta."],erros:["Balançar para puxar.","Deixar o bíceps dominar o movimento.","Perder amplitude."]},
-{nome:"Supino reto na máquina",exerciseId:"chest_press_machine",series:3,reps:"8-12",rest:120,grupo:"Peito",equipamento:"Máquina",loadType:"per_side_total",video:"https://youtu.be/0bFkkO9AanU",fonte:"Supino reto na máquina",videoStatus:"reference",dicas:["Ajuste o banco para a pegada ficar na linha do peitoral.","Mantenha escápulas apoiadas e tronco estável.","Controle a volta."],erros:["Banco alto ou baixo demais.","Perder estabilidade para mover mais carga.","Encurtar demais a descida."]},
-{nome:"Voador",exerciseId:"pec_deck_fly",series:2,reps:"10-15",rest:90,grupo:"Peito",equipamento:"Máquina",loadType:"stack",video:"https://youtu.be/Pf9sMLw_1Ag",fonte:"Treino Mestre · Voador / Peck Deck",videoStatus:"reference",dicas:["Ajuste o banco para os braços ficarem alinhados com o peito.","Mantenha o tronco apoiado.","Controle a abertura."],erros:["Usar impulso.","Deixar os ombros avançarem.","Forçar amplitude desconfortável."]},
-{nome:"Elevação lateral",exerciseId:"dumbbell_lateral_raise",series:3,reps:"12-20",rest:90,grupo:"Ombro",equipamento:"Halteres",loadType:"per_dumbbell",video:"https://youtu.be/c7zMmbWkUPw",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Use carga que permita trajetória limpa.","Eleve os braços sem impulso.","Controle a descida."],erros:["Encolher o trapézio.","Balançar o corpo.","Descer rápido demais."]},
-{nome:"Voador inverso",exerciseId:"reverse_pec_deck",series:2,reps:"12-20",rest:90,grupo:"Ombro",equipamento:"Máquina",loadType:"stack",video:"https://youtu.be/wjlX-5DTjBQ",fonte:"Voador invertido",videoStatus:"reference",dicas:["Apoie o peito e mantenha o tronco estável.","Abra os braços sem encolher os ombros.","Controle o retorno."],erros:["Usar lombar para roubar.","Transformar em remada.","Perder controle no retorno."]},
-{nome:"Rosca martelo",exerciseId:"hammer_curl",series:2,reps:"8-12",rest:90,grupo:"Bíceps",equipamento:"Halteres",loadType:"per_dumbbell",video:"https://youtu.be/pTyVDap5HaI",fonte:"Treino Mestre · Rosca martelo",videoStatus:"reference",dicas:["Mantenha os cotovelos estáveis.","Use pegada neutra durante todo o movimento.","Controle a descida."],erros:["Balançar o tronco.","Avançar os cotovelos.","Usar carga que reduza a amplitude."]},
-{nome:"Tríceps francês",exerciseId:"french_press",series:2,reps:"8-12",rest:90,grupo:"Tríceps",equipamento:"Halter/Polia",loadType:"total",video:"https://www.youtube.com/watch?v=NvCgPutyMrc",fonte:"Extensão de tríceps acima da cabeça · referência",videoStatus:"reference",dicas:["Mantenha os cotovelos estáveis.","Busque boa amplitude sem dor.","Controle o retorno."],erros:["Abrir demais os cotovelos.","Usar o tronco para ajudar.","Cortar a amplitude."]}
+{nome:"Remada articulada",exerciseId:"articulated_row",series:3,reps:"8-12",rest:120,grupo:"Costas",equipamento:"Máquina",loadType:"per_side_total",video:"https://www.youtube.com/watch?v=n02z-IcfhrM",fonte:"Treino Mestre · Remada articulada (variações)",videoStatus:"reference",ancora:true,dicas:["Ajuste o apoio para manter o tronco estável.","Puxe com os cotovelos sem perder o apoio.","Controle a volta."],erros:["Usar balanço do tronco.","Encolher os ombros.","Cortar a amplitude para aumentar carga."]},
+{nome:"Puxada fechada",exerciseId:"close_grip_lat_pulldown",series:3,reps:"8-12",rest:120,grupo:"Costas",equipamento:"Polia",loadType:"stack",video:"https://www.youtube.com/watch?v=yzlQK3s-a_Y",fonte:"Treino Mestre · Puxada fechada",videoStatus:"reference",dicas:["Mantenha o tronco estável.","Puxe a pegada em direção à parte alta do peito.","Controle o alongamento na volta."],erros:["Balançar para puxar.","Deixar o bíceps dominar o movimento.","Perder amplitude."]},
+{nome:"Supino reto na máquina",exerciseId:"chest_press_machine",series:3,reps:"8-12",rest:120,grupo:"Peito",equipamento:"Máquina",loadType:"per_side_total",video:"https://www.youtube.com/watch?v=MPM1bqU7b44",fonte:"Supino reto na máquina",videoStatus:"reference",dicas:["Ajuste o banco para a pegada ficar na linha do peitoral.","Mantenha escápulas apoiadas e tronco estável.","Controle a volta."],erros:["Banco alto ou baixo demais.","Perder estabilidade para mover mais carga.","Encurtar demais a descida."]},
+{nome:"Voador",exerciseId:"pec_deck_fly",series:2,reps:"10-15",rest:90,grupo:"Peito",equipamento:"Máquina",loadType:"stack",video:"https://www.youtube.com/watch?v=fvIAmcLpDr8",fonte:"Treino Mestre · Voador / Peck Deck",videoStatus:"reference",dicas:["Ajuste o banco para os braços ficarem alinhados com o peito.","Mantenha o tronco apoiado.","Controle a abertura."],erros:["Usar impulso.","Deixar os ombros avançarem.","Forçar amplitude desconfortável."]},
+{nome:"Elevação lateral",exerciseId:"dumbbell_lateral_raise",series:3,reps:"12-20",rest:90,grupo:"Ombro",equipamento:"Halteres",loadType:"per_dumbbell",video:"https://www.youtube.com/watch?v=3vcBrnneAy4",fonte:"Laércio Refundini",videoStatus:"reference",dicas:["Use carga que permita trajetória limpa.","Eleve os braços sem impulso.","Controle a descida."],erros:["Encolher o trapézio.","Balançar o corpo.","Descer rápido demais."]},
+{nome:"Voador inverso",exerciseId:"reverse_pec_deck",series:2,reps:"12-20",rest:90,grupo:"Ombro",equipamento:"Máquina",loadType:"stack",video:"https://www.youtube.com/watch?v=9BEQWr0u-ac",fonte:"Voador invertido",videoStatus:"reference",dicas:["Apoie o peito e mantenha o tronco estável.","Abra os braços sem encolher os ombros.","Controle o retorno."],erros:["Usar lombar para roubar.","Transformar em remada.","Perder controle no retorno."]},
+{nome:"Rosca martelo",exerciseId:"hammer_curl",series:2,reps:"8-12",rest:90,grupo:"Bíceps",equipamento:"Halteres",loadType:"per_dumbbell",video:"https://www.youtube.com/watch?v=OnNmaG_tZM4",fonte:"Treino Mestre · Rosca martelo",videoStatus:"reference",dicas:["Mantenha os cotovelos estáveis.","Use pegada neutra durante todo o movimento.","Controle a descida."],erros:["Balançar o tronco.","Avançar os cotovelos.","Usar carga que reduza a amplitude."]},
+{nome:"Tríceps francês",exerciseId:"french_press",series:2,reps:"8-12",rest:90,grupo:"Tríceps",equipamento:"Halter/Polia",loadType:"total",video:"https://www.youtube.com/watch?v=wcpCGLuXFfU",fonte:"Extensão de tríceps acima da cabeça · referência",videoStatus:"reference",dicas:["Mantenha os cotovelos estáveis.","Busque boa amplitude sem dor.","Controle o retorno."],erros:["Abrir demais os cotovelos.","Usar o tronco para ajudar.","Cortar a amplitude."]}
 ]},
 {id:"sexta",label:"Sexta",foco:"Lower B · Posterior",cor:"#D4A72C",exercicios:[
-{nome:"Flexora deitada",exerciseId:"lying_leg_curl",series:3,reps:"8-12",rest:120,grupo:"Posterior",equipamento:"Máquina",loadType:"stack",video:"https://youtu.be/2-ULaRrQa7c",fonte:"Leandro Twin · referência de flexora",videoStatus:"reference",ancora:true,dicas:["Ajuste o eixo da máquina ao joelho.","Mantenha o quadril apoiado.","Controle a volta."],erros:["Levantar o quadril.","Usar impulso.","Soltar a carga."]},
-{nome:"Stiff",exerciseId:"romanian_deadlift",series:3,reps:"6-10",rest:180,grupo:"Posterior",equipamento:"Barra",loadType:"total",video:"https://youtu.be/_oyxCn2iSjU",fonte:"Romanian deadlift · referência",videoStatus:"reference",dicas:["Leve o quadril para trás.","Mantenha coluna e tronco firmes.","Desça somente enquanto mantém tensão e posição."],erros:["Transformar em agachamento.","Arredondar a lombar.","Forçar amplitude além da mobilidade."]},
-{nome:"Agachamento pêndulo",exerciseId:"pendulum_squat",series:3,reps:"8-12",rest:120,grupo:"Quadríceps",equipamento:"Máquina",loadType:"per_side_total",video:"https://youtu.be/HJ2ecjzq3gk",fonte:"Boa Forma · Agachamento pêndulo",videoStatus:"reference",dicas:["Ajuste os pés para uma amplitude confortável.","Mantenha tronco e pelve apoiados.","Controle a descida."],erros:["Mudar a posição dos pés toda sessão.","Reduzir amplitude por excesso de carga.","Perder alinhamento dos joelhos."]},
-{nome:"Cadeira extensora",exerciseId:"leg_extension",series:2,reps:"12-15",rest:90,grupo:"Quadríceps",equipamento:"Máquina",loadType:"stack",video:"https://youtu.be/el3oHblB5DM",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Alinhe o eixo da máquina com o joelho.","Mantenha o quadril apoiado.","Desça controlando."],erros:["Roubar com o tronco.","Descer rápido.","Usar amplitude inconsistente."]},
-{nome:"Cadeira abdutora ou adutora",exerciseId:"abductor_or_adductor_machine",series:2,reps:"12-20",rest:90,grupo:"Glúteo",equipamento:"Máquina",loadType:"stack",video:"https://youtu.be/50qHGus1TZk",videoAlt:"https://youtu.be/goQVyEGMYMM",videoAltLabel:"Ver adutora",fonte:"Treino Mestre · Abdutora / Adutora",videoStatus:"reference",dicas:["Escolha uma das duas variações e mantenha por várias semanas para comparar evolução.","Ajuste o banco para uma posição confortável.","Faça a amplitude com controle."],erros:["Trocar de variação toda sessão sem critério.","Usar impulso.","Deixar a carga bater no retorno."]},
-{nome:"Panturrilha",exerciseId:"seated_calf_raise",series:3,reps:"10-15",rest:90,grupo:"Panturrilha",equipamento:"Máquina",loadType:"total",video:"https://youtu.be/jMWs_p-W9gY",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Use amplitude completa confortável.","Faça uma breve pausa no alongamento.","Evite quicar."],erros:["Repetições parciais involuntárias.","Descer sem controle.","Usar impulso."]}
+{nome:"Flexora deitada",exerciseId:"lying_leg_curl",series:3,reps:"8-12",rest:120,grupo:"Posterior",equipamento:"Máquina",loadType:"stack",video:"https://www.youtube.com/watch?v=cM50s4c5w6I",fonte:"Leandro Twin · referência de flexora",videoStatus:"reference",ancora:true,dicas:["Ajuste o eixo da máquina ao joelho.","Mantenha o quadril apoiado.","Controle a volta."],erros:["Levantar o quadril.","Usar impulso.","Soltar a carga."]},
+{nome:"Stiff",exerciseId:"romanian_deadlift",series:3,reps:"6-10",rest:180,grupo:"Posterior",equipamento:"Barra",loadType:"total",video:"https://www.youtube.com/watch?v=6PWws7e_z-s",fonte:"Romanian deadlift · referência",videoStatus:"reference",dicas:["Leve o quadril para trás.","Mantenha coluna e tronco firmes.","Desça somente enquanto mantém tensão e posição."],erros:["Transformar em agachamento.","Arredondar a lombar.","Forçar amplitude além da mobilidade."]},
+{nome:"Agachamento pêndulo",exerciseId:"pendulum_squat",series:3,reps:"8-12",rest:120,grupo:"Quadríceps",equipamento:"Máquina",loadType:"per_side_total",video:"https://www.youtube.com/watch?v=B7b3jWwL7H8",fonte:"Boa Forma · Agachamento pêndulo",videoStatus:"reference",dicas:["Ajuste os pés para uma amplitude confortável.","Mantenha tronco e pelve apoiados.","Controle a descida."],erros:["Mudar a posição dos pés toda sessão.","Reduzir amplitude por excesso de carga.","Perder alinhamento dos joelhos."]},
+{nome:"Cadeira extensora",exerciseId:"leg_extension",series:2,reps:"12-15",rest:90,grupo:"Quadríceps",equipamento:"Máquina",loadType:"stack",video:"https://www.youtube.com/watch?v=33L9_tT5_G4",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Alinhe o eixo da máquina com o joelho.","Mantenha o quadril apoiado.","Desça controlando."],erros:["Roubar com o tronco.","Descer rápido.","Usar amplitude inconsistente."]},
+{nome:"Cadeira abdutora ou adutora",exerciseId:"abductor_or_adductor_machine",series:2,reps:"12-20",rest:90,grupo:"Glúteo",equipamento:"Máquina",loadType:"stack",video:"https://www.youtube.com/watch?v=gS6Yl9d-V4M",videoAlt:"https://youtu.be/goQVyEGMYMM",videoAltLabel:"Ver adutora",fonte:"Treino Mestre · Abdutora / Adutora",videoStatus:"reference",dicas:["Escolha uma das duas variações e mantenha por várias semanas para comparar evolução.","Ajuste o banco para uma posição confortável.","Faça a amplitude com controle."],erros:["Trocar de variação toda sessão sem critério.","Usar impulso.","Deixar a carga bater no retorno."]},
+{nome:"Panturrilha",exerciseId:"seated_calf_raise",series:3,reps:"10-15",rest:90,grupo:"Panturrilha",equipamento:"Máquina",loadType:"total",video:"https://www.youtube.com/watch?v=Nap62yku2ks",fonte:"Leandro Twin",videoStatus:"reference",dicas:["Use amplitude completa confortável.","Faça uma breve pausa no alongamento.","Evite quicar."],erros:["Repetições parciais involuntárias.","Descer sem controle.","Usar impulso."]}
 ]}
 ];
 
 // Versão exibida no Perfil. Ao relatar um problema, é o que identifica o build.
-const APP_VERSION="4.8";
-const APP_BUILD="2026-08-19";
+const APP_VERSION="5.7";
+const APP_BUILD="2026-08-20";
 
 function safeGet(k,f){try{const x=localStorage.getItem(k);return x?JSON.parse(x):f}catch{return f}}
 function todayISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
@@ -487,11 +509,31 @@ let mainView=localStorage.getItem("ul-v2-main-view")||"dashboard";
 // aba Treino: quem abria o dia pelo painel ou pelo calendário era jogado em
 // outro lugar e tinha de navegar de volta na mão.
 let dayOrigin=null;
+// Erros de execução capturados durante o uso. Servem ao diagnóstico: um botão
+// que falha em silêncio não deixa rastro nenhum para investigar depois.
+// O localStorage recusou uma escrita. Diferente de storageUnavailable: aqui o
+// IndexedDB (o histórico) pode estar funcionando, e só as preferências falham.
+let localStorageFailed=false;
+// Rastro dos toques na bolinha. Existe para separar duas causas que produzem
+// o mesmo sintoma: o toque não chegar ao botão, ou chegar e a lógica desistir.
+let tapTrace=[];
+function tapLog(msg){
+  try{
+    tapTrace.push({msg:String(msg),em:new Date().toISOString()});
+    if(tapTrace.length>40)tapTrace.shift();
+    console.log("[tap]",msg);
+  }catch(e){}
+}
+let runtimeErrors=[];
 let wakeLock=null;
 let storageUnavailable=false;
 let storageError="";
-let profile={name:"",goal:"Hipertrofia",weeklyTarget:4,height:"",useRir:false};
-function usaRir(){return !!profile.useRir}
+const DEFAULT_PROFILE={name:"",goal:"Hipertrofia",weeklyTarget:4,height:"",useRir:false};
+function normalizeProfilePolicy(p){return {...DEFAULT_PROFILE,...(p||{}),useRir:false}}
+let profile=normalizeProfilePolicy();
+// Política do produto: RIR não faz parte do fluxo principal. Dados antigos são
+// preservados no histórico/backup, mas nunca voltam a bloquear o registro.
+function usaRir(){return false}
 let bodyLog=[];
 let checkins={};
 let calCursor=new Date();
@@ -572,7 +614,23 @@ function cloneSet(x={}){return{id:x.id||uid("set"),load:x.load??"",reps:x.reps??
 function normalizeSession(raw,{date,dayId,exerciseId,series}){const stamp=raw.updatedAt||raw.createdAt||nowISO(),sets=(Array.isArray(raw.sets)?raw.sets:[]).map(cloneSet);while(sets.length<series)sets.push(cloneSet());return{id:raw.id||sessionId(date,dayId,exerciseId),schemaVersion:2,date,dayId,exerciseId,sets,note:raw.note||"",extra:Number(raw.extra||0),createdAt:raw.createdAt||stamp,updatedAt:stamp,deletedAt:raw.deletedAt||null}}
 function cacheSession(s){if(!sessions[s.date])sessions[s.date]={};if(!sessions[s.date][s.dayId])sessions[s.date][s.dayId]={};sessions[s.date][s.dayId][s.exerciseId]=s}
 function allSessionRecords(){const a=[];Object.values(sessions).forEach(d=>Object.values(d||{}).forEach(e=>Object.values(e||{}).forEach(s=>{if(s&&!s.deletedAt)a.push(s)})));return a}
-function touchSession(s){s.updatedAt=nowISO();s.schemaVersion=2;s.sets.forEach(x=>{if(!x.id)x.id=uid("set");if(!x.createdAt)x.createdAt=s.createdAt||s.updatedAt;if(!x.updatedAt)x.updatedAt=s.updatedAt;if(x.deletedAt===undefined)x.deletedAt=null});queueSessionWrite(s)}
+/**
+ * Atualiza os metadados da sessão e agenda a gravação.
+ *
+ * A gravação é o passo que pode falhar (banco cheio, iOS recusando escrita), e
+ * ela é enfileirada de propósito: o registro em memória não pode depender dela.
+ * Antes, uma falha aqui subia por sessionFor e impedia até marcar a série —
+ * ou seja, um problema de disco travava o treino inteiro.
+ */
+function touchSession(s){
+  s.updatedAt=nowISO();s.schemaVersion=2;
+  s.sets.forEach(x=>{if(!x.id)x.id=uid("set");if(!x.createdAt)x.createdAt=s.createdAt||s.updatedAt;if(!x.updatedAt)x.updatedAt=s.updatedAt;if(x.deletedAt===undefined)x.deletedAt=null});
+  try{queueSessionWrite(s)}
+  catch(err){
+    console.error("queueSessionWrite",err);
+    try{runtimeErrors.push({quando:"queueSessionWrite",erro:String(err&&err.message||err),em:nowISO()})}catch(e){}
+  }
+}
 async function persistAllSessions(){if(ULDB.db)await Promise.all(allSessionRecords().map(s=>ULDB.put("sessions",s)))}
 function migrateKeyedObject(obj){const out={};Object.entries(obj||{}).forEach(([k,v])=>{const p=k.indexOf("|");if(p<0){out[k]=v;return}const day=k.slice(0,p),old=k.slice(p+1),eid=exerciseIdFromName(old)||old;out[stableKey(day,eid)]=v});return out}
 function migrateOrder(){const next={};Object.entries(exOrder||{}).forEach(([day,arr])=>{const d=DIAS.find(x=>x.id===day);if(!d||!Array.isArray(arr))return;next[day]=arr.map(v=>d.exercicios.find(e=>e.exerciseId===v)?.exerciseId||d.exercicios.find(e=>e.nome===v)?.exerciseId).filter(Boolean)});exOrder=next}
@@ -997,9 +1055,29 @@ function runtimeDays(program=activeProgram()){
   return program.days.map(d=>({...d,exercicios:d.items.map(runtimeExercise)}));
 }
 function runtimeDayById(dayId){return runtimeDays().find(d=>d.id===dayId)||null}
+/**
+ * Dia do treino como ele era na data pedida.
+ *
+ * CUIDADO com o espalhamento: o plano congelado tem `id` próprio, no formato
+ * "plan:2026-08-20:quinta". Espalhá-lo direto sobrescrevia o `id` do dia, e a
+ * tela passava a emitir data-day="plan:2026-08-20:quinta". Nenhum dia com esse
+ * id existe, então marcar série parava com "dia não encontrado" — e só depois
+ * que o plano congelava, isto é, a partir da primeira série do dia.
+ *
+ * O `id` aqui é sempre o do DIA. O id do plano fica em `planId`, se precisar.
+ */
 function historicalDay(date,dayId){
   const p=dayPlans[planKey(date,dayId)];
-  if(p)return{...p,exercicios:(p.items||[]).map(runtimeExercise)};
+  if(p){
+    const base=runtimeDayById(p.dayId||dayId)||{};
+    return{...p,
+      planId:p.id,
+      id:p.dayId||dayId,
+      label:p.label||base.label||dayId,
+      foco:p.foco||base.foco||"",
+      cor:p.cor||base.cor||"#D4A72C",
+      exercicios:(p.items||[]).map(runtimeExercise)};
+  }
   return runtimeDayById(dayId);
 }
 function programDayById(dayId,program=activeProgram()){
@@ -1370,7 +1448,7 @@ function syncPreviewPayload(){
     media:syncMediaManifest()};
 }
 
-async function initFoundation(){try{await ULDB.open();migrateOrder();customVideos=migrateKeyedObject(customVideos);videoOk=migrateKeyedObject(videoOk);const rows=await ULDB.all("sessions");if(rows.length)rows.filter(x=>!x.deletedAt).forEach(cacheSession);else await migrateLegacySessions();let body=await ULDB.all("bodyEntries"),checks=await ULDB.all("checkins");if(!(await ULDB.meta("schemaVersion"))&&!body.length&&!checks.length){await migrateBodyCheckins();body=await ULDB.all("bodyEntries");checks=await ULDB.all("checkins")}bodyLog=body.filter(x=>!x.deletedAt);checkins={};checks.filter(x=>!x.deletedAt).forEach(x=>checkins[x.date]=x);profile=(await ULDB.meta("profile"))||safeGet("ul-v2-profile",profile);await loadProgramData();await ensureLocalIdentity();await loadBodyPhotos();await ULDB.setMeta("schemaVersion",5);await ULDB.setMeta("exerciseCatalogVersion",1);await ULDB.setMeta("lastMigrationAt",nowISO());localStorage.setItem("treino-ordem-ul-v2",JSON.stringify(exOrder));localStorage.setItem("treino-videos-ok-ul",JSON.stringify(videoOk));localStorage.setItem("treino-videos-ul-v1",JSON.stringify(customVideos));foundationReady=true}catch(err){console.error(err);for(const [date,byDay] of Object.entries(LEGACY_SESSION_SNAPSHOT||{})){for(const [day,byName] of Object.entries(byDay||{})){for(const [name,raw] of Object.entries(byName||{})){const eid=exerciseIdFromName(name),e=exerciseById(eid);if(eid&&e)cacheSession(normalizeSession(raw||{},{date,dayId:day,exerciseId:eid,series:e.series}))}}}profile=safeGet("ul-v2-profile",profile);bodyLog=safeGet("ul-v2-body-log",[]);checkins=safeGet("ul-v2-checkins",{});
+async function initFoundation(){try{await ULDB.open();migrateOrder();customVideos=migrateKeyedObject(customVideos);videoOk=migrateKeyedObject(videoOk);const rows=await ULDB.all("sessions");if(rows.length)rows.filter(x=>!x.deletedAt).forEach(cacheSession);else await migrateLegacySessions();let body=await ULDB.all("bodyEntries"),checks=await ULDB.all("checkins");if(!(await ULDB.meta("schemaVersion"))&&!body.length&&!checks.length){await migrateBodyCheckins();body=await ULDB.all("bodyEntries");checks=await ULDB.all("checkins")}bodyLog=body.filter(x=>!x.deletedAt);checkins={};checks.filter(x=>!x.deletedAt).forEach(x=>checkins[x.date]=x);profile=normalizeProfilePolicy((await ULDB.meta("profile"))||safeGet("ul-v2-profile",profile));await loadProgramData();await ensureLocalIdentity();await loadBodyPhotos();await ULDB.setMeta("schemaVersion",5);await ULDB.setMeta("exerciseCatalogVersion",1);await ULDB.setMeta("lastMigrationAt",nowISO());localStorage.setItem("treino-ordem-ul-v2",JSON.stringify(exOrder));localStorage.setItem("treino-videos-ok-ul",JSON.stringify(videoOk));localStorage.setItem("treino-videos-ul-v1",JSON.stringify(customVideos));foundationReady=true}catch(err){console.error(err);for(const [date,byDay] of Object.entries(LEGACY_SESSION_SNAPSHOT||{})){for(const [day,byName] of Object.entries(byDay||{})){for(const [name,raw] of Object.entries(byName||{})){const eid=exerciseIdFromName(name),e=exerciseById(eid);if(eid&&e)cacheSession(normalizeSession(raw||{},{date,dayId:day,exerciseId:eid,series:e.series}))}}}profile=normalizeProfilePolicy(safeGet("ul-v2-profile",profile));bodyLog=safeGet("ul-v2-body-log",[]);checkins=safeGet("ul-v2-checkins",{});
   // Sem banco, o programa não é carregado e o app abria com zero dias, com
   // aparência normal. Semear a partir do catálogo mantém o app utilizável.
   try{await seedFromCatalog()}catch(e2){console.error(e2)}
@@ -1413,6 +1491,36 @@ async function requestWakeLock(){
   }catch(e){wakeLock=null;return null}
 }
 function releaseWakeLock(){if(wakeLock){try{wakeLock.release()}catch(e){}wakeLock=null}}
+/* ===== Captura global de erros =====
+ * "Uncaught Error: Script error." não diz nada: é o que o navegador mostra
+ * quando não consegue detalhar. Registrando aqui, o erro real fica disponível
+ * em Perfil → Diagnóstico, e para de ser necessário adivinhar.
+ */
+window.addEventListener("error",ev=>{
+  try{
+    runtimeErrors.push({
+      quando:"window.onerror",
+      erro:String(ev.message||"sem mensagem"),
+      onde:(ev.filename||"?")+":"+(ev.lineno||0)+":"+(ev.colno||0),
+      pilha:ev.error&&ev.error.stack?String(ev.error.stack).split("\n").slice(0,4).join(" | "):"",
+      em:nowISO()
+    });
+    if(runtimeErrors.length>30)runtimeErrors.shift();
+  }catch(e){}
+});
+window.addEventListener("unhandledrejection",ev=>{
+  try{
+    const r=ev.reason;
+    runtimeErrors.push({
+      quando:"promise",
+      erro:String(r&&r.message||r||"promessa rejeitada"),
+      pilha:r&&r.stack?String(r.stack).split("\n").slice(0,4).join(" | "):"",
+      em:nowISO()
+    });
+    if(runtimeErrors.length>30)runtimeErrors.shift();
+  }catch(e){}
+});
+
 document.addEventListener("visibilitychange",()=>{
   if(document.visibilityState!=="visible")return;
   // restoreTimer PRIMEIRO: é o que o usuário percebe. Se o wake lock falhar,
@@ -1562,10 +1670,21 @@ function workoutSessionTotals(dayId,date=curDate()){
   });
   return{completedSets,totalSets,volume:Math.round(volume),exercisesDone:dayDoneCount(d,date),totalExercises:d.exercicios.length};
 }
+/**
+ * Rótulo do cabeçalho "AGORA".
+ *
+ * Dizia "Treino concluído" sempre que não encontrava uma série pendente — o
+ * que inclui o caso em que NADA foi feito. Na tela aparecia "Treino concluído"
+ * ao lado de "0/8 feitos", uma contradição que faz o usuário desconfiar do app
+ * inteiro. Agora o rótulo só afirma conclusão quando o progresso confirma.
+ */
 function workoutNowLabel(dayId){
   const hit=nextPendingSet(dayId);
-  if(!hit)return'Treino concluído';
-  return`${hit.exercise.nome} · série ${hit.setIdx+1}`;
+  if(hit)return`${hit.exercise.nome} · série ${hit.setIdx+1}`;
+  const p=workoutProgressOn(curDate(),dayId);
+  if(p.total&&p.done>=p.total)return'Treino concluído';
+  if(!p.total)return'Sem exercícios neste dia';
+  return`${p.done}/${p.total} feitos · toque para revisar`;
 }
 function focusWorkoutTarget(dayId){
   const hit=nextPendingSet(dayId);if(!hit)return false;
@@ -1588,7 +1707,27 @@ function scrollToNextIncomplete(dayId){
   return true;
 }
 
-function save(){localStorage.setItem("treino-ordem-ul-v2",JSON.stringify(exOrder));localStorage.setItem("treino-videos-ok-ul",JSON.stringify(videoOk));localStorage.setItem("treino-videos-ul-v1",JSON.stringify(customVideos));localStorage.setItem("treino-notas-dia-ul-v2",JSON.stringify(dayNotes))}
+/**
+ * Grava preferências no localStorage.
+ *
+ * O iOS pode recusar a escrita sob pressão de espaço, e essa exceção subia
+ * pela pilha e travava o fluxo de quem chamou — inclusive o marcar série.
+ * Preferência é acessório; treino registrado não é. Aqui a falha é contida e
+ * sinalizada, para o app avisar em vez de simplesmente parar de responder.
+ */
+function save(){
+  try{
+    localStorage.setItem("treino-ordem-ul-v2",JSON.stringify(exOrder));
+    localStorage.setItem("treino-videos-ok-ul",JSON.stringify(videoOk));
+    localStorage.setItem("treino-videos-ul-v1",JSON.stringify(customVideos));
+    localStorage.setItem("treino-notas-dia-ul-v2",JSON.stringify(dayNotes));
+    localStorageFailed=false;
+  }catch(err){
+    console.error("save()",err);
+    localStorageFailed=true;
+    try{runtimeErrors.push({quando:"save",erro:String(err&&err.message||err),em:nowISO()})}catch(e){}
+  }
+}
 // Ao criar a primeira sessão do dia, congela o plano: a partir daí aquele
 // treino tem composição própria e edições futuras no programa não o alteram.
 function sessionFor(date,dayId,exerciseId,series){const novo=!sessions?.[date]?.[dayId];if(novo&&typeof freezeDayPlan==="function")freezeDayPlan(date,dayId);if(!sessions[date])sessions[date]={};if(!sessions[date][dayId])sessions[date][dayId]={};if(!sessions[date][dayId][exerciseId])sessions[date][dayId][exerciseId]=normalizeSession({},{date,dayId,exerciseId,series});const x=sessions[date][dayId][exerciseId];if(x.extra==null)x.extra=0;while(x.sets.filter(z=>!z.deletedAt).length<series+x.extra)x.sets.push(cloneSet());return x}
@@ -1682,55 +1821,7 @@ function recommendationRepsOnly(dayId,e,s){
   return{txt:`Sessão dentro do alvo. Mantenha a carga e acumule repetições até chegar a ${hi} em todas as séries.`,why:`Faixa ${lo}–${hi} reps. A carga sobe quando o topo for atingido duas vezes.`,cls:"",confidence:"média"};
 }
 
-function recommendation(dayId,e,s){
-  if(!usaRir())return recommendationRepsOnly(dayId,e,s);
-  const sets=s.sets.filter(x=>!x.deletedAt).slice(0,e.series);
-  if(sets.length<e.series||!sets.every(x=>x.done))return null;
-
-  const complete=sets.every(x=>String(x.load??"").trim()!==""&&String(x.reps??"").trim()!==""&&String(x.rir??"").trim()!=="");
-  if(!complete)return{txt:"Complete carga, reps e RIR de todas as séries para liberar a recomendação.",cls:"warn",confidence:"baixa"};
-
-  const {lo,hi}=parseRange(e.reps),targetMin=rirMin(e.rir);
-  const reps=sets.map(x=>Number(x.reps)),rirs=sets.map(x=>Number(x.rir)),loads=sets.map(x=>Number(x.load));
-  if([...reps,...rirs,...loads].some(v=>!Number.isFinite(v)))return{txt:"Há um valor inválido nesta sessão. Corrija antes da recomendação.",cls:"warn",confidence:"baixa"};
-
-  const sameLoad=loads.every(v=>Math.abs(v-loads[0])<1e-9);
-  const currentLoad=Math.max(...loads);
-  const allTop=reps.every(r=>r>=hi);
-  const allAtLeastLo=reps.every(r=>r>=lo);
-  const effortOk=rirs.every(r=>r>=targetMin);
-  const tooHard=rirs.filter(r=>r<=0).length>=2;
-  const avgRir=rirs.reduce((a,b)=>a+b,0)/rirs.length;
-
-  const recent=priorSessions(dayId,e).filter(x=>x.date!==s.date).filter(x=>{
-    const a=x.sets.filter(z=>!z.deletedAt).slice(0,e.series);
-    return a.length===e.series&&a.every(z=>z.done&&String(z.load).trim()!==""&&String(z.reps).trim()!==""&&String(z.rir).trim()!=="");
-  }).slice(0,3);
-
-  const comparable=recent.filter(x=>{
-    const a=x.sets.filter(z=>!z.deletedAt).slice(0,e.series);
-    const max=Math.max(...a.map(z=>Number(z.load)));
-    return Number.isFinite(max)&&Math.abs(max-currentLoad)<1e-9;
-  });
-
-  const priorStrong=comparable.filter(x=>{
-    const a=x.sets.filter(z=>!z.deletedAt).slice(0,e.series);
-    return a.every(z=>Number(z.reps)>=Math.max(lo,hi-1)&&Number(z.rir)>=targetMin);
-  }).length;
-
-  if(!sameLoad)return{txt:"Você usou cargas diferentes entre as séries. O registro é válido, mas a sugestão automática fica menos confiável. Compare a próxima sessão antes de progredir.",cls:"",confidence:"média"};
-
-  if(allTop&&effortOk){
-    if(priorStrong>=1){
-      const why=`${priorStrong+1} exposições fortes na mesma carga; todas as séries chegaram ao topo da faixa com RIR ≥ ${targetMin}.`;
-      return{txt:"Desempenho forte repetido. Teste o menor aumento de carga disponível na próxima sessão.",why,cls:"good",confidence:isAnchorExercise(e)?"alta":"média"};
-    }
-    return{txt:"Topo da faixa atingido com RIR adequado. Repita esse desempenho mais uma vez antes de subir a carga.",why:`Primeira confirmação forte nesta carga; o app ainda quer mais uma exposição comparável.`,cls:"good",confidence:"média"};
-  }
-  if(!allAtLeastLo||tooHard)return{txt:"A carga está pesada para a faixa-alvo ou o esforço ficou muito alto. Mantenha ou reduza levemente e priorize técnica e recuperação.",cls:"warn",confidence:"alta"};
-  if(avgRir>targetMin+2&&reps.every(r=>r>=lo))return{txt:"Você ficou claramente acima do RIR previsto. Mantenha a técnica e tente mais repetições antes de aumentar a carga.",cls:"",confidence:"média"};
-  return{txt:"Sessão dentro do alvo. Mantenha a carga e tente acumular repetições com o RIR prescrito.",why:`Faixa ${lo}–${hi} reps; RIR-alvo mínimo ${targetMin}; ainda não há evidência suficiente para subir a carga.`,cls:"",confidence:"média"};
-}
+function recommendation(dayId,e,s){return recommendationRepsOnly(dayId,e,s)}
 function trendPoints(dayId,e){const pts=[];Object.keys(sessions).sort().forEach(date=>{const ss=getSession(date,dayId,e.exerciseId);if(!ss)return;const vals=ss.sets.filter(x=>!x.deletedAt&&x.done&&x.load).map(x=>Number(x.load)).filter(Number.isFinite);if(vals.length)pts.push({d:date,v:Math.max(...vals)})});legacyHistory(dayId,e).slice().reverse().forEach(h=>{const v=Number(h.v);if(Number.isFinite(v))pts.push({d:h.d,v,legacy:true})});pts.sort((a,b)=>a.d.localeCompare(b.d));return pts.slice(-12)}
 function sparkSVG(points,color){const W=100,H=30,pad=3,vals=points.map(p=>p.v),min=Math.min(...vals),max=Math.max(...vals),range=(max-min)||1;const c=points.map((p,i)=>({x:(i/(points.length-1||1))*(W-pad*2)+pad,y:H-pad-((p.v-min)/range)*(H-pad*2)}));const line=c.map((p,i)=>(i?"L":"M")+p.x.toFixed(2)+" "+p.y.toFixed(2)).join(" ");return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><path d="${line}" fill="none" stroke="${color}" stroke-width="1.6" vector-effect="non-scaling-stroke"/>${c.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="1.8" fill="${color}"/>`).join("")}</svg>`}
 
@@ -2162,6 +2253,23 @@ function renderLicenseAuditCard(){
     <div class="v2muted" style="margin-top:9px;font-size:10px">Link externo (YouTube e afins) não conta: o app apenas aponta, não distribui.${a.apenasLink?` Hoje são ${a.apenasLink}.`:""} Mídia própria ou de domínio público é aceita sem contrato. Para fornecedor externo, preencha tipo de licença, fornecedor, referência do contrato e marque a aprovação comercial.</div>`;
 }
 
+/**
+ * Lista os erros capturados em execução. Existe porque o Safari mostra apenas
+ * "Script error." sem detalhe algum, e sem isso o diagnóstico vira adivinhação.
+ */
+function renderRuntimeErrorsCard(){
+  if(!runtimeErrors.length)return `<div class="v2muted">Nenhum erro registrado nesta sessão. Se algo falhar, aparece aqui com a linha exata.</div>`;
+  const ultimos=runtimeErrors.slice(-8).reverse();
+  return `<div class="v2muted" style="margin-bottom:8px">Do mais recente para o mais antigo. Toque em copiar e envie para análise.</div>
+    ${ultimos.map(e=>`<div class="errline">
+      <b>${esc(e.quando||"?")}</b> · ${esc((e.em||"").slice(11,19))}
+      <div>${esc(e.erro||"")}</div>
+      ${e.onde?`<div class="errwhere">${esc(e.onde)}</div>`:""}
+      ${e.pilha?`<div class="errwhere">${esc(e.pilha)}</div>`:""}
+    </div>`).join("")}
+    <button class="v2secondary" style="margin-top:10px" data-action="copy-errors">Copiar erros</button>`;
+}
+
 async function renderDiagnostics(){
   const app=document.getElementById("app");
   const counts=sessionCountsByExercise();
@@ -2182,6 +2290,11 @@ async function renderDiagnostics(){
           <div class="v2stat"><b>${mig.unmatched.length}</b><span>itens antigos sem correspondência</span></div>
           <div class="v2stat"><b>${storageHealth.ok?"OK":"ERRO"}</b><span>último estado do armazenamento</span></div>
         </div>
+      </section>
+
+      <section class="v2section">
+        <div class="v2section-title"><span>Erros capturados</span><small>${runtimeErrors.length}</small></div>
+        <div class="v2card">${renderRuntimeErrorsCard()}</div>
       </section>
 
       <section class="v2section">
@@ -2237,6 +2350,11 @@ function bottomNav(){
  * risco aqui é registrar a sessão inteira e perder tudo sem perceber.
  */
 function storageBanner(){
+  if(!storageUnavailable&&localStorageFailed)return `<div class="storagewarn" role="alert">
+    <b>O aparelho recusou gravar algumas informações.</b>
+    <div>Seus treinos continuam sendo salvos, mas ajustes como ordem de exercícios e notas podem não persistir. Costuma ser falta de espaço no iPhone.</div>
+    <div style="margin-top:6px">Exporte um backup por segurança e libere espaço quando puder.</div>
+  </div>`;
   if(!storageUnavailable)return "";
   return `<div class="storagewarn" role="alert">
     <b>Nada está sendo salvo neste aparelho.</b>
@@ -2521,13 +2639,10 @@ function renderProfile(){
           <div class="v2field full"><label>Nome</label><input class="v2input" data-action="profile-field" data-field="name" value="${esc(profile.name||"")}" placeholder="Opcional"></div>
           <div class="v2field"><label>Objetivo</label><select class="v2select" data-action="profile-field" data-field="goal"><option ${profile.goal==="Hipertrofia"?"selected":""}>Hipertrofia</option><option ${profile.goal==="Força + hipertrofia"?"selected":""}>Força + hipertrofia</option><option ${profile.goal==="Manutenção"?"selected":""}>Manutenção</option></select></div>
           <div class="v2field"><label>Meta semanal</label><select class="v2select" data-action="profile-field" data-field="weeklyTarget">${[3,4,5].map(n=>`<option value="${n}" ${+profile.weeklyTarget===n?"selected":""}>${n} treinos</option>`).join("")}</select></div>
-          <div class="v2field" style="grid-column:1/-1"><label>Registrar RIR (esforço percebido)</label>
-            <select class="v2select" data-action="profile-field" data-field="useRir">
-              <option value="0" ${!profile.useRir?"selected":""}>Não — progressão por repetições</option>
-              <option value="1" ${profile.useRir?"selected":""}>Sim — progressão por repetições e RIR</option>
-            </select>
-            <div class="demo-note" style="margin-top:7px">Desligado, o app sobe a carga quando você atinge o topo da faixa de repetições em todas as séries por duas sessões seguidas. Seus registros antigos de RIR ficam guardados de qualquer forma.</div>
+          <div class="v2field" style="grid-column:1/-1"><label>Progressão</label>
+            <div class="demo-note" style="margin-top:7px">Carga + repetições. O app não exige RIR. Registros antigos de RIR permanecem preservados no histórico e no backup, mas não interferem na progressão.</div>
           </div>
+        </div>
         </div>
       </div></section>
 
@@ -2877,7 +2992,6 @@ function renderProgramDay(){
           <div class="exedit-grid">
             <div><label class="fieldlabel">Séries</label><input class="v2input" type="number" inputmode="numeric" min="1" max="10" value="${it.series}" data-action="item-field" data-idx="${i}" data-field="series"></div>
             <div><label class="fieldlabel">Reps</label><input class="v2input" type="text" value="${esc(it.reps)}" data-action="item-field" data-idx="${i}" data-field="reps" placeholder="8-12"></div>
-            ${usaRir()?`<div><label class="fieldlabel">RIR</label><input class="v2input" type="text" value="${esc(it.rir)}" data-action="item-field" data-idx="${i}" data-field="rir" placeholder="1-2"></div>`:""}
             <div><label class="fieldlabel">Descanso (s)</label><input class="v2input" type="number" inputmode="numeric" min="15" max="600" step="15" value="${it.descanso}" data-action="item-field" data-idx="${i}" data-field="descanso"></div>
           </div>
         </div>`).join("")||`<div class="v2empty">Dia sem exercícios. Adicione o primeiro abaixo.</div>`}
@@ -3009,6 +3123,7 @@ function renderDay(){
   app.innerHTML=`<div class="wrap">
     <div class="top">
       <button class="back" data-action="back" aria-label="Voltar">← <span>Voltar</span></button>
+      <div id="tap-trace"></div>
       <div class="toprow">
         <div>
           <div class="workout-title">${d.label}</div>
@@ -3049,6 +3164,7 @@ function renderDay(){
     </div>
   </div>`;
 
+  renderTapTrace();
   restoreDetails(st);
   animateRings();
   updateTimerUI();
@@ -3193,7 +3309,89 @@ function setField(dayId,idx,setIdx,field,val){const d=workoutDayAt(curDate(),day
   if(field==="rir"&&val!==""&&(Number(val)<0||Number(val)>10))return;
   if(field==="reps"&&val!==""&&Number(val)>100)return;
   if(field==="load"&&val!==""&&Number(val)>1000)return;const a=s.sets.filter(x=>!x.deletedAt);if(!a[setIdx])return;a[setIdx][field]=val;a[setIdx].updatedAt=nowISO();touchSession(s);save()}
-function toggleSet(dayId,idx,setIdx){const d=workoutDayAt(curDate(),dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.exerciseId,e.series),a=s.sets.filter(x=>!x.deletedAt),x=a[setIdx];if(!x)return;x.done=!x.done;x.updatedAt=nowISO();touchSession(s);vibrate(x.done?[30,40]:15);save();if(x.done&&isToday())startTimer(e.rest,e.nome);updateCard(dayId,idx);const next=nextPendingSet(dayId);if(next&&next.idx!==idx)updateCard(dayId,next.idx);if(x.done)setTimeout(()=>{if(next)focusWorkoutTarget(dayId);else document.getElementById("workout-finish-slot")?.scrollIntoView({behavior:"smooth",block:"center"})},120)}
+/**
+ * Marca/desmarca uma série.
+ *
+ * A ordem aqui importa mais do que parece. Antes era:
+ *   marcar -> vibrate -> save -> startTimer -> updateCard
+ * Se qualquer passo do meio lançasse — e `save()` grava no localStorage, que o
+ * iOS bloqueia sob pressão de espaço — o `updateCard` nunca rodava. A série
+ * ficava marcada na memória e a bolinha continuava vazia: para quem está na
+ * academia, o botão simplesmente "não funciona".
+ *
+ * Agora o essencial (marcar + mostrar) acontece primeiro, e cada efeito
+ * secundário é isolado: nenhum deles pode impedir os outros nem travar o
+ * registro do treino.
+ */
+/**
+ * Painel de rastro do toque, na própria tela do treino.
+ * Responde a pergunta que a captura de tela não responde: o toque chega ao
+ * botão? Se nada aparecer aqui ao tocar, o problema está antes da lógica.
+ * Desligável em Perfil quando não for mais necessário.
+ */
+function renderTapTrace(){
+  const slot=document.getElementById("tap-trace");
+  if(!slot)return;
+  if(profile.showTapTrace!==true){slot.innerHTML="";return}
+  const ultimos=tapTrace.slice(-6).reverse();
+  slot.innerHTML=`<div class="tapbox"><b>Rastro do toque · v${APP_VERSION}</b>${
+    ultimos.length?ultimos.map(t=>`<div>${esc(t.em.slice(11,19))} — ${esc(t.msg)}</div>`).join("")
+    :"<div>Toque na bolinha. Se nada aparecer aqui, o toque não está chegando ao botão.</div>"}</div>`;
+}
+
+function toggleSet(dayId,idx,setIdx){
+  // Registra que o toque CHEGOU. Se este registro não existir depois de você
+  // tocar na bolinha, o problema é o toque não alcançar o botão (algo por
+  // cima, ou o clique cancelado) — e não a lógica daqui.
+  tapLog("toggle-set recebido: dia="+dayId+" ex="+idx+" serie="+setIdx);
+
+  const d=workoutDayAt(curDate(),dayId);
+  if(!d){tapLog("PAROU: dia não encontrado para "+curDate());renderTapTrace();return}
+  const e=d.exercicios[idx];
+  if(!e){tapLog("PAROU: exercício "+idx+" não existe (dia tem "+d.exercicios.length+")");renderTapTrace();return}
+  const s=sessionFor(curDate(),dayId,e.exerciseId,e.series);
+  const a=s.sets.filter(x=>!x.deletedAt),x=a[setIdx];
+  if(!x){tapLog("PAROU: série "+setIdx+" não existe (sessão tem "+a.length+" séries ativas)");renderTapTrace();return}
+
+  // 1) estado — nada pode falhar aqui
+  x.done=!x.done;
+  x.updatedAt=nowISO();
+
+  // 2) feedback visual — antes de qualquer efeito colateral
+  passo("updateCard",()=>updateCard(dayId,idx));
+
+  // 3) efeitos secundários, cada um isolado
+  passo("touchSession",()=>touchSession(s));
+  passo("save",()=>save());
+  passo("vibrate",()=>vibrate(x.done?[30,40]:15));
+  if(x.done&&isToday())passo("startTimer",()=>startTimer(e.rest,e.nome));
+
+  const next=passo("nextPendingSet",()=>nextPendingSet(dayId));
+  if(next&&next.idx!==idx)passo("updateCard-next",()=>updateCard(dayId,next.idx));
+  tapLog("OK: série "+setIdx+" agora "+(x.done?"FEITA":"pendente"));
+  passo("renderTapTrace",()=>renderTapTrace());
+  if(x.done)setTimeout(()=>passo("scroll",()=>{
+    if(next)focusWorkoutTarget(dayId);
+    else document.getElementById("workout-finish-slot")?.scrollIntoView({behavior:"smooth",block:"center"});
+  }),120);
+}
+
+/**
+ * Executa um passo não essencial sem deixar que a falha derrube o resto.
+ * Registra o erro para o diagnóstico: um botão que "não funciona" sem deixar
+ * rastro custou um treino inteiro para descobrir.
+ */
+function passo(nome,fn){
+  try{return fn()}
+  catch(err){
+    console.error("[toggleSet:"+nome+"]",err);
+    try{
+      runtimeErrors.push({quando:nome,erro:String(err&&err.message||err),em:nowISO()});
+      if(runtimeErrors.length>30)runtimeErrors.shift();
+    }catch(e){}
+    return null;
+  }
+}
 function toggleExercise(dayId,idx){const d=workoutDayAt(curDate(),dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.exerciseId,e.series),a=s.sets.filter(x=>!x.deletedAt),c=e.series+(s.extra||0),newState=!a.slice(0,c).every(x=>x.done);a.slice(0,c).forEach(x=>{x.done=newState;x.updatedAt=nowISO()});touchSession(s);vibrate([30,40]);save();updateCard(dayId,idx)}
 function setExNote(dayId,idx,val){const d=workoutDayAt(curDate(),dayId),e=d.exercicios[idx],s=sessionFor(curDate(),dayId,e.exerciseId,e.series);s.note=val;touchSession(s);save()}
 function setDayNote(dayId,val){const date=curDate();if(!dayNotes[date])dayNotes[date]={};dayNotes[date][dayId]=val;save()}
@@ -3216,13 +3414,32 @@ function restoreTimer(){
     if(!t||!t.end||t.end<=Date.now()){localStorage.removeItem("treino-timer-ul");timerEnd=0;updateTimerUI();return}
     timerEnd=t.end;timerLabel=t.label||"";
     if(timerInterval)clearInterval(timerInterval);
-    timerInterval=setInterval(updateTimerUI,250);
+    timerInterval=setInterval(tickTimerSeguro,250);
     updateTimerUI();
   }catch(e){}
 }
 function formatTimer(sec){sec=Math.max(0,sec);return String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")}
 function startTimer(seconds,label=""){timerEnd=Date.now()+seconds*1000;timerLabel=label;persistTimer();if(timerInterval)clearInterval(timerInterval);timerInterval=setInterval(updateTimerUI,250);const p=document.getElementById("timer-panel");if(p)p.hidden=true;updateTimerUI()}
 function stopTimer(){if(timerInterval)clearInterval(timerInterval);timerInterval=null;timerEnd=0;timerLabel="";persistTimer();updateTimerUI()}
+/**
+ * Tique protegido do cronômetro.
+ *
+ * updateTimerUI roda 4× por segundo. Uma exceção ali vira uma enxurrada de
+ * "Uncaught Error" no console e pode deixar o app ocupado a cada 250 ms.
+ * Se falhar, o intervalo é encerrado: melhor perder o cronômetro do que
+ * degradar a tela inteira no meio do treino.
+ */
+function tickTimerSeguro(){
+  try{updateTimerUI()}
+  catch(err){
+    console.error("updateTimerUI",err);
+    try{
+      runtimeErrors.push({quando:"updateTimerUI",erro:String(err&&err.message||err),em:nowISO()});
+      if(runtimeErrors.length>30)runtimeErrors.shift();
+    }catch(e){}
+    if(timerInterval){clearInterval(timerInterval);timerInterval=null}
+  }
+}
 function updateTimerUI(){const fab=document.getElementById("timer-fab"),ctx=document.getElementById("timer-context");if(!fab)return;if(!timerEnd){fab.textContent="⏱ Descanso";fab.classList.remove("running");return}const left=Math.max(0,Math.ceil((timerEnd-Date.now())/1000));fab.textContent="⏱ "+formatTimer(left);fab.classList.add("running");if(ctx&&timerLabel)ctx.textContent=timerLabel+" · descanso em andamento";if(left<=0){clearInterval(timerInterval);timerInterval=null;timerEnd=0;timerLabel="";persistTimer();fab.textContent="✓ Descanso";fab.classList.remove("running");vibrate([200,100,200,100,300]);setTimeout(updateTimerUI,1800)}}
 function toggleTimerPanel(){const p=document.getElementById("timer-panel");if(p)p.hidden=!p.hidden}
 
@@ -3266,7 +3483,7 @@ function renderPending(){
   const card=({d,e,i,v})=>`<div class="vidcard">
     <div class="vday" style="color:${d.cor}">${d.label} · ${d.foco}</div>
     <div class="vname">${esc(e.nome)}<span class="videobadge ${v.status==="pending"||v.status==="unverified"||v.status==="reference"?"pending":"ok"}">${videoLabel(v.status)}</span></div>
-    <div class="vgrp">${e.grupo} · ${e.series} × ${e.reps} · RIR ${e.rir}</div>
+    <div class="vgrp">${e.grupo} · ${e.series} × ${e.reps}</div>
     ${v.fonte?`<div class="vsrc">${esc(v.fonte)}</div>`:""}
     <div class="vidactions">
       ${v.url?`<a href="${esc(v.url)}" target="_blank" rel="noopener noreferrer">▶ abrir</a>`:""}
@@ -3411,6 +3628,7 @@ function prepareImportedBackup(data){
     prepared.dayPlans=Array.isArray(data.dayPlans)?data.dayPlans:[];
   }
   if(data.version>=10){prepared.gyms=Array.isArray(data.gyms)?data.gyms:[];prepared.activeGymId=data.activeGymId||null}
+  prepared.profile=normalizeProfilePolicy(prepared.profile);
   return prepared;
 }
 async function importBackupFile(file){
@@ -3516,6 +3734,11 @@ document.addEventListener("click",ev=>{
   else if(a==="date-next")shiftDate(1);
   else if(a==="date-today"){viewDate=todayISO();renderDay()}
   else if(a==="set-video")setVideo(el.dataset.day,Number(el.dataset.idx));
+  else if(a==="copy-errors"){
+    const txt=runtimeErrors.map(e=>[e.em,e.quando,e.erro,e.onde||"",e.pilha||""].filter(Boolean).join(" | ")).join("\n");
+    navigator.clipboard?.writeText(txt).then(()=>alert("Erros copiados. Cole na conversa para análise."))
+      .catch(()=>alert(txt.slice(0,1200)));
+  }
   else if(a==="open-exercise-demo")openExerciseVisualDemo(el.dataset.day,Number(el.dataset.idx));
   else if(a==="workout-swap"){
     const day=workoutDayAt(curDate(),el.dataset.day),e=day?.exercicios?.[Number(el.dataset.idx)];if(!e)return;
@@ -3617,7 +3840,7 @@ document.addEventListener("click",ev=>{
     }
     const p=programs.find(x=>x.id===t.programId),d=p?.days.find(x=>x.id===t.dayId);
     if(!d)return;
-    d.items.push(programItem({exerciseId:el.dataset.id,series:3,reps:"8-12",rir:usaRir()?"1-2":"",descanso:90}));
+    d.items.push(programItem({exerciseId:el.dataset.id,series:3,reps:"8-12",rir:"",descanso:90}));
     saveProgram(p).then(()=>{libraryTarget=null;libraryResetFilters();editingProgramId=t.programId;editingDayId=t.dayId;mainView="program-day";render()});
   }
   else if(a==="lib-new")openExerciseForm(null);
@@ -3720,7 +3943,11 @@ document.addEventListener("keydown",ev=>{
   el.blur();
 });
 
-// carga/reps (e RIR opcional) salvam ao sair do campo, para nao gravar valores parciais
+// carga/reps salvam ao sair do campo, para não gravar valores parciais
+// IMPORTANTE no iPhone/Safari: não redesenhar o card no "change" de carga/reps.
+// Ao tocar na bolinha "Feita", o input perde foco e dispara change ANTES do click.
+// Se updateCard() substituir o DOM nesse momento, o click original é cancelado e a
+// bolinha parece morta. Salvamos o valor aqui e deixamos o toggle-set redesenhar.
 document.addEventListener("change",ev=>{
   if(ev.target?.id==="body-photo-input"){
     const file=ev.target.files?.[0],owner=lastBody()?.id;
@@ -3729,7 +3956,7 @@ document.addEventListener("change",ev=>{
     return;
   }
   const el=ev.target;
-  if(el.dataset.action==="set-field"){setField(el.dataset.day,Number(el.dataset.idx),Number(el.dataset.set),el.dataset.field,el.value);updateCard(el.dataset.day,Number(el.dataset.idx))}
+  if(el.dataset.action==="set-field"){setField(el.dataset.day,Number(el.dataset.idx),Number(el.dataset.set),el.dataset.field,el.value)}
   else if(el.dataset.action==="date-pick")setDate(el.value);
   else if(el.dataset.action==="lib-group-select"){libraryGroup=el.value||"";renderLibrary()}
   else if(el.dataset.action==="lib-pattern"){libraryPattern=el.value||"";renderLibrary()}
@@ -3738,7 +3965,6 @@ document.addEventListener("change",ev=>{
   else if(el.dataset.action==="profile-field"){
     const f=el.dataset.field;
     if(f==="weeklyTarget")profile[f]=Number(el.value);
-    else if(f==="useRir"){profile[f]=el.value==="1";saveV2();render();return} // muda o layout: redesenha
     else profile[f]=el.value;
     saveV2();
   }

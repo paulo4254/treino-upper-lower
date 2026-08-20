@@ -3,7 +3,7 @@
 //   navegação/HTML  -> network-first (senão o usuário fica preso numa versão antiga)
 //   demais assets   -> cache-first (ícones e manifest praticamente não mudam)
 // Trocar CACHE a cada release limpa o cache anterior no activate.
-const CACHE = "treino-v4-8";
+const CACHE = "treino-v5-7";
 const PRECACHE = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (e) => {
