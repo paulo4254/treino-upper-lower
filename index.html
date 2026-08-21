@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#14161A">
-<title>Treino 5.7</title>
+<title>Treino 5.9</title>
 <!-- Arquivo único, autossuficiente. Basta hospedar este .html. -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -474,10 +474,13 @@ const DIAS=[
 ];
 
 // Versão exibida no Perfil. Ao relatar um problema, é o que identifica o build.
-const APP_VERSION="5.7";
-const APP_BUILD="2026-08-20";
+const APP_VERSION="5.9";
+const APP_BUILD="2026-08-21";
 
-function safeGet(k,f){try{const x=localStorage.getItem(k);return x?JSON.parse(x):f}catch{return f}}
+function safeStorageGet(k,f=null){try{const x=localStorage.getItem(k);return x==null?f:x}catch{return f}}
+function safeStorageSet(k,v){try{localStorage.setItem(k,v);return true}catch{return false}}
+function safeStorageRemove(k){try{localStorage.removeItem(k);return true}catch{return false}}
+function safeGet(k,f){try{const x=safeStorageGet(k,null);return x?JSON.parse(x):f}catch{return f}}
 function todayISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function weekKey(date){const d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));const dayNum=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()-dayNum+3);const firstThursday=new Date(Date.UTC(d.getUTCFullYear(),0,4));const week=1+Math.round(((d-firstThursday)/86400000-3+((firstThursday.getUTCDay()+6)%7))/7);return d.getUTCFullYear()+"-W"+String(week).padStart(2,"0")}
 function fmtDate(iso){const [y,m,d]=iso.split("-");return d+"/"+m}
@@ -497,7 +500,7 @@ let legacyDone=safeGet("treino-feitos-ul-v1",{});
 let dayNotes=safeGet("treino-notas-dia-ul-v2",{});
 const WK=weekKey(new Date());
 let active=null;
-let mainView=localStorage.getItem("ul-v2-main-view")||"dashboard";
+let mainView=safeStorageGet("ul-v2-main-view","dashboard")||"dashboard";
 // useRir desligado por padrão: RIR autorreportado confunde mais do que ajuda
 // para a maioria. Com ele off, a progressão usa dupla progressão (repetições).
 // Modo degradado: o armazenamento não pôde ser aberto (navegação privada no
@@ -540,13 +543,13 @@ let calCursor=new Date();
 let progressMetric="weight";
 let foundationReady=false;
 let storageHealth={ok:true,lastError:"",lastWriteAt:null};
-let productPrefs=JSON.parse(localStorage.getItem("ul-product-prefs-v1")||"null")||{
+let productPrefs=safeGet("ul-product-prefs-v1",null)||{
   progressionMode:"balanced",
   anchorExercises:["chest_press_machine","row_machine","hack_squat_or_smith","rdl"],
   showWhy:true,
   programType:"upper_lower"
 };
-function saveProductPrefs(){localStorage.setItem("ul-product-prefs-v1",JSON.stringify(productPrefs))}
+function saveProductPrefs(){if(!safeStorageSet("ul-product-prefs-v1",JSON.stringify(productPrefs)))localStorageFailed=true}
 
 let bodyPhotos=[];
 let selectedBodyEntryForPhoto=null;
@@ -1448,7 +1451,7 @@ function syncPreviewPayload(){
     media:syncMediaManifest()};
 }
 
-async function initFoundation(){try{await ULDB.open();migrateOrder();customVideos=migrateKeyedObject(customVideos);videoOk=migrateKeyedObject(videoOk);const rows=await ULDB.all("sessions");if(rows.length)rows.filter(x=>!x.deletedAt).forEach(cacheSession);else await migrateLegacySessions();let body=await ULDB.all("bodyEntries"),checks=await ULDB.all("checkins");if(!(await ULDB.meta("schemaVersion"))&&!body.length&&!checks.length){await migrateBodyCheckins();body=await ULDB.all("bodyEntries");checks=await ULDB.all("checkins")}bodyLog=body.filter(x=>!x.deletedAt);checkins={};checks.filter(x=>!x.deletedAt).forEach(x=>checkins[x.date]=x);profile=normalizeProfilePolicy((await ULDB.meta("profile"))||safeGet("ul-v2-profile",profile));await loadProgramData();await ensureLocalIdentity();await loadBodyPhotos();await ULDB.setMeta("schemaVersion",5);await ULDB.setMeta("exerciseCatalogVersion",1);await ULDB.setMeta("lastMigrationAt",nowISO());localStorage.setItem("treino-ordem-ul-v2",JSON.stringify(exOrder));localStorage.setItem("treino-videos-ok-ul",JSON.stringify(videoOk));localStorage.setItem("treino-videos-ul-v1",JSON.stringify(customVideos));foundationReady=true}catch(err){console.error(err);for(const [date,byDay] of Object.entries(LEGACY_SESSION_SNAPSHOT||{})){for(const [day,byName] of Object.entries(byDay||{})){for(const [name,raw] of Object.entries(byName||{})){const eid=exerciseIdFromName(name),e=exerciseById(eid);if(eid&&e)cacheSession(normalizeSession(raw||{},{date,dayId:day,exerciseId:eid,series:e.series}))}}}profile=normalizeProfilePolicy(safeGet("ul-v2-profile",profile));bodyLog=safeGet("ul-v2-body-log",[]);checkins=safeGet("ul-v2-checkins",{});
+async function initFoundation(){try{await ULDB.open();migrateOrder();customVideos=migrateKeyedObject(customVideos);videoOk=migrateKeyedObject(videoOk);const rows=await ULDB.all("sessions");if(rows.length)rows.filter(x=>!x.deletedAt).forEach(cacheSession);else await migrateLegacySessions();let body=await ULDB.all("bodyEntries"),checks=await ULDB.all("checkins");if(!(await ULDB.meta("schemaVersion"))&&!body.length&&!checks.length){await migrateBodyCheckins();body=await ULDB.all("bodyEntries");checks=await ULDB.all("checkins")}bodyLog=body.filter(x=>!x.deletedAt);checkins={};checks.filter(x=>!x.deletedAt).forEach(x=>checkins[x.date]=x);profile=normalizeProfilePolicy((await ULDB.meta("profile"))||safeGet("ul-v2-profile",profile));await loadProgramData();await ensureLocalIdentity();await loadBodyPhotos();await ULDB.setMeta("schemaVersion",5);await ULDB.setMeta("exerciseCatalogVersion",1);await ULDB.setMeta("lastMigrationAt",nowISO());if(!safeStorageSet("treino-ordem-ul-v2",JSON.stringify(exOrder)))localStorageFailed=true;if(!safeStorageSet("treino-videos-ok-ul",JSON.stringify(videoOk)))localStorageFailed=true;if(!safeStorageSet("treino-videos-ul-v1",JSON.stringify(customVideos)))localStorageFailed=true;foundationReady=true}catch(err){console.error(err);for(const [date,byDay] of Object.entries(LEGACY_SESSION_SNAPSHOT||{})){for(const [day,byName] of Object.entries(byDay||{})){for(const [name,raw] of Object.entries(byName||{})){const eid=exerciseIdFromName(name),e=exerciseById(eid);if(eid&&e)cacheSession(normalizeSession(raw||{},{date,dayId:day,exerciseId:eid,series:e.series}))}}}profile=normalizeProfilePolicy(safeGet("ul-v2-profile",profile));bodyLog=safeGet("ul-v2-body-log",[]);checkins=safeGet("ul-v2-checkins",{});
   // Sem banco, o programa não é carregado e o app abria com zero dias, com
   // aparência normal. Semear a partir do catálogo mantém o app utilizável.
   try{await seedFromCatalog()}catch(e2){console.error(e2)}
@@ -1457,8 +1460,8 @@ async function initFoundation(){try{await ULDB.open();migrateOrder();customVideo
   storageUnavailable=true;storageError=String(err&&err.message||err||"desconhecido");
   foundationReady=true}}
 async function saveV2(){
-  localStorage.setItem("ul-v2-main-view",mainView);
-  localStorage.setItem("ul-v2-profile",JSON.stringify(profile));
+  if(!safeStorageSet("ul-v2-main-view",mainView))localStorageFailed=true;
+  if(!safeStorageSet("ul-v2-profile",JSON.stringify(profile)))localStorageFailed=true;
   if(!ULDB.db)return;
   try{
     await ULDB.setMeta("profile",profile);
@@ -2633,7 +2636,7 @@ function renderProfile(){
         ${lastBody()?`<label class="v2primary" style="display:block;text-align:center;margin-top:10px">Adicionar foto<input id="body-photo-input" type="file" accept="image/*" capture="environment" style="display:none"></label>`:`<div class="v2empty">Salve pelo menos uma medição corporal antes de adicionar fotos.</div>`}
         ${bodyPhotos.length?`<div class="photo-grid">${bodyPhotos.slice(0,12).map(p=>`<div class="photo-tile"><img src="${esc(photoUrl(p))}" alt="Foto de evolução"><button class="photo-del" data-action="delete-photo" data-id="${esc(p.id)}">×</button></div>`).join("")}</div>`:""}
       </div></section>
-      <section class="v2section"><div class="v2section-title"><span>Base técnica</span><small>versão ${APP_VERSION} · ${APP_BUILD}</small></div><div class="v2card"><div class="v2muted">Histórico em IndexedDB, IDs estáveis por exercício, timestamps e soft-delete. A área de mídia fica separada para fotos futuras.</div><div class="v2row" style="margin-top:10px"><button class="v2secondary" data-action="integrity-check">Verificar integridade</button><button class="v2secondary" data-action="migration-report">Relatório de migração</button></div><div class="v2row" style="margin-top:8px"><button class="v2secondary" data-action="open-diagnostics">Abrir diagnóstico completo</button></div></div></section>
+      <section class="v2section"><div class="v2section-title"><span>Base técnica</span><small>versão ${APP_VERSION} · ${APP_BUILD}</small></div><div class="v2card"><div class="v2muted">Histórico em IndexedDB, IDs estáveis por exercício, timestamps e soft-delete. A área de mídia fica separada para fotos futuras.</div><div class="v2row" style="margin-top:10px"><button class="v2secondary" data-action="integrity-check">Verificar integridade</button><button class="v2secondary" data-action="migration-report">Relatório de migração</button></div><div class="v2row" style="margin-top:8px"><button class="v2secondary" data-action="open-diagnostics">Abrir diagnóstico completo</button></div><div class="v2row" style="margin-top:8px"><button class="v2secondary" data-action="toggle-tap-trace">${profile.showTapTrace===true?"Ocultar rastro do toque":"Mostrar rastro do toque"}</button></div><div class="demo-note" style="margin-top:7px">O rastro mostra, na tela do treino, o que acontece a cada toque na bolinha. Foi o que permitiu achar o bug do dia congelado. Deixe desligado no uso normal.</div></div></section>
       <section class="v2section"><div class="v2section-title"><span>Objetivo e rotina</span></div><div class="v2card">
         <div class="v2form">
           <div class="v2field full"><label>Nome</label><input class="v2input" data-action="profile-field" data-field="name" value="${esc(profile.name||"")}" placeholder="Opcional"></div>
@@ -3545,7 +3548,7 @@ function exportMigrationSnapshot(){
   a.href=url;a.download="ul-migration-snapshot-"+todayISO()+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 
-function exportBackup(){const payload=buildBackupPayloadObject();const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="upper-lower-v2-foundation-backup-"+todayISO()+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);localStorage.setItem("treino-ul-ultimo-backup",new Date().toISOString())}
+function exportBackup(){const payload=buildBackupPayloadObject();const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="upper-lower-v2-foundation-backup-"+todayISO()+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);safeStorageSet("treino-ul-ultimo-backup",new Date().toISOString())}
 function chooseBackup(){document.getElementById("import-file")?.click()}
 
 function buildBackupPayloadObject(){
@@ -3669,7 +3672,7 @@ async function importBackupFile(file){
     }
   }catch(err){console.error(err);alert("Backup inválido, incompatível ou não pôde ser restaurado. Nenhum dado válido foi apagado.")}
 }
-function savingLegacy(){localStorage.setItem("treino-cargas-ul-v1",JSON.stringify(legacyLoads));localStorage.setItem("treino-feitos-ul-v1",JSON.stringify(legacyDone))}
+function savingLegacy(){safeStorageSet("treino-cargas-ul-v1",JSON.stringify(legacyLoads));safeStorageSet("treino-feitos-ul-v1",JSON.stringify(legacyDone))}
 
 document.addEventListener("click",ev=>{
   const ov=ev.target.closest(".modal-overlay");
@@ -3734,6 +3737,10 @@ document.addEventListener("click",ev=>{
   else if(a==="date-next")shiftDate(1);
   else if(a==="date-today"){viewDate=todayISO();renderDay()}
   else if(a==="set-video")setVideo(el.dataset.day,Number(el.dataset.idx));
+  else if(a==="toggle-tap-trace"){
+    profile.showTapTrace=profile.showTapTrace!==true;
+    saveV2();render();
+  }
   else if(a==="copy-errors"){
     const txt=runtimeErrors.map(e=>[e.em,e.quando,e.erro,e.onde||"",e.pilha||""].filter(Boolean).join(" | ")).join("\n");
     navigator.clipboard?.writeText(txt).then(()=>alert("Erros copiados. Cole na conversa para análise."))
